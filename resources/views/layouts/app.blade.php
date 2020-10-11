@@ -16,8 +16,9 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/ui/prism.min.css')}}">
     <!-- END: Vendor CSS-->
+
+    @stack('css')
 
     <!-- BEGIN: Theme CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/bootstrap.min.css')}}">
@@ -97,35 +98,19 @@
     </nav>
     <!-- END: Header-->
 
+    @include('layouts.komponen.menu')
 
-    <!-- BEGIN: Main Menu-->
-
-    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
-      <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class=" nav-item"><a href="index.html"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
-            <ul class="menu-content">
-              <li><a class="menu-item" href="dashboard-ecommerce.html"><i></i><span data-i18n="eCommerce">eCommerce</span></a>
-              </li>
-              <li><a class="menu-item" href="dashboard-crypto.html"><i></i><span data-i18n="Crypto">Crypto</span></a>
-              </li>
-              <li><a class="menu-item" href="dashboard-sales.html"><i></i><span data-i18n="Sales">Sales</span></a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- END: Main Menu-->
     <!-- BEGIN: Content-->
     <div class="app-content content">
       <div class="content-overlay"></div>
       <div class="content-wrapper">
+      <div class="content-header row">
+          <div class="content-header-left col-md-6 col-12 mb-2">
+            <h3 class="content-header-title mb-0 d-inline-block">@yield('judul')</h3>
+          </div>
+        </div>
         <div class="content-body"><!-- Description -->
-            <section id="description" class="card">
-                @yield('isi')
-            </section>
+          @yield('isi')
 <!--/ Description -->
         </div>
       </div>
@@ -154,8 +139,7 @@
     <script src="{{asset('app-assets/js/scripts/footer.min.js')}}"></script>
     <!-- END: Theme JS-->
 
-    <!-- BEGIN: Page JS-->
-    <!-- END: Page JS-->
+    @stack('js')
 
   </body>
   <!-- END: Body-->

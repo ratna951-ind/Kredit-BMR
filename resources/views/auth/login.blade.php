@@ -56,10 +56,10 @@
                             <div class="card border-grey border-lighten-3 m-0">
                                 <div class="card-header border-0">
                                     <div class="card-title text-center">
-                                        <div class="p-1"><img src="{{asset('app-assets/images/logo/logo-dark.png')}}" alt="branding logo"></div>
+                                        <b><h2>BMR</h2></b>
                                     </div>
                                     <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
-                                        <span>Login with Modern</span>
+                                        <span>Kredit Dana Tunai</span>
                                     </h6>
                                 </div>
                                 <div class="card-content">
@@ -82,11 +82,11 @@
                                                 <div class="col-sm-6 col-12 text-center text-sm-left">
                                                     <fieldset>
                                                         <input class="chk-remember" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                        <label for="remember-me"> Remember Me</label>
+                                                        <label for="remember-me"> Ingat Saya</label>
                                                     </fieldset>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-info btn-block"><i class="ft-unlock"></i> Login</button>
+                                            <button type="submit" class="btn btn-info btn-block"><i class="ft-unlock"></i> Masuk</button>
                                         </form>
                                     </div>
                                 </div>

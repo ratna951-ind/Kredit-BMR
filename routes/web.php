@@ -17,4 +17,17 @@ Auth::routes([
     'verify' => false,
 ]);
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', 'HomeController@index')->name('home'); // Route Home
+});
+
+// Route Admin
+Route::group(['middleware' => ['auth','peran:1']], function(){
+    Route::resource('user','UserController')->except(['show']);
+    Route::resource('kios','KiosController')->except(['show']);
+});
+
+// Route MCE
+Route::group(['middleware' => ['auth','peran:2']], function(){
+    
+});

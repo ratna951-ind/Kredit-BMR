@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Peran extends Model
 {
-    protected $table="Peran";
+    protected $table = "peran";
+    public $timestamps = false;
+
+    protected $fillable = [
+        'nama', 'aktif'
+    ];
 }

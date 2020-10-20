@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Kios;
+use App\Peran;
 
 class UserController extends Controller
 {
@@ -26,7 +28,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $data['kioss'] = Kios::where('aktif','1')->get();
+        $data['perans'] = Peran::all();
+
+        return view('user.create',$data);
     }
 
     /**

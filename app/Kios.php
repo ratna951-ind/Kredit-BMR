@@ -15,6 +15,6 @@ class Kios extends Model
 
     public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'kode_kios', 'kode');
     }
 }

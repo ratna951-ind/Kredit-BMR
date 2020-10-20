@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\KiosForm;
 use App\Kios;
 
 class KiosController extends Controller
@@ -26,62 +26,40 @@ class KiosController extends Controller
      */
     public function create()
     {
-        //
+        return view('kios.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\KiosForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KiosForm $request)
     {
-        //
-    }
+        $check = $request->validated();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        Kios::create($check);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return redirect()->route('kios.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $kode
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($kode)
     {
-        //
+        $kios = Kios::where('kode', $kode)->first();
+
+        if(count($kios->user) == 0) {
+            Kios::where('kode', $kode)->delete();
+        }
+
+        Kios::where('kode', $kode)->update(['aktif' => '0']);
+
+        return redirect()->route('kios.index');
     }
 }

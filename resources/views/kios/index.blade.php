@@ -13,6 +13,7 @@
         <div class="card-content collapse show">
             <div class="card-body card-dashboard">
                 <div class="table-responsive">
+                    <h3 style="padding: 15px 15px"><button type="button" class="btn btn-success btn-sm" onclick="window.location.href='{{route('kios.create')}}'"><i class="la la-plus"></i> Tambah</button></h3>
                     <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -31,9 +32,13 @@
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" class="btn btn-icon btn-warning"><i class="la la-edit"></i></button>
-                                        <button type="button" class="btn btn-icon btn-danger"><i class="la la-trash"></i></button>
+                                        <button type="button" data-name="{{$kios->nama}}" data-id="{{$kios->kode}}" class="modal-delete btn btn-icon btn-danger"><i class="la la-trash"></i></button>
                                     </div>
                                 </td>
+                                <form action="{{route('kios.destroy', $kios->kode)}}" method="post" id="deleteRecord{{$kios->kode}}">
+                                    {{csrf_field()}}
+                                    @method("DELETE")
+                                </form>
                             </tr>
                         @endforeach
                         </tbody>
@@ -45,6 +50,8 @@
 @endsection
 
 @push('js')
+    @include('komponen.modalDelete', ['modul' => 'kios'])
+    
     <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <script>
         $(document).ready(function(){$("#datatable").DataTable()});

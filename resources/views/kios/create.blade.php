@@ -5,7 +5,19 @@
 @endsection
 
 @push('css')
-    
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        #inputKode::-webkit-outer-spin-button,
+        #inputKode::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        
+        /* Firefox */
+        #inputKode[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
 @endpush
 
 @section('isi')
@@ -28,20 +40,20 @@
                             <div class="form-group row">
                                 <label class="col-md-2 label-control" for="inputKode">Kode</label>
                                 <div class="col-md-10 mx-auto">
-                                    <input type="number" id="inputKode" class="form-control decimal-inputmask" placeholder="Masukan Kode" name="kode" required autofocus>
+                                    <input type="number" id="inputKode" class="form-control decimal-inputmask" placeholder="Masukan Kode!" value="{{old('kode')}}" name="kode" required autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 label-control" for="inputNama">Nama</label>
                                 <div class="col-md-10 mx-auto">
-                                    <input type="text" id="inputNama" class="form-control" placeholder="Masukan Nama" name="nama" required>
+                                    <input type="text" id="inputNama" class="form-control" placeholder="Masukan Nama!" value="{{old('nama')}}" name="nama" required>
                                 </div>
                             </div>
                         </form>
                         <center>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('kios.index')}}'">Batal</button>
-                                <button type="button" class="modal-create btn btn-icon btn-success right">Simpan</button>
+                                <button type="button" class="modal-create btn btn-icon btn-success">Simpan</button>
                             </div>
                         </center>
                     </div>

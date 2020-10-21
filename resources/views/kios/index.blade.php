@@ -30,10 +30,7 @@
                                 <td>{{$kios->kode}}
                                 <td>{{$kios->nama}}</td>
                                 <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-icon btn-warning"><i class="la la-edit"></i></button>
-                                        <button type="button" data-name="{{$kios->nama}}" data-id="{{$kios->kode}}" class="modal-delete btn btn-icon btn-danger"><i class="la la-trash"></i></button>
-                                    </div>
+                                    <button type="button" data-name="{{$kios->nama}}" data-id="{{$kios->kode}}" class="modal-delete btn btn-icon btn-danger"><i class="la la-trash"></i></button>
                                 </td>
                                 <form action="{{route('kios.destroy', $kios->kode)}}" method="post" id="deleteRecord{{$kios->kode}}">
                                     {{csrf_field()}}

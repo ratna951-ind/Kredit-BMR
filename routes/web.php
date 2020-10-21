@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function(){
 // Route Admin
 Route::group(['middleware' => ['auth','peran:1']], function(){
     Route::resource('user','UserController')->except(['show']);
-    Route::resource('kios','KiosController')->except(['show']);
+    Route::resource('kios','KiosController')->except(['show','edit','update']);
 });
 
 // Route MCE

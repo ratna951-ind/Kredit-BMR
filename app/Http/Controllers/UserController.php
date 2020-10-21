@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserForm;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Kios;
 use App\Peran;
@@ -37,12 +38,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UserForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserForm $request)
     {
-        //
+        $check = $request->validated();
+
+        User::create($check);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -53,19 +58,31 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['userlama'] = User::find($id);
+        $data['kioss'] = Kios::where('aktif','1')->get();
+        $data['perans'] = Peran::all();
+
+        return view('user.edit',$data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UserForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserForm $request, $id)
     {
-        //
+        $check = $request->validated();
+
+        if($request->password && $request->password_confirmation){
+            $check['password'] = Hash::make($check['password']);
+        }
+
+        User::find($id)->update($check);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -76,6 +93,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        // if(count($user->user) == 0) {
+            // $user->delete();
+        // }
+
+        $user->update(['aktif' => '0']);
+
+        return redirect()->route('user.index');
     }
 }

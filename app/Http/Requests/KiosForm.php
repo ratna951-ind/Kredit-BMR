@@ -42,8 +42,8 @@ class KiosForm extends FormRequest
             'kode.max' => 'Kode kios harus 6 angka!',
             'kode.unique' => 'Kode kios sudah digunakan!',
             'nama.required' => 'Nama kios dibutuhkan!',
-            'nama.min' => 'Nama kios minimal 3 angka!',
-            'nama.max' => 'Nama kios maksimal 20 angka!'    
+            'nama.min' => 'Nama kios minimal 3 karakter!',
+            'nama.max' => 'Nama kios maksimal 20 karakter!'    
         ];
     }
 }

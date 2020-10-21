@@ -80,7 +80,7 @@
               </li>
               <li class="dropdown dropdown-user nav-item">
                 <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                    <span class="mr-1 user-name text-bold-700">{{Auth::user()->nama}}</span><span class="avatar avatar-online"><img src="{{asset('app-assets/images/portrait/small/avatar-s-19.png')}}" alt="avatar"><i></i></span>
+                    <span style="margin-top: 5px" class="user-name text-bold-700">{{Auth::user()->nama}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item"><i class="ft-user"></i> Edit Profile</a>

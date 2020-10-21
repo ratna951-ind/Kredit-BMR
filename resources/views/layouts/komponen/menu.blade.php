@@ -5,33 +5,30 @@
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
         @if (url()->current() == route('home'))
             <li class="active">
-            <a href="javascript:void(0);">
         @else
             <li class=" nav-item">
-            <a href="{{route('home')}}">
         @endif
+            <a href="{{route('home')}}">
             <i class="la la-tasks"></i><span class="menu-title" data-i18n="Home">Home</span>
         </a>
         </li>
 
-        @if (url()->current() == route('user.index'))
+        @if (\Str::contains(Route::currentRouteName(), ['user']))
             <li class="active">
-            <a href="javascript:void(0);">
         @else
             <li class=" nav-item">
-            <a href="{{route('user.index')}}">
         @endif
+            <a href="{{route('user.index')}}">
             <i class="la la-users"></i><span class="menu-title" data-i18n="User">User</span>
         </a>
         </li>
         
-        @if (url()->current() == route('kios.index'))
+        @if (\Str::contains(Route::currentRouteName(), ['kios']))
             <li class="active">
-            <a href="javascript:void(0);">
         @else
             <li class=" nav-item">
-            <a href="{{route('kios.index')}}">
         @endif
+            <a href="{{route('kios.index')}}">
             <i class="la la-home"></i><span class="menu-title" data-i18n="Kios">Kios</span>
         </a>
         </li>

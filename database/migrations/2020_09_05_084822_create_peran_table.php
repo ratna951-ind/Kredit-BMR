@@ -26,6 +26,6 @@ class CreatePeranTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perans');
+        Schema::dropIfExists('peran');
     }
 }

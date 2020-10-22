@@ -29,5 +29,5 @@ Route::group(['middleware' => ['auth','peran:1']], function(){
 
 // Route MCE
 Route::group(['middleware' => ['auth','peran:2']], function(){
-    
+    Route::resource('konsumen','KonsumenController')->except(['destroy']);
 });

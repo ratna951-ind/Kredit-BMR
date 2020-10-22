@@ -47,7 +47,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputPassword">Password</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputPassword" class="form-control border-primary" placeholder="Masukan Password" name="password">
+                                            <input type="password" id="inputPassword" class="form-control border-primary" placeholder="Masukan Password" name="password">
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputKonfirmasiPassword">Konfirmasi Password</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputKonfirmasiPassword" class="form-control border-primary" placeholder="Masukan Konfirmasi Password" name="password_confirmation">
+                                            <input type="password" id="inputKonfirmasiPassword" class="form-control border-primary" placeholder="Masukan Konfirmasi Password" name="password_confirmation">
                                         </div>
                                     </div>
                                 </div>

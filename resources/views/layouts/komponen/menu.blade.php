@@ -16,37 +16,37 @@
 
         @if(Auth::user()->peran_id == 1)
 
-        @if (\Str::contains(Route::currentRouteName(), ['user']))
-            <li class="active">
-        @else
-            <li class=" nav-item">
-        @endif
-            <a href="{{route('user.index')}}">
-            <i class="la la-users"></i><span class="menu-title" data-i18n="User">User</span>
-        </a>
-        </li>
-        
-        @if (\Str::contains(Route::currentRouteName(), ['kios']))
-            <li class="active">
-        @else
-            <li class=" nav-item">
-        @endif
-            <a href="{{route('kios.index')}}">
-            <i class="la la-home"></i><span class="menu-title" data-i18n="Kios">Kios</span>
-        </a>
-        </li>
+            @if (\Str::contains(Route::currentRouteName(), ['user']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('user.index')}}">
+                <i class="la la-users"></i><span class="menu-title" data-i18n="User">User</span>
+            </a>
+            </li>
+            
+            @if (\Str::contains(Route::currentRouteName(), ['kios']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('kios.index')}}">
+                <i class="la la-home"></i><span class="menu-title" data-i18n="Kios">Kios</span>
+            </a>
+            </li>
 
         @elseif(Auth::user()->peran_id == 2)
 
-        @if (\Str::contains(Route::currentRouteName(), ['konsumen']))
-            <li class="active">
-        @else
-            <li class=" nav-item">
-        @endif
-            <a href="{{route('konsumen.index')}}">
-            <i class="la la-home"></i><span class="menu-title" data-i18n="Konsumen">Konsumen</span>
-        </a>
-        </li>
+            @if (\Str::contains(Route::currentRouteName(), ['konsumen']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('konsumen.index')}}">
+                <i class="la la-home"></i><span class="menu-title" data-i18n="Konsumen">Konsumen</span>
+            </a>
+            </li>
 
         @endif
     </ul>

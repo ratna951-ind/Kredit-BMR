@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKiosTable extends Migration
+class CreateKonsumenDaruratTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateKiosTable extends Migration
      */
     public function up()
     {
-        Schema::create('kios', function (Blueprint $table) {
-            $table->unsignedInteger('kode');
-            $table->string('nama');
-            $table->enum('aktif',[0,1])->default(1);
+        Schema::create('konsumen_darurat', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateKiosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kios');
+        Schema::dropIfExists('konsumen_darurat');
     }
 }

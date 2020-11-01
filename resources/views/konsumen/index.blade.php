@@ -19,6 +19,8 @@
                             <tr>
                                 <th width="1%">No</th>
                                 <th>Nama</th>
+                                <th>No Telp</th>
+                                <th>Alamat</th>
                                 <th width="1%">Aksi</th>
                             </tr>
                         </thead>
@@ -27,13 +29,14 @@
                             <tr>
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$konsumen->nama}}</td>
+                                <td>{{$konsumen->telp}}</td>
+                                <td>{{$konsumen->alamatskrng}}</td>
                                 <td>
-                                    <button type="button" data-name="{{$konsumen->nama}}" data-id="{{$konsumen->kode}}" class="modal-delete btn btn-icon btn-danger"><i class="la la-trash"></i></button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-icon btn-warning" onclick="window.location.href='{{route('konsumen.edit',$konsumen->nik)}}'"><i class="la la-edit"></i></button>
+                                        <button type="button" class="btn btn-icon btn-dark" onclick="window.location.href='{{route('konsumen.show',$konsumen->nik)}}'"><i class="la la-file-text"></i></button>
+                                    </div>
                                 </td>
-                                <form action="{{route('kios.destroy', $konsumen->kode)}}" method="post" id="deleteRecord{{$konsumen->kode}}">
-                                    {{csrf_field()}}
-                                    @method("DELETE")
-                                </form>
                             </tr>
                         @endforeach
                         </tbody>
@@ -44,9 +47,7 @@
     </section>
 @endsection
 
-@push('js')
-    @include('komponen.modalDelete', ['modul' => 'konsumen'])
-    
+@push('js')    
     <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <script>
         $(document).ready(function(){$("#datatable").DataTable()});

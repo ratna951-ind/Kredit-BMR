@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetailPembebanansTable extends Migration
+class CreateDetailPembebananTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateDetailPembebanansTable extends Migration
      */
     public function up()
     {
-        Schema::create('detail_pembebanans', function (Blueprint $table) {
-            $table->integer('order_id');
-            $table->integer('pembayaranke', 1);
+        Schema::create('detail_pembebanan', function (Blueprint $table) {
+            $table->unsignedInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('jadwal_order')->onDelete('restrict');
+            $table->tinyInteger('pembayaranke');
             $table->string('notransaksi', 20);
             $table->date('tgl_bayar');
             
@@ -29,6 +30,6 @@ class CreateDetailPembebanansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_pembebanans');
+        Schema::dropIfExists('detail_pembebanan');
     }
 }

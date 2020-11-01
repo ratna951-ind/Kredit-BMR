@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $role = Auth::user()->role_id;
+        $role = Auth::user()->peran_id;
         
         if($role == 1){
             $data['kios'] = Kios::where('aktif','1')->count();
@@ -25,19 +25,19 @@ class HomeController extends Controller
             $data['peran'] = Peran::count();
         }
         else if($role == 2){
-            
+            $data['peran'] = Peran::count();
         }
         else if($role == 3){
-            
+            $data['peran'] = Peran::count();
         }
         else if($role == 4){
-            
+            $data['peran'] = Peran::count();
         }
         else if($role == 5){
-            
+            $data['peran'] = Peran::count();
         }
         else if($role == 6){
-            
+            $data['peran'] = Peran::count();
         }
 
         return view('home', $data);

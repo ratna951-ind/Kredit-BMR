@@ -8,8 +8,4 @@ class Peran extends Model
 {
     protected $table = "peran";
     public $timestamps = false;
-
-    protected $fillable = [
-        'nama', 'aktif'
-    ];
 }

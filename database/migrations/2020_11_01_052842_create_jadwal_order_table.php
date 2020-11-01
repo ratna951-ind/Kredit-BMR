@@ -15,6 +15,8 @@ class CreateJadwalOrderTable extends Migration
     {
         Schema::create('jadwal_order', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->string('nik',18);
             $table->foreign('nik')->references('nik')->on('konsumen')->onDelete('restrict');
             $table->string('no_kontrak',14);

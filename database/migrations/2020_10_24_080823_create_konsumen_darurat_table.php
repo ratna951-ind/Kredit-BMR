@@ -14,8 +14,12 @@ class CreateKonsumenDaruratTable extends Migration
     public function up()
     {
         Schema::create('konsumen_darurat', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('nik', 18)->primary();
+            $table->foreign('nik')->references('nik')->on('konsumen')->onDelete('cascade');
+            $table->string('nama', 50);
+            $table->string('hubungan', 30);
+            $table->text('alamat');
+            $table->string('telp', 14);
         });
     }
 

@@ -14,7 +14,7 @@ class CreateKonsumenTable extends Migration
     public function up()
     {
         Schema::create('konsumen', function (Blueprint $table) {
-            $table->string('nik', 18);
+            $table->string('nik', 18)->primary();
             $table->string('nama', 50);
             $table->string('tmptlahir', 20);
             $table->date('tgllahir');
@@ -25,7 +25,7 @@ class CreateKonsumenTable extends Migration
             $table->string('ibukandung', 50);
             $table->enum('status', ['K', 'BK', 'C'])->comment('Kawin, Belum Kawin, Cerai');
             $table->enum('statusrumah', ['Sen', 'K', 'Sew', 'KPR', 'D', 'L'])->comment('Sendiri, Keluarga, Sewa, KPR, Dinas, Lain-lain');
-            $table->integer('lamamenetapbulan');
+            $table->string('lamamenetapbulan', 3);
             $table->enum('pendidikanterakhir', ['SD', 'SLTP', 'SLTA', 'Akademi', 'Universitas']);
             $table->string('nama_2', 50);
             $table->string('tmptlahir_2', 20);

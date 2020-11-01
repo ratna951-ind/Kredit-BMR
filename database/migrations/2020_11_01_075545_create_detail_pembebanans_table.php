@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKiosTable extends Migration
+class CreateDetailPembebanansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateKiosTable extends Migration
      */
     public function up()
     {
-        Schema::create('kios', function (Blueprint $table) {
-            $table->increments('kode');
-            $table->string('nama');
-            $table->enum('aktif',[0,1])->default(1);
+        Schema::create('detail_pembebanans', function (Blueprint $table) {
+            $table->integer('order_id');
+            $table->integer('pembayaranke', 1);
+            $table->string('notransaksi', 20);
+            $table->date('tgl_bayar');
+            
         });
     }
 
@@ -27,6 +29,6 @@ class CreateKiosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kios');
+        Schema::dropIfExists('detail_pembebanans');
     }
 }

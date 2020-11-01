@@ -18,7 +18,7 @@ class CreateKonsumenPekerjaanTable extends Migration
             $table->foreign('nik')->references('nik')->on('konsumen')->onDelete('cascade');
             $table->enum('tipe', ['Karyawan', 'Non Karyawan']);
             $table->string('perusahaan', 30);
-            $table->string('masakerja', 3);
+            $table->tinyInteger('masakerja');
             $table->text('alamat');
             $table->string('telp', 14);
             $table->string('jabatan', 20);

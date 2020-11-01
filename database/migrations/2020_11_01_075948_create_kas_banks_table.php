@@ -15,6 +15,7 @@ class CreateKasBanksTable extends Migration
     {
         Schema::create('kas_banks', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('kode_kios')->nullable();
             $table->foreign('kode_kios')->references('kode')->on('kios')->onDelete('restrict');
             $table->integer('order_id');
             $table->enum('cara_bayar', ['B', 'C'])->comment('Bank, Cash');

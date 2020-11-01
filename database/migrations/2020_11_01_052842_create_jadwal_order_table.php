@@ -23,7 +23,7 @@ class CreateJadwalOrderTable extends Migration
             $table->integer('harga_barang');
             $table->integer('pinjaman_awal');
             $table->integer('pinjaman_disetujui');
-            $table->integer('tenor',3);
+            $table->tinyInteger('tenor');
             $table->integer('angsuran');
             $table->integer('adm');
             $table->string('stnk',20);

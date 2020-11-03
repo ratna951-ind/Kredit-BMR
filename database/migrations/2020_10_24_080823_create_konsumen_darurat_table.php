@@ -16,10 +16,10 @@ class CreateKonsumenDaruratTable extends Migration
         Schema::create('konsumen_darurat', function (Blueprint $table) {
             $table->string('nik', 18)->primary();
             $table->foreign('nik')->references('nik')->on('konsumen')->onDelete('cascade');
-            $table->string('nama', 50);
+            $table->string('nama_darurat', 50);
             $table->string('hubungan', 30);
-            $table->text('alamat');
-            $table->string('telp', 14);
+            $table->text('alamat_darurat');
+            $table->string('telp_darurat', 14);
         });
     }
 

@@ -12,6 +12,6 @@ class KonsumenDarurat extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nik', 'nama', 'hubungan', 'alamat', 'telp'
+        'nik', 'nama_darurat', 'hubungan', 'alamat_darurat', 'telp_darurat'
     ];
 }

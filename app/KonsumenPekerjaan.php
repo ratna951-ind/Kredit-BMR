@@ -12,6 +12,6 @@ class KonsumenPekerjaan extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nik', 'tipe', 'perusahaan', 'masakerja', 'alamat', 'telp', 'jabatan', 'penghasilan', 'perusahaan_2', 'alamat_2', 'telp_2', 'jabatan_2', 'penghasilan_2'
+        'nik', 'tipe', 'perusahaan', 'masakerja', 'alamat_pekerjaan', 'telp_pekerjaan', 'jabatan', 'penghasilan', 'perusahaan_2', 'alamat_pekerjaan_2', 'telp_pekerjaan_2', 'jabatan_2', 'penghasilan_2'
     ];
 }

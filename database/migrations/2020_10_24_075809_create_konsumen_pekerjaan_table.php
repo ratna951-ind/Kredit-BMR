@@ -19,13 +19,13 @@ class CreateKonsumenPekerjaanTable extends Migration
             $table->enum('tipe', ['Karyawan', 'Non Karyawan']);
             $table->string('perusahaan', 30);
             $table->tinyInteger('masakerja');
-            $table->text('alamat');
-            $table->string('telp', 14);
+            $table->text('alamat_pekerjaan');
+            $table->string('telp_pekerjaan', 14);
             $table->string('jabatan', 20);
             $table->integer('penghasilan');
             $table->string('perusahaan_2', 30);
-            $table->text('alamat_2');
-            $table->string('telp_2', 14);
+            $table->text('alamat_pekerjaan_2');
+            $table->string('telp_pekerjaan_2', 14);
             $table->string('jabatan_2', 20);
             $table->integer('penghasilan_2');
         });

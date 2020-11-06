@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\KonsumenForm;
 use App\Konsumen;
 
 class KonsumenController extends Controller
@@ -32,12 +32,13 @@ class KonsumenController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\KonsumenForm  $request
      * @return \Illuminate\Http\Response
      */
     public function store(KonsumenForm $request)
     {
-        //
+        $check = $request->validated();
+        dd($check);
     }
 
     /**

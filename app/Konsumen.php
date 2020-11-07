@@ -12,6 +12,6 @@ class Konsumen extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nik', 'nama', 'tmptlahir', 'tgllahir', 'alamatktp', 'alamatsekarang', 'telp', 'jk', 'ibukandung', 'status', 'statusrumah', 'lamamenetapbulan', 'pendidikanterakhir', 'nama_2', 'tmptlahir_2', 'tgllahir_2', 'gambarktp', 'gambarkk', 'gambarktp_2'
+        'nik', 'nama', 'tmptlahir', 'tgllahir', 'alamatktp', 'alamatskrng', 'telp', 'jk', 'ibukandung', 'status', 'statusrumah', 'lamamenetapbulan', 'pendidikanterakhir', 'nama_2', 'tmptlahir_2', 'tgllahir_2', 'gambarktp', 'gambarkk', 'gambarktp_2'
     ];
 }

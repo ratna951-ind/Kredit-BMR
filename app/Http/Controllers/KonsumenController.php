@@ -38,7 +38,64 @@ class KonsumenController extends Controller
     public function store(KonsumenForm $request)
     {
         $check = $request->validated();
-        dd($check);
+
+        // dd($check);
+
+        $konsumen = array(
+            'nik' => $check['nik'],
+            'nama' => $check['nama'],
+            'tmptlahir' => $check['tmptlahir'],
+            'tgllahir' => $check['tgllahir'],
+            'alamatktp' => $check['alamatktp'],
+            'alamatskrng' => $check['alamatskrng'],
+            'telp' => $check['telp'],
+            'jk' => $check['jk'],
+            'ibukandung' => $check['ibukandung'],
+            'status' => $check['status'],
+            'statusrumah' => $check['statusrumah'],
+            'lamamenetapbulan' => $check['lamamenetapbulan'],
+            'pendidikanterakhir' => $check['pendidikanterakhir'],
+            'nama_2' => $check['nama_2'],
+            'tmptlahir_2' => $check['tmptlahir_2'],
+            'tgllahir_2' => $check['tgllahir_2'],
+            // 'gambarktp' => $check['gambarktp'],
+            // 'gambarkk' => $check['gambarkk'],
+            // 'gambarktp_2' => $check['gambarktp_2'],
+            'gambarktp' => 'gambarktp',
+            'gambarkk' => 'gambarkk',
+            'gambarktp_2' => 'gambarktp_2',
+        );
+
+        $konsumenTambah = Konsumen::create($konsumen);
+
+        $konsumen_pekerjaan = array(
+            'nik' => $check['nik'],
+            'nama' => $check['nama'],
+            'tmptlahir' => $check['tmptlahir'],
+            'tgllahir' => $check['tgllahir'],
+            'alamatktp' => $check['alamatktp'],
+            'alamatskrng' => $check['alamatskrng'],
+            'telp' => $check['telp'],
+            'jk' => $check['jk'],
+            'ibukandung' => $check['ibukandung'],
+            'status' => $check['status'],
+            'statusrumah' => $check['statusrumah'],
+            'lamamenetapbulan' => $check['lamamenetapbulan'],
+            'pendidikanterakhir' => $check['pendidikanterakhir'],
+            'nama_2' => $check['nama_2'],
+            'tmptlahir_2' => $check['tmptlahir_2'],
+            'tgllahir_2' => $check['tgllahir_2'],
+            // 'gambarktp' => $check['gambarktp'],
+            // 'gambarkk' => $check['gambarkk'],
+            // 'gambarktp_2' => $check['gambarktp_2'],
+            'gambarktp' => 'gambarktp',
+            'gambarkk' => 'gambarkk',
+            'gambarktp_2' => 'gambarktp_2',
+        );
+
+        $konsumenPekerjaanTambah = Konsumen::create($konsumen);
+
+        dd($konsumen);
     }
 
     /**

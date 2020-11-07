@@ -66,15 +66,13 @@ class KonsumenController extends Controller
             'gambarktp_2' => 'gambarktp_2',
         );
 
-        $konsumenTambah = Konsumen::create($konsumen);
-
         $konsumen_pekerjaan = array(
             'nik' => $check['nik'],
-            'nama' => $check['nama'],
-            'tmptlahir' => $check['tmptlahir'],
-            'tgllahir' => $check['tgllahir'],
-            'alamatktp' => $check['alamatktp'],
-            'alamatskrng' => $check['alamatskrng'],
+            'tipe' => $check['tipe'],
+            'perusahaan' => $check['perusahaan'],
+            'masakerja' => $check['masakerja'],
+            'alamat_pekerjaan' => $check['alamat_pekerjaan'],
+            'telp_pekerjaan' => $check['telp_pekerjaan'],
             'telp' => $check['telp'],
             'jk' => $check['jk'],
             'ibukandung' => $check['ibukandung'],
@@ -93,7 +91,9 @@ class KonsumenController extends Controller
             'gambarktp_2' => 'gambarktp_2',
         );
 
-        $konsumenPekerjaanTambah = Konsumen::create($konsumen);
+        $konsumenTambah = Konsumen::create($konsumen);
+
+        $konsumenPekerjaanTambah = KonsumenPekerjaan::create($konsumen_pekerjaan);
 
         dd($konsumen);
     }

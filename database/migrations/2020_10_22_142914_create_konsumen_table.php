@@ -27,12 +27,12 @@ class CreateKonsumenTable extends Migration
             $table->enum('statusrumah', ['Sen', 'K', 'Sew', 'KPR', 'D', 'L'])->comment('Sendiri, Keluarga, Sewa, KPR, Dinas, Lain-lain');
             $table->tinyInteger('lamamenetapbulan');
             $table->enum('pendidikanterakhir', ['SD', 'SLTP', 'SLTA', 'Akademi', 'Universitas']);
-            $table->string('nama_2', 50);
-            $table->string('tmptlahir_2', 20);
-            $table->date('tgllahir_2');
+            $table->string('nama_2', 50)->nullable();
+            $table->string('tmptlahir_2', 20)->nullable();
+            $table->date('tgllahir_2')->nullable();
             $table->string('gambarktp');
             $table->string('gambarkk');
-            $table->string('gambarktp_2');
+            $table->string('gambarktp_2')->nullable();
         });
     }
 

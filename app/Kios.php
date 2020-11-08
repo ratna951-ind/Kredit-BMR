@@ -9,6 +9,8 @@ class Kios extends Model
     protected $table = "kios";
     public $timestamps = false;
 
+    protected $primaryKey = 'kode';
+
     protected $fillable = [
         'kode', 'nama', 'aktif'
     ];

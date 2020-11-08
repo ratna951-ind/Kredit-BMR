@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KiosForm;
 use App\Kios;
+use Alert;
 
 class KiosController extends Controller
 {
@@ -39,7 +40,13 @@ class KiosController extends Controller
     {
         $check = $request->validated();
 
-        Kios::create($check);
+        $process = Kios::create($check);
+
+        if ($process) {
+            Alert::success('Sukses', 'Data Kios '.$request->nama.' Berhasil Ditambah!');
+        } else {
+            Alert::error('Gagal', 'Data Kios '.$request->nama.' Gagal Ditambah!');
+        }
 
         return redirect()->route('kios.index');
     }
@@ -52,13 +59,20 @@ class KiosController extends Controller
      */
     public function destroy($kode)
     {
-        $kios = Kios::where('kode', $kode)->first();
+        $kios = Kios::find($kode);
 
         if(count($kios->user) == 0) {
-            Kios::where('kode', $kode)->delete();
+            $process = $kios->delete();
+        }
+        else {
+            $process = $kios->update(['aktif' => '0']);
         }
 
-        Kios::where('kode', $kode)->update(['aktif' => '0']);
+        if ($process) {
+            Alert::success('Sukses', 'Data Kios '.$kios->nama.' Berhasil Dihapus!');
+        } else {
+            Alert::error('Gagal', 'Data Kios '.$kios->nama.' Gagal Dihapus!');
+        }
 
         return redirect()->route('kios.index');
     }

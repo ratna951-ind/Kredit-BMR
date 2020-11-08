@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KonsumenForm;
 use App\Konsumen;
+use App\KonsumenPekerjaan;
+use App\KonsumenDarurat;
+use Alert;
 
 class KonsumenController extends Controller
 {
@@ -55,15 +58,8 @@ class KonsumenController extends Controller
             'statusrumah' => $check['statusrumah'],
             'lamamenetapbulan' => $check['lamamenetapbulan'],
             'pendidikanterakhir' => $check['pendidikanterakhir'],
-            'nama_2' => $check['nama_2'],
-            'tmptlahir_2' => $check['tmptlahir_2'],
-            'tgllahir_2' => $check['tgllahir_2'],
-            // 'gambarktp' => $check['gambarktp'],
-            // 'gambarkk' => $check['gambarkk'],
-            // 'gambarktp_2' => $check['gambarktp_2'],
             'gambarktp' => 'gambarktp',
             'gambarkk' => 'gambarkk',
-            'gambarktp_2' => 'gambarktp_2',
         );
 
         $konsumen_pekerjaan = array(
@@ -73,29 +69,44 @@ class KonsumenController extends Controller
             'masakerja' => $check['masakerja'],
             'alamat_pekerjaan' => $check['alamat_pekerjaan'],
             'telp_pekerjaan' => $check['telp_pekerjaan'],
-            'telp' => $check['telp'],
-            'jk' => $check['jk'],
-            'ibukandung' => $check['ibukandung'],
-            'status' => $check['status'],
-            'statusrumah' => $check['statusrumah'],
-            'lamamenetapbulan' => $check['lamamenetapbulan'],
-            'pendidikanterakhir' => $check['pendidikanterakhir'],
-            'nama_2' => $check['nama_2'],
-            'tmptlahir_2' => $check['tmptlahir_2'],
-            'tgllahir_2' => $check['tgllahir_2'],
-            // 'gambarktp' => $check['gambarktp'],
-            // 'gambarkk' => $check['gambarkk'],
-            // 'gambarktp_2' => $check['gambarktp_2'],
-            'gambarktp' => 'gambarktp',
-            'gambarkk' => 'gambarkk',
-            'gambarktp_2' => 'gambarktp_2',
+            'jabatan' => $check['jabatan'],
+            'penghasilan' => $check['penghasilan'],
         );
+
+        $konsumen_darurat = array(
+            'nik' => $check['nik'],
+            'nama_darurat' => $check['nama_darurat'],
+            'hubungan' => $check['hubungan'],
+            'alamat_darurat' => $check['alamat_darurat'],
+            'telp_darurat' => $check['telp_darurat'],
+        );
+
+        if($check['status'] == 'K'){
+            $konsumen['nama_2'] = $check['nama_2'];
+            $konsumen['tmptlahir_2'] = $check['tmptlahir_2'];
+            $konsumen['tgllahir_2'] = $check['tgllahir_2'];
+            $konsumen['gambarktp_2'] = 'gambarktp_2';
+            
+            $konsumen_pekerjaan['perusahaan_2'] = $check['perusahaan_2'];
+            $konsumen_pekerjaan['alamat_pekerjaan_2'] = $check['alamat_pekerjaan_2'];
+            $konsumen_pekerjaan['telp_pekerjaan_2'] = $check['telp_pekerjaan_2'];
+            $konsumen_pekerjaan['jabatan_2'] = $check['jabatan_2'];
+            $konsumen_pekerjaan['penghasilan_2'] = $check['penghasilan_2'];
+        }
 
         $konsumenTambah = Konsumen::create($konsumen);
 
         $konsumenPekerjaanTambah = KonsumenPekerjaan::create($konsumen_pekerjaan);
 
-        dd($konsumen);
+        $konsumenDarurat = KonsumenDarurat::create($konsumen_darurat);
+
+        if ($konsumenTambah && $konsumenPekerjaanTambah && $konsumenDarurat) {
+            Alert::success('Sukses', 'Data Konsumen '.$request->nama.' Berhasil Ditambah!');
+        } else {
+            Alert::error('Gagal', 'Data Konsumen '.$request->nama.' Gagal Ditambah!');
+        }
+
+        return redirect()->route('konsumen.index');
     }
 
     /**

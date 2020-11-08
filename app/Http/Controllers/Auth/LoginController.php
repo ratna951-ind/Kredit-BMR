@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Alert;
 
 class LoginController extends Controller
 {
@@ -40,6 +41,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        Alert::success('Selamat Datang', 'Anda Telah Berhasil Login!');
+
         $this->middleware('guest')->except('logout');
     }
 }

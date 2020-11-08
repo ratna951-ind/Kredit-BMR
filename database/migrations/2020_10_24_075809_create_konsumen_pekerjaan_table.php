@@ -23,11 +23,11 @@ class CreateKonsumenPekerjaanTable extends Migration
             $table->string('telp_pekerjaan', 14);
             $table->string('jabatan', 20);
             $table->integer('penghasilan');
-            $table->string('perusahaan_2', 30);
-            $table->text('alamat_pekerjaan_2');
-            $table->string('telp_pekerjaan_2', 14);
-            $table->string('jabatan_2', 20);
-            $table->integer('penghasilan_2');
+            $table->string('perusahaan_2', 30)->nullable();
+            $table->text('alamat_pekerjaan_2')->nullable();
+            $table->string('telp_pekerjaan_2', 14)->nullable();
+            $table->string('jabatan_2', 20)->nullable();
+            $table->integer('penghasilan_2')->nullable();
         });
     }
 

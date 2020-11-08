@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Kios;
 use App\Peran;
+use Alert; 
 
 class UserController extends Controller
 {
@@ -47,7 +48,13 @@ class UserController extends Controller
 
         $check['password'] = Hash::make($check['password']);
 
-        User::create($check);
+        $process = User::create($check);
+
+        if ($process) {
+            Alert::success('Sukses', 'Data User '.$request->nama.' Berhasil Ditambah!');
+        } else {
+            Alert::error('Gagal', 'Data User '.$request->nama.' Gagal Ditambah!');
+        }
 
         return redirect()->route('user.index');
     }
@@ -82,7 +89,13 @@ class UserController extends Controller
             $check['password'] = Hash::make($check['password']);
         }
 
-        User::find($id)->update($check);
+        $process = User::find($id)->update($check);
+
+        if ($process) {
+            Alert::success('Sukses', 'Data User '.$request->nama.' Berhasil Diubah!');
+        } else {
+            Alert::error('Gagal', 'Data User '.$request->nama.' Gagal Diubah!');
+        }
 
         return redirect()->route('user.index');
     }
@@ -97,11 +110,18 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        // if(count($user->user) == 0) {
-            // $user->delete();
-        // }
+        if(count($user->jadwal_order) == 0) {
+            $process = $user->delete();
+        }
+        else {
+            $process = $user->update(['aktif' => '0']);
+        }
 
-        $user->update(['aktif' => '0']);
+        if ($process) {
+            Alert::success('Sukses', 'Data User '.$user->nama.' Berhasil Dihapus!');
+        } else {
+            Alert::error('Gagal', 'Data User '.$user->nama.' Gagal Dihapus!');
+        }
 
         return redirect()->route('user.index');
     }

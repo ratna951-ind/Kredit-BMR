@@ -40,6 +40,11 @@ class User extends Authenticatable
         return $this->belongsTo(Peran::class);
     }
 
+    public function jadwal_order()
+    {
+        return $this->hasMany(JadwalOrder::class);
+    }
+
     public function punyaPeran($peranId)
     {
         if ($this->peran->id == $peranId) return true;

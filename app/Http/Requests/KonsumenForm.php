@@ -60,9 +60,9 @@ class KonsumenForm extends FormRequest
                 'alamat_darurat' => 'required|string',
                 'telp_darurat' => 'required|numeric|digits_between:5,14',
 
-                // 'gambarktp' => 'required|file|mimes:png,jpeg,jpg',
-                // 'gambarkk' => 'required|file|mimes:png,jpeg,jpg',
-                // 'gambarktp_2' => 'required|file|mimes:png,jpeg,jpg',
+                'gambarktp' => 'required|file|mimes:png,jpeg,jpg|max:10240',
+                'gambarkk' => 'required|file|mimes:png,jpeg,jpg|max:10240',
+                'gambarktp_2' => 'required_if:status,K|file|mimes:png,jpeg,jpg|max:10240',
             ];
         } else {
             return [

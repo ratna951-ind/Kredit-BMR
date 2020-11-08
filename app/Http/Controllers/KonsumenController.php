@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KonsumenForm;
+use Illuminate\Support\Facades\Storage;
 use App\Konsumen;
 use App\KonsumenPekerjaan;
 use App\KonsumenDarurat;
@@ -44,6 +45,9 @@ class KonsumenController extends Controller
 
         // dd($check);
 
+        $gambarktp = $check['nik']."-KTP.".$check['gambarktp']->getClientOriginalExtension();
+        $gambarkk = $check['nik']."-KK.".$check['gambarkk']->getClientOriginalExtension();
+
         $konsumen = array(
             'nik' => $check['nik'],
             'nama' => $check['nama'],
@@ -58,8 +62,8 @@ class KonsumenController extends Controller
             'statusrumah' => $check['statusrumah'],
             'lamamenetapbulan' => $check['lamamenetapbulan'],
             'pendidikanterakhir' => $check['pendidikanterakhir'],
-            'gambarktp' => 'gambarktp',
-            'gambarkk' => 'gambarkk',
+            'gambarktp' => $gambarktp,
+            'gambarkk' => $gambarkk,
         );
 
         $konsumen_pekerjaan = array(
@@ -81,17 +85,25 @@ class KonsumenController extends Controller
             'telp_darurat' => $check['telp_darurat'],
         );
 
+        $uploadgambarktp = Storage::putFileAs('konsumen', $check['gambarktp'], $gambarktp);
+
+        $uploadgambarkk = Storage::putFileAs('konsumen', $check['gambarkk'], $gambarkk);
+
         if($check['status'] == 'K'){
+            $gambarktp_2 = $check['nik']."-KTP_2.".$check['gambarktp_2']->getClientOriginalExtension();
+
             $konsumen['nama_2'] = $check['nama_2'];
             $konsumen['tmptlahir_2'] = $check['tmptlahir_2'];
             $konsumen['tgllahir_2'] = $check['tgllahir_2'];
-            $konsumen['gambarktp_2'] = 'gambarktp_2';
+            $konsumen['gambarktp_2'] = $gambarktp_2;
             
             $konsumen_pekerjaan['perusahaan_2'] = $check['perusahaan_2'];
             $konsumen_pekerjaan['alamat_pekerjaan_2'] = $check['alamat_pekerjaan_2'];
             $konsumen_pekerjaan['telp_pekerjaan_2'] = $check['telp_pekerjaan_2'];
             $konsumen_pekerjaan['jabatan_2'] = $check['jabatan_2'];
             $konsumen_pekerjaan['penghasilan_2'] = $check['penghasilan_2'];
+
+            $uploadgambarktp_2 = Storage::putFileAs('konsumen', $check['gambarktp_2'], $gambarktp_2);
         }
 
         $konsumenTambah = Konsumen::create($konsumen);

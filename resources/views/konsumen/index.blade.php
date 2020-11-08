@@ -27,7 +27,7 @@
                         <tbody>
                         @foreach ($konsumens as $konsumen)
                             <tr>
-                                <td align="center">{{$loop->iteration}}</td>
+                                <td align="center">{{$loop->iteration}} <img src="{{route('image.konsumen', $konsumen->gambarktp)}}" /></td>
                                 <td>{{$konsumen->nama}}</td>
                                 <td>{{$konsumen->telp}}</td>
                                 <td>{{$konsumen->alamatskrng}}</td>

@@ -42,4 +42,10 @@ class HomeController extends Controller
 
         return view('home', $data);
     }
+
+    public function imageKonsumen($path)
+    {
+        $storagePath = storage_path('app/konsumen/' . $path);
+        return response()->file($storagePath);
+    }
 }

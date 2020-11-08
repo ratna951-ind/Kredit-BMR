@@ -12,7 +12,7 @@
     <section id="description" class="card">
         <div class="card-content">
             <div class="card-body">
-                <form class="form form-horizontal" action="{{route('konsumen.store')}}" method="post" id="createRecord">
+                <form class="form form-horizontal" action="{{route('konsumen.store')}}" method="post" id="createRecord" enctype="multipart/form-data">
                     {{csrf_field()}}
                     @if(count($errors) > 0)
                         <div class="alert alert-danger" role="alert">
@@ -380,7 +380,7 @@
                                         <label class="col-md-3 label-control" for="inputKTP">KTP</label>
                                         <div class="col-md-9 mx-auto">
                                             <input type="file" class="custom-file-input" id="inputKTP" name="gambarktp">
-                                            <label class="custom-file-label" for="inputKTP" aria-describedby="inputGroupFile02">Pilih Dokumen</label>
+                                            <label class="custom-file-label" for="inputKTP" aria-describedby="inputKTP">Pilih Dokumen</label>
                                         </div>
                                     </div>
                                 </div>
@@ -388,8 +388,8 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputKK">KK</label>
                                         <div class="col-md-9 mx-auto">
-                                        <input type="file" class="custom-file-input" id="inputKK" name="gambarkK">
-                                            <label class="custom-file-label" for="inputKK" aria-describedby="inputGroupFile02">Pilih Dokumen</label>
+                                            <input type="file" class="custom-file-input" id="inputKK" name="gambarkk">
+                                            <label class="custom-file-label" for="inputKK" aria-describedby="inputKK">Pilih Dokumen</label>
                                         </div>
                                     </div>
                                 </div>
@@ -402,7 +402,7 @@
                                             <label class="col-md-3 label-control" for="inputKTPPasangan">KTP</label>
                                             <div class="col-md-9 mx-auto">
                                                 <input type="file" class="custom-file-input" id="inputKTPPasangan" name="gambarktp_2">
-                                                <label class="custom-file-label" for="inputKTPPasangan" aria-describedby="inputGroupFile02">Pilih Dokumen</label>
+                                                <label class="custom-file-label" for="inputKTPPasangan" aria-describedby="inputKTPPasangan">Pilih Dokumen</label>
                                             </div>
                                         </div>
                                     </div>
@@ -429,4 +429,5 @@
         $(document).ready(function(){$("#datatable").DataTable()});
     </script>
     <script src="{{asset('app-assets/custom/konsumen.js')}}"></script>
+    <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>
 @endpush

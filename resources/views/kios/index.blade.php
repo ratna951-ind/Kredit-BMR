@@ -28,7 +28,7 @@
                             <tr>
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$kios->kode}}
-                                <td>{{$kios->nama}}</td>
+                                <td>Kios {{$kios->nama}}</td>
                                 <td>
                                     <button type="button" data-name="{{$kios->nama}}" data-id="{{$kios->kode}}" class="modal-delete btn btn-icon btn-danger"><i class="la la-trash"></i></button>
                                 </td>

@@ -14,7 +14,7 @@ class KiosTableSeeder extends Seeder
         App\Kios::insert([
             [
                 'kode' => 712002,
-                'nama' => 'Kios Hybrid Kepaon'
+                'nama' => 'Hybrid Kepaon'
             ]
         ]);
     }

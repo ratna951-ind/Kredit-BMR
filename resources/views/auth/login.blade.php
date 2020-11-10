@@ -66,6 +66,14 @@
                                     <div class="card-body">
                                         <form class="form-horizontal form-simple" method="POST" action="{{ route('login') }}" novalidate>
                                             @csrf
+                                            @if(count($errors) > 0)
+                                                <div class="alert alert-danger" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    @foreach($errors->all() as $message)
+                                                        {{$message}}<br>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                             <fieldset class="form-group position-relative has-icon-left mb-0">
                                                 <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Masukkan username!">
                                                 <div class="form-control-position">

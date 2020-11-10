@@ -5,7 +5,19 @@
 @endsection
 
 @push('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        .nospinner::-webkit-outer-spin-button,
+        .nospinner::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        
+        /* Firefox */
+        .nospinner[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
 @endpush
 
 @section('isi')
@@ -53,7 +65,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNIK">No KTP</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNIK" class="form-control border-primary" placeholder="Masukan No KTP" value="{{ $konsumenlama->nik }}" name="nik">
+                                            <input type="number" id="inputNIK" class="form-control border-primary nospinner" placeholder="Masukan No KTP" value="{{ $konsumenlama->nik }}" name="nik">
                                         </div>
                                     </div>
                                 </div>
@@ -91,9 +103,9 @@
                                         <div class="col-md-9 mx-auto">
                                             <select class="form-control custom-select" id="inputStatus" name="status">
                                                 <option value="">Pilih Status</option>
-                                                <option value="K" @if ('K' == old('status')) {{'selected'}}@endif>Kawin</option>
-                                                <option value="BK" @if ('BK' == old('status')) {{'selected'}}@endif>Belum Kawin</option>
-                                                <option value="C" @if ('C' == old('status')) {{'selected'}}@endif>Cerai</option>
+                                                <option value="K" @if ('K' == $konsumenlama->status) {{'selected'}}@endif>Kawin</option>
+                                                <option value="BK" @if ('BK' == $konsumenlama->status) {{'selected'}}@endif>Belum Kawin</option>
+                                                <option value="C" @if ('C' == $konsumenlama->status) {{'selected'}}@endif>Cerai</option>
                                             </select>
                                         </div>
                                     </div>
@@ -114,12 +126,12 @@
                                         <div class="col-md-9 mx-auto">
                                             <select class="form-control custom-select" id="inputStatusRumah" name="statusrumah">
                                                 <option value="">Pilih Status Rumah</option>
-                                                <option value="Sen" @if ('Sen' == old('statusrumah')) {{'selected'}}@endif>Sendiri</option>
-                                                <option value="K" @if ('K' == old('statusrumah')) {{'selected'}}@endif>Keluarga</option>
-                                                <option value="Sew" @if ('Sew' == old('statusrumah')) {{'selected'}}@endif>Sewa</option>
-                                                <option value="KPR" @if ('KPR' == old('statusrumah')) {{'selected'}}@endif>KPR</option>
-                                                <option value="D" @if ('D' == old('statusrumah')) {{'selected'}}@endif>Dinas</option>
-                                                <option value="L" @if ('L' == old('statusrumah')) {{'selected'}}@endif>Lain-Lain</option>
+                                                <option value="Sen" @if ('Sen' == $konsumenlama->statusrumah) {{'selected'}}@endif>Sendiri</option>
+                                                <option value="K" @if ('K' == $konsumenlama->statusrumah) {{'selected'}}@endif>Keluarga</option>
+                                                <option value="Sew" @if ('Sew' == $konsumenlama->statusrumah) {{'selected'}}@endif>Sewa</option>
+                                                <option value="KPR" @if ('KPR' == $konsumenlama->statusrumah) {{'selected'}}@endif>KPR</option>
+                                                <option value="D" @if ('D' == $konsumenlama->statusrumah) {{'selected'}}@endif>Dinas</option>
+                                                <option value="L" @if ('L' == $konsumenlama->statusrumah) {{'selected'}}@endif>Lain-Lain</option>
                                             </select>
                                         </div>
                                     </div>
@@ -148,7 +160,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNoTelp">No Telp</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNoTelp" class="form-control border-primary" placeholder="Masukan No Telp" value="{{ $konsumenlama->telp }}" name="telp">
+                                            <input type="number" id="inputNoTelp" class="form-control border-primary nospinner" placeholder="Masukan No Telp" value="{{ $konsumenlama->telp }}" name="telp">
                                         </div>
                                     </div>
                                 </div>
@@ -158,11 +170,11 @@
                                         <div class="col-md-9 mx-auto">
                                             <select class="form-control custom-select" id="inputPendidikanTerakhir" name="pendidikanterakhir">
                                                 <option value="">Pilih Pendidikan Terakhir</option>
-                                                <option value="SD" @if ('SD' == old('pendidikanterakhir')) {{'selected'}}@endif>SD</option>
-                                                <option value="SLTP" @if ('SLTP' == old('pendidikanterakhir')) {{'selected'}}@endif>SLTP</option>
-                                                <option value="SLTA" @if ('SLTA' == old('pendidikanterakhir')) {{'selected'}}@endif>SLTA</option>
-                                                <option value="Akademi" @if ('Akademi' == old('pendidikanterakhir')) {{'selected'}}@endif>Akademi</option>
-                                                <option value="Universitas" @if ('Universitas' == old('pendidikanterakhir')) {{'selected'}}@endif>Universitas</option>
+                                                <option value="SD" @if ('SD' == $konsumenlama->pendidikanterakhir) {{'selected'}}@endif>SD</option>
+                                                <option value="SLTP" @if ('SLTP' == $konsumenlama->pendidikanterakhir) {{'selected'}}@endif>SLTP</option>
+                                                <option value="SLTA" @if ('SLTA' == $konsumenlama->pendidikanterakhir) {{'selected'}}@endif>SLTA</option>
+                                                <option value="Akademi" @if ('Akademi' == $konsumenlama->pendidikanterakhir) {{'selected'}}@endif>Akademi</option>
+                                                <option value="Universitas" @if ('Universitas' == $konsumenlama->pendidikanterakhir) {{'selected'}}@endif>Universitas</option>
                                             </select>
                                         </div>
                                     </div>
@@ -175,8 +187,8 @@
                                         <div class="col-md-9 mx-auto">
                                             <select class="form-control custom-select" id="inputJenisKelamin" name="jk">
                                                 <option value="">Pilih Jenis Kelamin</option>
-                                                <option value="L" @if ('L' == old('jk')) {{'selected'}}@endif>Laki-Laki</option>
-                                                <option value="P" @if ('P' == old('jk')) {{'selected'}}@endif>Perempuan</option>
+                                                <option value="L" @if ('L' == $konsumenlama->jk) {{'selected'}}@endif>Laki-Laki</option>
+                                                <option value="P" @if ('P' == $konsumenlama->jk) {{'selected'}}@endif>Perempuan</option>
                                             </select>
                                         </div>
                                     </div>
@@ -223,8 +235,8 @@
                                         <div class="col-md-9 mx-auto">
                                             <select class="form-control custom-select" id="inputTipePekerjaan" name="tipe">
                                                 <option value="">Pilih Tipe Pekerjaan</option>
-                                                <option value="Karyawan" @if ('Karyawan' == old('tipe')) {{'selected'}}@endif>Karyawan</option>
-                                                <option value="Non Karyawan" @if ('Non Karyawan' == old('tipe')) {{'selected'}}@endif>Non Karyawan</option>
+                                                <option value="Karyawan" @if ('Karyawan' == $konsumenlama->konsumen_pekerjaan->tipe) {{'selected'}}@endif>Karyawan</option>
+                                                <option value="Non Karyawan" @if ('Non Karyawan' == $konsumenlama->konsumen_pekerjaan->tipe) {{'selected'}}@endif>Non Karyawan</option>
                                             </select>
                                         </div>
                                     </div>
@@ -233,7 +245,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputJabatan">Jabatan</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputJabatan" class="form-control border-primary" placeholder="Masukan Jabatan" value="{{ $konsumenlama->jabatan }}" name="jabatan">
+                                            <input type="text" id="inputJabatan" class="form-control border-primary" placeholder="Masukan Jabatan" value="{{ $konsumenlama->konsumen_pekerjaan->jabatan }}" name="jabatan">
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +255,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputPerusahaan">Perusahaan</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputPerusahaan" class="form-control border-primary" placeholder="Masukan Perusahaan" value="{{ $konsumenlama->perusahaan }}" name="perusahaan">
+                                            <input type="text" id="inputPerusahaan" class="form-control border-primary" placeholder="Masukan Perusahaan" value="{{ $konsumenlama->konsumen_pekerjaan->perusahaan }}" name="perusahaan">
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +263,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputAlamatPekerjaan">Alamat</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputAlamatPekerjaan" class="form-control border-primary" placeholder="Masukan Alamat Pekerjaan" value="{{ $konsumenlama->alamat_pekerjaan }}" name="alamat_pekerjaan">
+                                            <input type="text" id="inputAlamatPekerjaan" class="form-control border-primary" placeholder="Masukan Alamat Pekerjaan" value="{{ $konsumenlama->konsumen_pekerjaan->alamat_pekerjaan }}" name="alamat_pekerjaan">
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +273,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputMasaKerja">Masa Kerja</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputMasaKerja" class="form-control border-primary" placeholder="Masukan Masa Kerja" value="{{ $konsumenlama->masakerja }}" name="masakerja">
+                                            <input type="number" id="inputMasaKerja" class="form-control border-primary" placeholder="Masukan Masa Kerja" value="{{ $konsumenlama->konsumen_pekerjaan->masakerja }}" name="masakerja">
                                         </div>
                                     </div>
                                 </div>
@@ -269,7 +281,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNoTelpPekerjaan">No Telp</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNoTelpPekerjaan" class="form-control border-primary" placeholder="Masukan No Telp Pekerjaan" value="{{ $konsumenlama->telp_pekerjaan }}" name="telp_pekerjaan">
+                                            <input type="number" id="inputNoTelpPekerjaan" class="form-control border-primary nospinner" placeholder="Masukan No Telp Pekerjaan" value="{{ $konsumenlama->konsumen_pekerjaan->telp_pekerjaan }}" name="telp_pekerjaan">
                                         </div>
                                     </div>
                                 </div>
@@ -279,7 +291,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputPenghasilan">Penghasilan</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputPenghasilan" class="form-control border-primary" placeholder="Masukan Penghasilan" value="{{ $konsumenlama->penghasilan }}" name="penghasilan">
+                                            <input type="number" id="inputPenghasilan" class="form-control border-primary nospinner" placeholder="Masukan Penghasilan" value="{{ $konsumenlama->konsumen_pekerjaan->penghasilan }}" name="penghasilan">
                                         </div>
                                     </div>
                                 </div>
@@ -291,7 +303,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="inputPerusahaanPasangan">Perusahaan</label>
                                             <div class="col-md-9 mx-auto">
-                                                <input type="text" id="inputPerusahaanPasangan" class="form-control border-primary" placeholder="Masukan Perusahaan Pasangan" value="{{ $konsumenlama->perusahaan_2 }}" name="perusahaan_2">
+                                                <input type="text" id="inputPerusahaanPasangan" class="form-control border-primary" placeholder="Masukan Perusahaan Pasangan" value="{{ $konsumenlama->konsumen_pekerjaan->perusahaan_2 }}" name="perusahaan_2">
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +311,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="inputAlamatPekerjaanPasangan">Alamat</label>
                                             <div class="col-md-9 mx-auto">
-                                                <input type="text" id="inputAlamatPekerjaanPasangan" class="form-control border-primary" placeholder="Masukan Alamat Pekerjaan Pasangan" value="{{ $konsumenlama->alamat_pekerjaan_2 }}" name="alamat_pekerjaan_2">
+                                                <input type="text" id="inputAlamatPekerjaanPasangan" class="form-control border-primary" placeholder="Masukan Alamat Pekerjaan Pasangan" value="{{ $konsumenlama->konsumen_pekerjaan->alamat_pekerjaan_2 }}" name="alamat_pekerjaan_2">
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +321,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="inputJabatanPasangan">Jabatan</label>
                                             <div class="col-md-9 mx-auto">
-                                                <input type="text" id="inputJabatanPasangan" class="form-control border-primary" placeholder="Masukan Jabatan Pasangan" value="{{ $konsumenlama->jabatan_2 }}" name="jabatan_2">
+                                                <input type="text" id="inputJabatanPasangan" class="form-control border-primary" placeholder="Masukan Jabatan Pasangan" value="{{ $konsumenlama->konsumen_pekerjaan->jabatan_2 }}" name="jabatan_2">
                                             </div>
                                         </div>
                                     </div>
@@ -317,7 +329,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="inputNoTelpPekerjaanPasangan">No Telp</label>
                                             <div class="col-md-9 mx-auto">
-                                                <input type="number" id="inputNoTelpPekerjaanPasangan" class="form-control border-primary" placeholder="Masukan No Telp Pekerjaan Pasangan" value="{{ $konsumenlama->telp_pekerjaan_2 }}" name="telp_pekerjaan_2">
+                                                <input type="number" id="inputNoTelpPekerjaanPasangan" class="form-control border-primary nospinner" placeholder="Masukan No Telp Pekerjaan Pasangan" value="{{ $konsumenlama->konsumen_pekerjaan->telp_pekerjaan_2 }}" name="telp_pekerjaan_2">
                                             </div>
                                         </div>
                                     </div>
@@ -327,7 +339,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="inputPenghasilanPasangan">Penghasilan</label>
                                             <div class="col-md-9 mx-auto">
-                                                <input type="number" id="inputPenghasilanPasangan" class="form-control border-primary" placeholder="Masukan Penghasilan Pasangan" value="{{ $konsumenlama->penghasilan_2 }}" name="penghasilan_2">
+                                                <input type="number" id="inputPenghasilanPasangan" class="form-control border-primary nospinner" placeholder="Masukan Penghasilan Pasangan" value="{{ $konsumenlama->konsumen_pekerjaan->penghasilan_2 }}" name="penghasilan_2">
                                             </div>
                                         </div>
                                     </div>
@@ -341,7 +353,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNamaDarurat">Nama</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputNamaDarurat" class="form-control border-primary" placeholder="Masukan Nama Darurat" value="{{ $konsumenlama->nama_darurat }}" name="nama_darurat">
+                                            <input type="text" id="inputNamaDarurat" class="form-control border-primary" placeholder="Masukan Nama Darurat" value="{{ $konsumenlama->konsumen_darurat->nama_darurat }}" name="nama_darurat">
                                         </div>
                                     </div>
                                 </div>
@@ -349,7 +361,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputAlamatDarurat">Alamat</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputAlamatDarurat" class="form-control border-primary" placeholder="Masukan Alamat Darurat" value="{{ $konsumenlama->alamat_darurat }}" name="alamat_darurat">
+                                            <input type="text" id="inputAlamatDarurat" class="form-control border-primary" placeholder="Masukan Alamat Darurat" value="{{ $konsumenlama->konsumen_darurat->alamat_darurat }}" name="alamat_darurat">
                                         </div>
                                     </div>
                                 </div>
@@ -359,7 +371,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputHubunganDarurat">Hubungan</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputHubunganDarurat" class="form-control border-primary" placeholder="Masukan Hubungan Darurat" value="{{ $konsumenlama->hubungan }}" name="hubungan">
+                                            <input type="text" id="inputHubunganDarurat" class="form-control border-primary" placeholder="Masukan Hubungan Darurat" value="{{ $konsumenlama->konsumen_darurat->hubungan }}" name="hubungan">
                                         </div>
                                     </div>
                                 </div>
@@ -367,7 +379,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNoTelpDarurat">No Telp</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNoTelpDarurat" class="form-control border-primary" placeholder="Masukan No Telp Darurat" value="{{ $konsumenlama->telp_darurat }}" name="telp_darurat">
+                                            <input type="number" id="inputNoTelpDarurat" class="form-control border-primary nospinner" placeholder="Masukan No Telp Darurat" value="{{ $konsumenlama->konsumen_darurat->telp_darurat }}" name="telp_darurat">
                                         </div>
                                     </div>
                                 </div>
@@ -425,10 +437,6 @@
 
 @push('js')    
     @include('komponen.modalUpdate', ['modul' => 'konsumen'])
-    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
-    <script>
-        $(document).ready(function(){$("#datatable").DataTable()});
-    </script>
     <script src="{{asset('app-assets/custom/konsumen.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>
 @endpush

@@ -5,7 +5,19 @@
 @endsection
 
 @push('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        .nospinner::-webkit-outer-spin-button,
+        .nospinner::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        
+        /* Firefox */
+        .nospinner[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
 @endpush
 
 @section('isi')
@@ -52,7 +64,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNIK">No KTP</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNIK" class="form-control border-primary" placeholder="Masukan No KTP" value="{{ old('nik') }}" name="nik">
+                                            <input type="number" id="inputNIK" class="form-control border-primary nospinner" placeholder="Masukan No KTP" value="{{ old('nik') }}" name="nik">
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +159,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNoTelp">No Telp</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNoTelp" class="form-control border-primary" placeholder="Masukan No Telp" value="{{ old('telp') }}" name="telp">
+                                            <input type="number" id="inputNoTelp" class="form-control border-primary nospinner" placeholder="Masukan No Telp" value="{{ old('telp') }}" name="telp">
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +280,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNoTelpPekerjaan">No Telp</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNoTelpPekerjaan" class="form-control border-primary" placeholder="Masukan No Telp Pekerjaan" value="{{ old('telp_pekerjaan') }}" name="telp_pekerjaan">
+                                            <input type="number" id="inputNoTelpPekerjaan" class="form-control border-primary nospinner" placeholder="Masukan No Telp Pekerjaan" value="{{ old('telp_pekerjaan') }}" name="telp_pekerjaan">
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +290,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputPenghasilan">Penghasilan</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputPenghasilan" class="form-control border-primary" placeholder="Masukan Penghasilan" value="{{ old('penghasilan') }}" name="penghasilan">
+                                            <input type="number" id="inputPenghasilan" class="form-control border-primary nospinner" placeholder="Masukan Penghasilan" value="{{ old('penghasilan') }}" name="penghasilan">
                                         </div>
                                     </div>
                                 </div>
@@ -316,7 +328,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="inputNoTelpPekerjaanPasangan">No Telp</label>
                                             <div class="col-md-9 mx-auto">
-                                                <input type="number" id="inputNoTelpPekerjaanPasangan" class="form-control border-primary" placeholder="Masukan No Telp Pekerjaan Pasangan" value="{{ old('telp_pekerjaan_2') }}" name="telp_pekerjaan_2">
+                                                <input type="number" id="inputNoTelpPekerjaanPasangan" class="form-control border-primary nospinner" placeholder="Masukan No Telp Pekerjaan Pasangan" value="{{ old('telp_pekerjaan_2') }}" name="telp_pekerjaan_2">
                                             </div>
                                         </div>
                                     </div>
@@ -326,7 +338,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="inputPenghasilanPasangan">Penghasilan</label>
                                             <div class="col-md-9 mx-auto">
-                                                <input type="number" id="inputPenghasilanPasangan" class="form-control border-primary" placeholder="Masukan Penghasilan Pasangan" value="{{ old('penghasilan_2') }}" name="penghasilan_2">
+                                                <input type="number" id="inputPenghasilanPasangan" class="form-control border-primary nospinner" placeholder="Masukan Penghasilan Pasangan" value="{{ old('penghasilan_2') }}" name="penghasilan_2">
                                             </div>
                                         </div>
                                     </div>
@@ -366,7 +378,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputNoTelpDarurat">No Telp</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputNoTelpDarurat" class="form-control border-primary" placeholder="Masukan No Telp Darurat" value="{{ old('telp_darurat') }}" name="telp_darurat">
+                                            <input type="number" id="inputNoTelpDarurat" class="form-control border-primary nospinner" placeholder="Masukan No Telp Darurat" value="{{ old('telp_darurat') }}" name="telp_darurat">
                                         </div>
                                     </div>
                                 </div>
@@ -424,10 +436,6 @@
 
 @push('js')    
     @include('komponen.modalCreate', ['modul' => 'konsumen'])
-    <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
-    <script>
-        $(document).ready(function(){$("#datatable").DataTable()});
-    </script>
     <script src="{{asset('app-assets/custom/konsumen.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>
 @endpush

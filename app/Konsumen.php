@@ -14,4 +14,14 @@ class Konsumen extends Model
     protected $fillable = [
         'nik', 'nama', 'tmptlahir', 'tgllahir', 'alamatktp', 'alamatskrng', 'telp', 'jk', 'ibukandung', 'status', 'statusrumah', 'lamamenetapbulan', 'pendidikanterakhir', 'nama_2', 'tmptlahir_2', 'tgllahir_2', 'gambarktp', 'gambarkk', 'gambarktp_2'
     ];
+
+    public function konsumen_pekerjaan()
+    {
+        return $this->belongsTo(KonsumenPekerjaan::class, 'nik', 'nik');
+    }
+
+    public function konsumen_darurat()
+    {
+        return $this->belongsTo(KonsumenDarurat::class, 'nik', 'nik');
+    }
 }

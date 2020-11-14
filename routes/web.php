@@ -31,4 +31,13 @@ Route::group(['middleware' => ['auth','peran:1']], function(){
 // Route MCE
 Route::group(['middleware' => ['auth','peran:2']], function(){
     Route::resource('konsumen','KonsumenController')->except(['destroy']);
+    Route::resource('pembebanan','PembebananController')->except(['edit', 'update', 'destroy']);
+
+    Route::get('jadwal/create', 'JadwalController@create')->name('jadwal.create');
+    Route::post('jadwal', 'JadwalController@store')->name('jadwal.store');
+});
+
+// Route MCE & UH
+Route::group(['middleware' => ['auth','peran:2,3']], function(){
+    Route::get('jadwal', 'JadwalController@index')->name('jadwal.index');
 });

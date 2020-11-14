@@ -44,7 +44,37 @@
                 <li class=" nav-item">
             @endif
                 <a href="{{route('konsumen.index')}}">
-                <i class="la la-home"></i><span class="menu-title" data-i18n="Konsumen">Konsumen</span>
+                <i class="la la-user"></i><span class="menu-title" data-i18n="Konsumen">Konsumen</span>
+            </a>
+            </li>
+
+            @if (\Str::contains(Route::currentRouteName(), ['jadwal']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('jadwal.index')}}">
+                <i class="la la-user"></i><span class="menu-title" data-i18n="Jadwal">Jadwal</span>
+            </a>
+            </li>
+
+            @if (\Str::contains(Route::currentRouteName(), ['order']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('order.index')}}">
+                <i class="la la-user"></i><span class="menu-title" data-i18n="Order">Order</span>
+            </a>
+            </li>
+
+            @if (\Str::contains(Route::currentRouteName(), ['pembebanan']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('pembebanan.index')}}">
+                <i class="la la-user"></i><span class="menu-title" data-i18n="Pembebanan">Pembebanan</span>
             </a>
             </li>
 

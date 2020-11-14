@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Alert;
 
 class PeranMiddleware
 {
@@ -13,13 +14,17 @@ class PeranMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $roleId)
+    public function handle($request, Closure $next, ... $roles)
     {
-        if(!$request->user()->punyaPeran($roleId))
-        {
-            return redirect()
-                ->to('/');
+        foreach($roles as $role) {
+            if($request->user()->punyaPeran($role))
+            {
+                return $next($request);
+            }
         }
-        return $next($request);
+
+        Alert::warning('Akses Dilarang', 'Anda tidak memiliki hak!');
+
+        return redirect()->to('/');
     }
 }

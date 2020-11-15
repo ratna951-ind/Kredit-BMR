@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\JadwalOrder;
+use App\Konsumen;
 
 class JadwalController extends Controller
 {
@@ -26,7 +27,9 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        //
+        $data['konsumens'] = Konsumen::all();
+
+        return view('jadwal.create', $data);
     }
 
     /**

@@ -438,7 +438,7 @@
                             <center>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('konsumen.index')}}'">Batal</button>
-                                    <button type="button" class="modal-create btn btn-icon btn-success">Simpan</button>
+                                    <button type="button" class="modal-update btn btn-icon btn-success">Simpan</button>
                                 </div>
                             </center>
                         </div>

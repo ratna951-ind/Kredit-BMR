@@ -58,6 +58,7 @@
                                         <label class="col-md-3 label-control" for="inputNama">Nama Lengkap</label>
                                         <div class="col-md-9 mx-auto">
                                             <input type="text" id="inputNama" class="form-control border-primary" placeholder="Masukan Nama" value="{{ $konsumenlama->nama }}" name="nama" autofocus>
+                                            <input type="hidden" value="{{ $konsumenlama->nik }}" name="nik_lama">
                                         </div>
                                     </div>
                                 </div>
@@ -387,6 +388,14 @@
                         </div>
                         <div class="tab-pane" id="dokumen" aria-labelledby="tab_dokumen">
                             <h4 class="card-title mt-2"><b>DATA DOKUMEN KONSUMEN</b></h4>
+                            <div class="row mb-2">
+                                <div class="col-md-6" align="center">
+                                    <img src="{{route('image', ['konsumen', $konsumenlama->gambarktp])}}" id="uploadKTP" height="200px" alt="Preview KTP">
+                                </div>
+                                <div class="col-md-6" align="center">
+                                    <img src="{{route('image', ['konsumen', $konsumenlama->gambarkk])}}" id="uploadKK" height="200px" alt="Preview KK">
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -409,6 +418,11 @@
                             </div>
                             <div id="pasangan_dokumen" style="display: none">
                                 <h4 class="card-title mt-5"><b>DATA DOKUMEN PASANGAN</b></h4>
+                                <div class="row mb-2">
+                                    <div class="col-md-6" align="center">
+                                        <img src="{{route('image', ['konsumen', $konsumenlama->gambarktp_2])}}" id="uploadKTP2" height="200px" alt="Preview KTP2">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">

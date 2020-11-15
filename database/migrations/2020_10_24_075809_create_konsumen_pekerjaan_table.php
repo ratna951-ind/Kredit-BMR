@@ -15,7 +15,7 @@ class CreateKonsumenPekerjaanTable extends Migration
     {
         Schema::create('konsumen_pekerjaan', function (Blueprint $table) {
             $table->string('nik', 18)->primary();
-            $table->foreign('nik')->references('nik')->on('konsumen')->onDelete('cascade');
+            $table->foreign('nik')->references('nik')->on('konsumen')->onUpdate('cascade')->onDelete('cascade');
             $table->enum('tipe', ['Karyawan', 'Non Karyawan']);
             $table->string('perusahaan', 30);
             $table->tinyInteger('masakerja');

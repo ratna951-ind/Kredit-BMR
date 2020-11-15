@@ -43,9 +43,13 @@ class HomeController extends Controller
         return view('home', $data);
     }
 
-    public function imageKonsumen($path)
+    public function image($module, $file_name)
     {
-        $storagePath = storage_path('app/konsumen/' . $path);
-        return response()->file($storagePath);
+        try {
+            $storagePath = storage_path('app/'. $module .'/' . $file_name);
+            return response()->file($storagePath);
+        } catch (\Throwable $th) {
+            return abort(404);
+        }
     }
 }

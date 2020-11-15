@@ -19,7 +19,7 @@ Auth::routes([
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/', 'HomeController@index')->name('home'); // Route Home
-    Route::get('/image/konsumen/{path}', 'HomeController@imageKonsumen')->name('image.konsumen');
+    Route::get('/image/{module}/{file_name}', 'HomeController@image')->name('image');
 });
 
 // Route Admin

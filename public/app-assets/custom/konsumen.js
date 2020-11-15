@@ -57,5 +57,48 @@
             document.getElementById("inputKTPPasangan").disabled = true;
         }
     });
+
+    function readImageKTP(input) {
+        if (input.files && input.files[0]) {
+           var reader = new FileReader();
+      
+           reader.onload = function (e) {
+               $('#uploadKTP').attr('src', e.target.result);
+           }
+      
+           reader.readAsDataURL(input.files[0]);
+        }
+     }
+     function readImageKK(input) {
+        if (input.files && input.files[0]) {
+           var reader = new FileReader();
+      
+           reader.onload = function (e) {
+               $('#uploadKK').attr('src', e.target.result);
+           }
+      
+           reader.readAsDataURL(input.files[0]);
+        }
+     }
+     function readImageKTP2(input) {
+        if (input.files && input.files[0]) {
+           var reader = new FileReader();
+      
+           reader.onload = function (e) {
+               $('#uploadKTP2').attr('src', e.target.result);
+           }
+      
+           reader.readAsDataURL(input.files[0]);
+        }
+     }
+     $("#inputKTP").change(function(){
+        readImageKTP(this);
+     });
+     $("#inputKK").change(function(){
+        readImageKK(this);
+     });
+     $("#inputKTPPasangan").change(function(){
+        readImageKTP2(this);
+     });
   
 })(jQuery, undefined);

@@ -23,7 +23,7 @@ class KonsumenForm extends FormRequest
      */
     public function rules()
     {
-        if (!isset($this->id)) {
+        if (!isset($this->nik_lama)) {
             return [
                 'nik' => 'required|string|min:12|max:18|unique:konsumen',
                 'nama' => 'required|string|min:2|max:50',
@@ -66,6 +66,7 @@ class KonsumenForm extends FormRequest
             ];
         } else {
             return [
+                'nik' => 'required|string|min:12|max:18|unique:konsumen,nik,'.$this->nik_lama.',nik',
                 'nama' => 'required|string|min:2|max:50',
                 'tmptlahir' => 'required|string|min:2|max:20',
                 'tgllahir' => 'required|date',
@@ -78,9 +79,9 @@ class KonsumenForm extends FormRequest
                 'statusrumah' => 'required|string',
                 'lamamenetapbulan' => 'required|integer',
                 'pendidikanterakhir' => 'required|string',
-                'nama_2' => 'required|string|min:2|max:50',
-                'tmptlahir_2' => 'required|string|min:2|max:20',
-                'tgllahir_2' => 'required|date',
+                'nama_2' => 'required_if:status,K|string|min:2|max:50',
+                'tmptlahir_2' => 'required_if:status,K|string|min:2|max:20',
+                'tgllahir_2' => 'required_if:status,K|date',
 
                 'tipe' => 'required|string',
                 'perusahaan' => 'required|string|min:2|max:30',
@@ -89,11 +90,11 @@ class KonsumenForm extends FormRequest
                 'telp_pekerjaan' => 'required|numeric|digits_between:5,14',
                 'jabatan' => 'required|string|min:2|max:20',
                 'penghasilan' => 'required|integer',
-                'perusahaan_2' => 'required|string|min:2|max:30',
-                'alamat_pekerjaan_2' => 'required|string',
-                'telp_pekerjaan_2' => 'required|numeric|digits_between:5,14',
-                'jabatan_2' => 'required|string|min:2|max:20',
-                'penghasilan_2' => 'required|integer',
+                'perusahaan_2' => 'required_if:status,K|string|min:2|max:30',
+                'alamat_pekerjaan_2' => 'required_if:status,K|string',
+                'telp_pekerjaan_2' => 'required_if:status,K|numeric|digits_between:5,14',
+                'jabatan_2' => 'required_if:status,K|string|min:2|max:20',
+                'penghasilan_2' => 'required_if:status,K|integer',
 
                 'nama_darurat' => 'required|string|min:2|max:50',
                 'hubungan' => 'required|string|min:4|max:30',

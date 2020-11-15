@@ -54,7 +54,7 @@
                 <li class=" nav-item">
             @endif
                 <a href="{{route('jadwal.index')}}">
-                <i class="la la-user"></i><span class="menu-title" data-i18n="Jadwal">Jadwal</span>
+                <i class="la la-calendar"></i><span class="menu-title" data-i18n="Jadwal">Jadwal</span>
             </a>
             </li>
 
@@ -63,8 +63,8 @@
             @else
                 <li class=" nav-item">
             @endif
-                <a href="{{route('order.index')}}">
-                <i class="la la-user"></i><span class="menu-title" data-i18n="Order">Order</span>
+                <a href="{{route('jadwal.index')}}">
+                <i class="la la-check-square"></i><span class="menu-title" data-i18n="Order">Order</span>
             </a>
             </li>
 
@@ -74,7 +74,7 @@
                 <li class=" nav-item">
             @endif
                 <a href="{{route('pembebanan.index')}}">
-                <i class="la la-user"></i><span class="menu-title" data-i18n="Pembebanan">Pembebanan</span>
+                <i class="la la-money"></i><span class="menu-title" data-i18n="Pembebanan">Pembebanan</span>
             </a>
             </li>
 

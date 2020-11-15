@@ -17,4 +17,9 @@ class JadwalOrder extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function konsumen()
+    {
+        return $this->belongsTo(Konsumen::class, 'nik', 'nik');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\JadwalOrder;
 
 class JadwalController extends Controller
 {
@@ -13,7 +14,9 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        //
+        $data['jadwals'] = JadwalOrder::where('status', 'J')->get();
+
+        return view('jadwal.index', $data);
     }
 
     /**

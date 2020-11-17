@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\JadwalForm;
 use App\JadwalOrder;
 use App\Konsumen;
 
@@ -38,9 +38,11 @@ class JadwalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JadwalForm $request)
     {
-        //
+        $check = $request->validated();
+
+        dd("Berhasil hore");
     }
 
     /**

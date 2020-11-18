@@ -8,4 +8,6 @@ class Angsuran extends Model
 {
     protected $table = "angsuran";
     public $timestamps = false;
+
+    protected $primaryKey = "pinjaman";
 }

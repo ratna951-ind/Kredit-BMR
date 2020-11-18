@@ -30,11 +30,13 @@
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$jadwal->konsumen->nama}}</td>
                                 <td>Rp {{number_format($jadwal->pinjaman_awal,0,",",".")}}</td>
-                                <td><img src="{{route('image', ['konsumen', $jadwal->stnk])}}" alt="Gambar STNK" width="200px"></td>
+                                <td><img src="{{route('image', ['jadwal_order', $jadwal->stnk])}}" alt="Gambar STNK" width="200px"></td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-icon btn-warning" onclick="window.location.href='{{route('jadwal.edit',$jadwal->konsumen->nik)}}'"><i class="la la-edit"></i></button>
-                                        <button type="button" class="btn btn-icon btn-dark" onclick="window.location.href='{{route('jadwal.show',$jadwal->konsumen->nik)}}'"><i class="la la-file-text"></i></button>
+                                        @if(Auth::user()->peran_id == 3)
+                                            <button type="button" class="btn btn-icon btn-warning" onclick="window.location.href='{{route('jadwal.edit',$jadwal->id)}}'"><i class="la la-edit"></i></button>
+                                        @endif
+                                        <button type="button" class="btn btn-icon btn-dark" onclick="window.location.href='{{route('jadwal.show',$jadwal->id)}}'"><i class="la la-file-text"></i></button>
                                     </div>
                                 </td>
                             </tr>

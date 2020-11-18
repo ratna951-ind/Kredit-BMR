@@ -22,12 +22,12 @@ class CreateJadwalOrderTable extends Migration
             $table->string('no_kontrak',14)->nullable();
             $table->date('tgl_jadwal');
             $table->date('tgl_order')->nullable();
-            $table->integer('harga_barang');
+            $table->integer('harga_barang')->nullable();
             $table->integer('pinjaman_awal');
             $table->integer('pinjaman_disetujui')->nullable();
             $table->tinyInteger('tenor');
             $table->integer('angsuran');
-            $table->integer('adm');
+            $table->integer('adm')->nullable();
             $table->string('stnk',40);
             $table->string('bpkb_depan',40);
             $table->string('bpkb_belakang',40);

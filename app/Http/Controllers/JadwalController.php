@@ -42,7 +42,21 @@ class JadwalController extends Controller
     {
         $check = $request->validated();
 
-        dd("Berhasil hore");
+        $count = (JadwalOrder::where('nik', $check['nik'])->count())+1;
+
+        $gambarstnk           = $check['nik']."-".$count."-STNK.".$check['stnk']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+        $gambarbpkb_belakang  = $check['nik']."-".$count."-BPKBBelakang.".$check['bpkb_belakang']->getClientOriginalExtension();
+        $gambarkwt_jb         = $check['nik']."-".$count."-KWTJB.".$check['kwt_jb']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+        $gambarbpkb_depan     = $check['nik']."-".$count."-BPKBDepan.".$check['bpkb_depan']->getClientOriginalExtension();
+
+        dd($count);
     }
 
     /**

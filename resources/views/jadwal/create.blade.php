@@ -78,7 +78,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputAngsuran">Angsuran</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputAngsuran" class="form-control border-primary nospinner" placeholder="Masukan Angsuran" value="{{ old('angsuran') }}" name="angsuran">
+                                            <input type="number" id="inputAngsuran" class="form-control border-primary nospinner" placeholder="Angsuran" value="{{ old('angsuran') }}" name="angsuran" disabled>
                                         </div>
                                     </div>
                                 </div>

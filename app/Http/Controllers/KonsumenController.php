@@ -159,13 +159,6 @@ class KonsumenController extends Controller
 
         $konsumenLama = Konsumen::find($nik);
 
-        // if(Storage::exists('konsumen/'. $konsumenLama->gambarktp_2)){
-        //     dd(true);
-        // }
-        // else{
-        //     dd(false);
-        // }
-
         $konsumen = array(
             'nik' => $check['nik'],
             'nama' => $check['nama'],

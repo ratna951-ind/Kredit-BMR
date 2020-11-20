@@ -285,4 +285,19 @@
     <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/select/form-select2.min.js')}}"></script>
+    <script>
+        (function($) {
+            'use strict';
+
+            $('select').on('change', function() {
+                var pinjaman = $("#inputPinjaman").val();
+                var tenor = $("#inputJangkaWaktu").val();
+
+                var angsuran = pinjaman + tenor;
+
+                console.log(angsuran);
+            });
+        
+        })(jQuery, undefined);
+    </script>
 @endpush

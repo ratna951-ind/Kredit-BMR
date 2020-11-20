@@ -32,6 +32,7 @@ class JadwalController extends Controller
     public function create()
     {
         $data['konsumens'] = Konsumen::all();
+        $data['angsuran'] = Angsuran::all();
 
         return view('jadwal.create', $data);
     }

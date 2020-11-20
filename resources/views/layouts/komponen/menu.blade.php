@@ -63,7 +63,7 @@
             @else
                 <li class=" nav-item">
             @endif
-                <a href="{{route('jadwal.index')}}">
+                <a href="{{route('order.index')}}">
                 <i class="la la-check-square"></i><span class="menu-title" data-i18n="Order">Order</span>
             </a>
             </li>

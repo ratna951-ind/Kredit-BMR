@@ -364,17 +364,27 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="inputKTP">KTP</label>
+                                    <label class="col-md-3 label-control" for="inputPinjaman">Pinjaman</label>
                                     <div class="col-md-9 mx-auto">
-                                        <img src="{{route('image', ['konsumen', $jadwal->konsumen->gambarktp])}}" alt="Gambar KTP" width="300px">
+                                        <input type="text" id="inputPinjaman" class="form-control border-primary" value="Rp {{number_format($jadwal->pinjaman_awal,0,',','.')}}" disabled>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="inputKK">KK</label>
+                                    <label class="col-md-3 label-control" for="inputJangkaWaktu">Jangka Waktu</label>
                                     <div class="col-md-9 mx-auto">
-                                        <img src="{{route('image', ['konsumen', $jadwal->konsumen->gambarkk])}}" alt="Gambar KK" width="300px">
+                                        <input type="text" id="inputJangkaWaktu" class="form-control border-primary" value="{{ $jadwal->tenor }} Bulan" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="inputAngsuran">Angsuran</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <input type="text" id="inputAngsuran" class="form-control border-primary" value="Rp {{number_format($jadwal->angsuran,0,',','.')}}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -413,6 +423,107 @@
                                 </div>
                             </div>
                         @endif
+                        <h4 class="card-title mt-2"><b>DATA KENDARAAN KONSUMEN</b></h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">STNK</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->stnk])}}" alt="Gambar STNK" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">Kwitansi Jual Beli</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->kwt_jb])}}" alt="Gambar Kwitansi Jual Beli" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">BPKB Depan</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->bpkb_depan])}}" alt="Gambar BPKB Depan" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">BPKB Belakang</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->bpkb_belakang])}}" alt="Gambar BPKB Belakang" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">No Mesin</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->nosin])}}" alt="Gambar No Mesin" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">No Rangka</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->noka])}}" alt="Gambar No Rangka" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">Motor Depan</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->mtr_dpn])}}" alt="Gambar Motor Depan" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">Motor Belakang</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->mtr_blkng])}}" alt="Gambar Motor Belakang" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">Motor Kanan</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->mtr_kanan])}}" alt="Gambar Motor Kanan" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">Motor Kiri</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->mtr_kiri])}}" alt="Gambar Motor Kiri" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control">Selfie</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <img src="{{route('image', ['jadwal_order', $jadwal->selfie])}}" alt="Gambar Selfie" width="300px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <center>

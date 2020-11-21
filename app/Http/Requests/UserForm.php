@@ -39,6 +39,20 @@ class UserForm extends FormRequest
                 'kode_kios' => 'required|integer|min:1',
                 'peran_id' => 'required|integer|min:1',
             ];
+        } elseif (isset($this->profil)) {
+            if (isset($this->password) || isset($this->password_confirmation)) {
+                return [
+                    'nama' => 'required|string|min:3|max:50',
+                    'username' => 'required|string|min:3|max:20|unique:users,username,'.$this->id,
+                    'password' => 'required|string|min:8|max:20|confirmed',
+                ];
+            }
+            else {
+                return [
+                    'nama' => 'required|string|min:3|max:50',
+                    'username' => 'required|string|min:3|max:20|unique:users,username,'.$this->id,
+                ];
+            }
         } else {
             return [
                 'nama' => 'required|string|min:3|max:50',

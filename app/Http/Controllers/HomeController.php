@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Kios;
 use App\User;
 use App\Peran;
+use Alert;
 
 class HomeController extends Controller
 {
@@ -51,5 +53,34 @@ class HomeController extends Controller
         } catch (\Throwable $th) {
             return abort(404);
         }
+    }
+
+    public function profile()
+    {
+        return view('profil.index');
+    }
+
+    public function editProfile()
+    {
+        return view('profil.edit');
+    }
+
+    public function updateProfile(UserForm $request, $id)
+    {
+        $check = $request->validated();
+
+        if($request->password && $request->password_confirmation){
+            $check['password'] = Hash::make($check['password']);
+        }
+
+        $process = User::find($id)->update($check);
+
+        if ($process) {
+            Alert::success('Sukses', 'Data Profil Berhasil Diubah!');
+        } else {
+            Alert::error('Gagal', 'Data Profil Gagal Diubah!');
+        }
+
+        return redirect()->route('profile.index');
     }
 }

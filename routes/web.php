@@ -18,8 +18,11 @@ Auth::routes([
 ]);
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', 'HomeController@index')->name('home'); // Route Home
-    Route::get('/image/{module}/{file_name}', 'HomeController@image')->name('image');
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('image/{module}/{file_name}', 'HomeController@image')->name('image');
+    Route::get('profil', 'HomeController@profile')->name('profile.index');
+    Route::get('profil/edit', 'HomeController@editProfile')->name('profile.edit');
+    Route::put('profil/{id}', 'HomeController@updateProfile')->name('profile.update');
 });
 
 // Route Admin

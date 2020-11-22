@@ -14,7 +14,7 @@
             <div class="card-body card-dashboard">
                 <div class="table-responsive">
                     <form action="{{route('order.index')}}" method="get">
-                        <div class="row mb-2">
+                        <div class="row" style="padding: 15px 15px">
                             <div class="col-md-2">
                                 <select class="form-control" id="inputBulan" name="bulan">
                                     @foreach ($months as $month)
@@ -62,12 +62,17 @@
                                 <td>Rp {{number_format($order->pinjaman_awal,0,",",".")}}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        @if(Auth::user()->peran_id == 3)
-                                            <button type="button" class="btn btn-icon btn-warning" onclick="window.location.href='{{route('order.edit',$order->id)}}'"><i class="la la-edit"></i></button>
-                                        @endif
                                         <button type="button" class="btn btn-icon btn-dark" onclick="window.location.href='{{route('order.show',$order->id)}}'"><i class="la la-file-text"></i></button>
+                                        @if($order->status == "O")
+                                            <button type="button" data-name="{{$order->konsumen->nama}}" data-id="{{$order->id}}" class="modal-approve btn btn-icon btn-success"><i class="la la-check"></i></button>
+                                            <button type="button" class="btn btn-icon btn-warning" onclick="window.location.href='{{route('order.edit',$order->id)}}'"><i class="la la-close"></i></button>
+                                        @endif
                                     </div>
                                 </td>
+                                <form action="{{route('order.approve', $order->id)}}" method="post" id="approveRecord{{$order->id}}">
+                                    {{csrf_field()}}
+                                    @method("PUT")
+                                </form>
                             </tr>
                         @endforeach
                         </tbody>
@@ -78,7 +83,8 @@
     </section>
 @endsection
 
-@push('js')    
+@push('js')
+    @include('komponen.modalApprove', ['modul' => 'order konsumen'])
     <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <script>
         $(document).ready(function() {

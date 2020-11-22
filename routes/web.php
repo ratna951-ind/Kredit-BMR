@@ -38,9 +38,13 @@ Route::group(['middleware' => ['auth','peran:2']], function(){
 
     Route::get('jadwal/create', 'JadwalController@create')->name('jadwal.create');
     Route::post('jadwal', 'JadwalController@store')->name('jadwal.store');
+
+    Route::get('order/{order}/edit', 'OrderController@edit')->name('order.edit');
+    Route::put('order/{order}', 'OrderController@update')->name('order.update');
+    Route::put('order/{order}/approve', 'OrderController@approve')->name('order.approve');
 });
 
-// Route MCE
+// Route UH
 Route::group(['middleware' => ['auth','peran:3']], function(){
     Route::get('jadwal/{jadwal}/edit', 'JadwalController@edit')->name('jadwal.edit');
     Route::put('jadwal/{jadwal}', 'JadwalController@update')->name('jadwal.update');

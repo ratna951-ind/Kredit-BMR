@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\OrderForm;
 use Carbon\Carbon;
 use App\JadwalOrder;
 use Alert;
@@ -96,7 +97,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['order'] = JadwalOrder::find($id);
+
+        return view('order.show', $data);
     }
 
     /**
@@ -107,19 +110,33 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['order'] = JadwalOrder::where('status', 'O')->where('id', $id)->first();
+
+        return view('order.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\OrderForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrderForm $request, $id)
     {
-        //
+        $check = $request->validated();
+
+        $data = JadwalOrder::find($id);
+        $check['status'] = 'B';
+        $process = $data->update($check);
+        
+        if ($process) {
+            Alert::success('Sukses', 'Data Order '.$data->konsumen->nama.' Berhasil Dibatalkan!');
+        } else {
+            Alert::error('Gagal', 'Data Order '.$data->konsumen->nama.' Gagal Dibatalkan!');
+        }
+
+        return redirect()->route('order.index');
     }
 
     /**
@@ -131,5 +148,20 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function approve($id)
+    {
+        $data = JadwalOrder::find($id);
+        $check['status'] = 'D';
+        $process = $data->update($check);
+
+        if ($process) {
+            Alert::success('Sukses', 'Data Order '.$data->konsumen->nama.' Berhasil Disetujui!');
+        } else {
+            Alert::error('Gagal', 'Data Order '.$data->konsumen->nama.' Gagal Disetujui!');
+        }
+
+        return redirect()->route('order.index');
     }
 }

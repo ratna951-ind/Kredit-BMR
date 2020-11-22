@@ -20,7 +20,7 @@ class CreateKonsumenPekerjaanTable extends Migration
             $table->string('perusahaan', 30);
             $table->tinyInteger('masakerja');
             $table->text('alamat_pekerjaan');
-            $table->string('telp_pekerjaan', 14);
+            $table->string('telp_pekerjaan', 14)->nullable();
             $table->string('jabatan', 20);
             $table->integer('penghasilan');
             $table->string('perusahaan_2', 30)->nullable();

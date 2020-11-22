@@ -37,7 +37,7 @@ class OrderForm extends FormRequest
     {
         return [
             'pembatalan.required' => 'Alasan batal dibutuhkan!',
-            'pembatalan.min' => 'Alasan batal harus minimal 6 huruf!',
+            'pembatalan.min' => 'Alasan batal harus minimal 6 karakter!',
         ];
     }
 }

@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth','peran:2']], function(){
     Route::get('order/{order}/edit', 'OrderController@edit')->name('order.edit');
     Route::put('order/{order}', 'OrderController@update')->name('order.update');
     Route::put('order/{order}/approve', 'OrderController@approve')->name('order.approve');
+    Route::put('order/{order}/kontrak', 'OrderController@kontrak')->name('order.kontrak');
 });
 
 // Route UH

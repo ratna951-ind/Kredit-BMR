@@ -65,14 +65,21 @@
                                         <button type="button" class="btn btn-icon btn-dark" onclick="window.location.href='{{route('order.show',$order->id)}}'"><i class="la la-file-text"></i></button>
                                         @if($order->status == "O")
                                             <button type="button" data-name="{{$order->konsumen->nama}}" data-id="{{$order->id}}" class="modal-approve btn btn-icon btn-success"><i class="la la-check"></i></button>
+                                            <form action="{{route('order.approve', $order->id)}}" method="post" id="approveRecord{{$order->id}}">
+                                                {{csrf_field()}}
+                                                @method("PUT")
+                                            </form>
                                             <button type="button" class="btn btn-icon btn-warning" onclick="window.location.href='{{route('order.edit',$order->id)}}'"><i class="la la-close"></i></button>
+                                        @elseif($order->status == "D" && !isset($order->no_kontrak))
+                                            <button type="button" data-name="{{$order->konsumen->nama}}" data-id="{{$order->id}}" class="modal-kontrak btn btn-icon btn-success"><i class="la la-edit"></i></button>
+                                            <form action="{{route('order.kontrak', $order->id)}}" method="post" id="kontrakRecord{{$order->id}}">
+                                                {{csrf_field()}}
+                                                @method("PUT")
+                                                <input type="hidden" name="no_kontrak" id="inputNoKontrak{{$order->id}}">
+                                            </form>
                                         @endif
                                     </div>
                                 </td>
-                                <form action="{{route('order.approve', $order->id)}}" method="post" id="approveRecord{{$order->id}}">
-                                    {{csrf_field()}}
-                                    @method("PUT")
-                                </form>
                             </tr>
                         @endforeach
                         </tbody>
@@ -84,6 +91,36 @@
 @endsection
 
 @push('js')
+    <div class="modal fade" id="kontrakModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-col-danger">
+                <div class="modal-header bg-danger white">
+                    <h4 class="modal-title white">Konfirmasi</h4>
+                </div>
+                <div class="modal-body">
+                    <p align="center">Input No Kontrak</p>
+                    <input type="hidden" id="id_kontrak" disabled>
+                    <input type="text" class="form-control" id="no_kontrak" placeholder="Masukkan No Kontrak">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger kontrak">Ya</button>
+                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Tidak</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).on("click", ".modal-kontrak", function () {
+            $('#id_kontrak').val($(this).data('id'));
+            $('#kontrakModal').modal('show');
+        });
+        $('.modal-footer').on('click', '.kontrak', function() {
+            id = $('#id_kontrak').val();
+            $('#inputNoKontrak'+id).val($('#no_kontrak').val()); 
+            event.preventDefault();
+            document.getElementById('kontrakRecord'+id).submit();
+        });
+    </script>
     @include('komponen.modalApprove', ['modul' => 'order konsumen'])
     <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <script>

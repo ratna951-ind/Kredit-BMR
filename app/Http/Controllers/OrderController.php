@@ -164,4 +164,24 @@ class OrderController extends Controller
 
         return redirect()->route('order.index');
     }
+
+    public function kontrak(Request $request, $id)
+    {
+        if($request->no_kontrak == null || $request->no_kontrak == "") {
+            Alert::error('Gagal', 'Data No Kontrak Tidak Boleh Kosong!');
+        }
+        else{
+            $data = JadwalOrder::find($id);
+            $check['no_kontrak'] = $request->no_kontrak;
+            $process = $data->update($check);
+
+            if ($process) {
+                Alert::success('Sukses', 'Data No Kontrak Order '.$data->konsumen->nama.' Berhasil Ditambahkan!');
+            } else {
+                Alert::error('Gagal', 'Data No Kontrak Order '.$data->konsumen->nama.' Gagal Ditambahkan!');
+            }
+        }
+
+        return redirect()->route('order.index');
+    }
 }

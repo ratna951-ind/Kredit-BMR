@@ -417,7 +417,7 @@
                             <div id="pasangan_dokumen" style="display: none">
                                 <h4 class="card-title mt-5"><b>DATA DOKUMEN PASANGAN</b></h4>
                                 <div class="row mb-2">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" align="center">
                                         <img src="{{asset('app-assets/images/ico/document-default.png')}}" id="uploadKTP2" height="200px" alt="Preview KTP2">
                                     </div>
                                 </div>

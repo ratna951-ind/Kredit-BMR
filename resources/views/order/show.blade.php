@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('judul')
-    Batal Order
+    Detail Order
 @endsection
 
 @push('css')
@@ -390,7 +390,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="inputPinjamanDisetujui">Pinjaman</label>
+                                    <label class="col-md-3 label-control" for="inputPinjamanDisetujui">Pinjaman Disetujui</label>
                                     <div class="col-md-9 mx-auto">
                                         <input type="text" id="inputPinjamanDisetujui" class="form-control border-primary" value="Rp {{number_format($order->pinjaman_disetujui,0,',','.')}}" disabled>
                                     </div>

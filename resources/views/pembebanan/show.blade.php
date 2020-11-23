@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('judul')
-    Detail Order
+    Detail Pembebanan
 @endsection
 
 @push('css')
@@ -14,7 +14,7 @@
             <div class="card-body">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" id="tab_konsumen" data-toggle="tab" aria-controls="konsumen" href="#konsumen" aria-expanded="false"><i class="la la-user"></i> &nbspKonsumen</a>
+                        <a class="nav-link" id="tab_konsumen" data-toggle="tab" aria-controls="konsumen" href="#konsumen" aria-expanded="true"><i class="la la-user"></i> &nbspKonsumen</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="tab_pekerjaan" data-toggle="tab" aria-controls="pekerjaan" href="#pekerjaan" aria-expanded="false"><i class="la la-suitcase"></i> &nbspPekerjaan</a>
@@ -26,7 +26,10 @@
                         <a class="nav-link" id="tab_dokumen" data-toggle="tab" aria-controls="dokumen" href="#dokumen" aria-expanded="false"><i class="la la-file"></i> &nbspDokumen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" id="tab_pembiayaan" data-toggle="tab" aria-controls="pembiayaan" href="#pembiayaan" aria-expanded="true"><i class="la la-money"></i> &nbspPembiayaan</a>
+                        <a class="nav-link" id="tab_pembiayaan" data-toggle="tab" aria-controls="pembiayaan" href="#pembiayaan" aria-expanded="false"><i class="la la-money"></i> &nbspPembiayaan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab_pembebanan" data-toggle="tab" aria-controls="pembebanan" href="#pembebanan" aria-expanded="false"><i class="la la-balance-scale"></i> &nbspPembebanan</a>
                     </li>
                 </ul>
                 <div class="tab-content px-1 pt-1">
@@ -359,7 +362,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane active" id="pembiayaan" aria-labelledby="tab_pembiayaan">
+                    <div class="tab-pane" id="pembiayaan" aria-labelledby="tab_pembiayaan">
                         <h4 class="card-title mt-2"><b>DATA PEMBIAYAAN KONSUMEN</b></h4>
                         <div class="row">
                             <div class="col-md-6">
@@ -571,9 +574,39 @@
                             </div>
                         </div>
                     </div>
+                    <div class="tab-pane active" id="pembebanan" aria-labelledby="tab_pembebanan">
+                        <div class="row mt-2">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6" align="center">
+                                @if (count($order->pembebanan))
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Pembebanan Ke</th>
+                                                <th>No Transaksi</th>
+                                                <th>Tanggal Bayar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($order->pembebanan as $pembebanan)
+                                                <tr>
+                                                    <td align="center">{{$pembebanan->pembayaranke}}</td>
+                                                    <td>{{$pembebanan->notransaksi}}</td>
+                                                    <td>{{date('j F Y', strtotime($pembebanan->tgl_bayar))}}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <p>Belum ada data pembebanan!</p>
+                                @endif
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
                 </div>
                 <center>
-                    <button type="button" class="btn btn-secondary mt-3" onclick="window.location.href='{{route('order.index')}}'">Kembali</button>
+                    <button type="button" class="btn btn-secondary mt-3" onclick="window.location.href='{{route('pembebanan.index')}}'">Kembali</button>
                 </center>
             </div>
         </div>

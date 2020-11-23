@@ -22,4 +22,9 @@ class JadwalOrder extends Model
     {
         return $this->belongsTo(Konsumen::class, 'nik', 'nik');
     }
+
+    public function pembebanan()
+    {
+        return $this->hasMany(DetailPembebanan::class, 'order_id');
+    }
 }

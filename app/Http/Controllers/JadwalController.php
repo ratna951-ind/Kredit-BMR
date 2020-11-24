@@ -19,9 +19,22 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        $data['jadwals'] = JadwalOrder::where('status', 'J')->get();
+        if (Auth::user()->peran_id == 2) {
+            $data['jadwals'] = JadwalOrder::where([
+                ['status', 'J'],
+                ['user_id', Auth::user()->id],
+            ])->get();
+            return view('jadwal.index-mce', $data);
+        }
+        else if(Auth::user()->peran_id == 3){
+            $kios = Auth::user()->kode_kios;
 
-        return view('jadwal.index', $data);
+            $data['jadwals'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {
+                $query->where('kode_kios','=',$kios);
+            })->where('status', 'J')->get();
+            
+            return view('jadwal.index-uh', $data);
+        }
     }
 
     /**
@@ -134,11 +147,13 @@ class JadwalController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()->peran_id != 3) {
-            return abort('403');
-        }
+        $data['jadwal'] = JadwalOrder::where([
+            ['status', 'J'],
+            ['no_kontrak', null],
+            ['id', $id]
+        ])->first();
 
-
+        return view('jadwal.edit', $data);
     }
 
     /**

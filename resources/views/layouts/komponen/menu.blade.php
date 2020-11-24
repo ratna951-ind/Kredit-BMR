@@ -78,6 +78,28 @@
             </a>
             </li>
 
+        @elseif(Auth::user()->peran_id == 3)
+
+            @if (\Str::contains(Route::currentRouteName(), ['jadwal']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('jadwal.index')}}">
+                <i class="la la-calendar"></i><span class="menu-title" data-i18n="Jadwal">Jadwal</span>
+            </a>
+            </li>
+
+            @if (\Str::contains(Route::currentRouteName(), ['pembebanan']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('pembebanan.index')}}">
+                <i class="la la-sticky-note"></i><span class="menu-title" data-i18n="Laporan">Laporan</span>
+            </a>
+            </li>
+
         @endif
     </ul>
     </div>

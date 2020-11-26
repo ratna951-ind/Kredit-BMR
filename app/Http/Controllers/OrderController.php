@@ -18,55 +18,68 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $data['months'] = [
-            ['id' => 1, 'nama' => 'Januari'],
-            ['id' => 2, 'nama' => 'Februari'],
-            ['id' => 3, 'nama' => 'Maret'],
-            ['id' => 4, 'nama' => 'April'],
-            ['id' => 5, 'nama' => 'Mei'],
-            ['id' => 6, 'nama' => 'Juni'],
-            ['id' => 7, 'nama' => 'Juli'],
-            ['id' => 8, 'nama' => 'Agustus'],
-            ['id' => 9, 'nama' => 'September'],
-            ['id' => 10, 'nama' => 'Oktober'],
-            ['id' => 11, 'nama' => 'November'],
-            ['id' => 12, 'nama' => 'Desember'],
-        ];
+        if (Auth::user()->peran_id==4) {
+            $kios = Auth::user()->kode_kios;
+            $data['orders'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {
+                $query->where('kode_kios','=',$kios);
+            })->where([
+                ['status', 'D'],
+                ['no_kontrak', null]
+            ])->get();
 
-        $data['statuss'] = [
-            ['id' => "O", 'nama' => 'Order'],
-            ['id' => "B", 'nama' => 'Batal'],
-            ['id' => "D", 'nama' => 'Diterima']
-        ];
-
-        $orders = JadwalOrder::whereNotIn('status',['J']);
-
-        $data['bulan'] = now()->month;
-        $data['tahun'] = now()->year;
-        $data['stts'] = null;
-
-        $dateFirst = now()->startOfMonth();
-        $dateLast = now()->endOfMonth();
-
-        if ($request->bulan && $request->tahun) {
-            $data['bulan'] = $request->bulan;
-            $data['tahun'] = $request->tahun;
-            $dateFirst = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->startOfMonth();
-            $dateLast = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->endOfMonth();
+            return view('order.index-admin',$data);
         }
-        
-        if ($request->status) {
-            $orders->where('status', $request->status);
-            $data['stts'] = $request->status;
-        }
-        
-        $data['orders'] = $orders->where([
-            ['tgl_order', '>=', $dateFirst],
-            ['tgl_order', '<=', $dateLast],
-            ['user_id', Auth::user()->id],
-        ])->get();
+        else{
+            $data['months'] = [
+                ['id' => 1, 'nama' => 'Januari'],
+                ['id' => 2, 'nama' => 'Februari'],
+                ['id' => 3, 'nama' => 'Maret'],
+                ['id' => 4, 'nama' => 'April'],
+                ['id' => 5, 'nama' => 'Mei'],
+                ['id' => 6, 'nama' => 'Juni'],
+                ['id' => 7, 'nama' => 'Juli'],
+                ['id' => 8, 'nama' => 'Agustus'],
+                ['id' => 9, 'nama' => 'September'],
+                ['id' => 10, 'nama' => 'Oktober'],
+                ['id' => 11, 'nama' => 'November'],
+                ['id' => 12, 'nama' => 'Desember'],
+            ];
 
-        return view('order.index',$data);
+            $data['statuss'] = [
+                ['id' => "O", 'nama' => 'Order'],
+                ['id' => "B", 'nama' => 'Batal'],
+                ['id' => "D", 'nama' => 'Diterima']
+            ];
+
+            $orders = JadwalOrder::whereNotIn('status',['J']);
+
+            $data['bulan'] = now()->month;
+            $data['tahun'] = now()->year;
+            $data['stts'] = null;
+
+            $dateFirst = now()->startOfMonth();
+            $dateLast = now()->endOfMonth();
+
+            if ($request->bulan && $request->tahun) {
+                $data['bulan'] = $request->bulan;
+                $data['tahun'] = $request->tahun;
+                $dateFirst = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->startOfMonth();
+                $dateLast = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->endOfMonth();
+            }
+            
+            if ($request->status) {
+                $orders->where('status', $request->status);
+                $data['stts'] = $request->status;
+            }
+            
+            $data['orders'] = $orders->where([
+                ['tgl_order', '>=', $dateFirst],
+                ['tgl_order', '<=', $dateLast],
+                ['user_id', Auth::user()->id],
+            ])->get();
+
+            return view('order.index',$data);
+        }
     }
 
     /**
@@ -184,5 +197,16 @@ class OrderController extends Controller
         }
 
         return redirect()->route('order.index');
+    }
+
+    public function accept($id)
+    {
+        $data['order'] = JadwalOrder::where([
+            ['status', 'D'],
+            ['no_kontrak', null],
+            ['id', $id],
+        ])->first();
+
+        return view('order.edit', $data);
     }
 }

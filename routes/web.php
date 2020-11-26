@@ -52,13 +52,20 @@ Route::group(['middleware' => ['auth','peran:3']], function(){
     Route::put('jadwal/{jadwal}', 'JadwalController@update')->name('jadwal.update');
 });
 
+// Route Admin
+Route::group(['middleware' => ['auth','peran:4']], function(){
+    Route::get('order/history', 'OrderController@history')->name('order.history');
+    Route::get('order/{order}/accept', 'OrderController@accept')->name('order.accept'); 
+    Route::put('order/{order}/accept', 'OrderController@acceptUpdate')->name('order.accept_update');
+});
+
 // Route MCE & UH
 Route::group(['middleware' => ['auth','peran:2,3']], function(){
     Route::get('jadwal','JadwalController@index')->name('jadwal.index');
     Route::get('jadwal/{jadwal}', 'JadwalController@show')->name('jadwal.show');
 });
 
-//Route MCE. UH & Admin
+//Route MCE, UH & Admin
 Route::group(['middleware' => ['auth','peran:2,3,4']], function(){
     Route::get('order', 'OrderController@index')->name('order.index');
     Route::get('order/{order}', 'OrderController@show')->name('order.show');

@@ -427,6 +427,7 @@
                                 </div>
                             </div>
                             <div class="row">
+                                @if(Auth::user()->peran_id!=4)
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputAlasanBatal">Alasan Batal</label>
@@ -435,6 +436,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputJangkaWaktu">Jangka Waktu</label>
@@ -444,6 +446,36 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(Auth::user()->peran_id==4)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" for="inputMetode">Metode</label>
+                                        <div class="col-md-9 mx-auto">
+                                            <input type="text" id="inputMetode" class="form-control border-primary" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" for="inputTanggal">Tanggal</label>
+                                        <div class="col-md-9 mx-auto">
+                                            <input type="date" id="inputTanggal" class="form-control border-primary" value="{{old('tgl')}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" for="inputBuktiPencairan">Bukti Pencairan</label>
+                                        <div class="col-md-9 mx-auto">
+                                            <input type="text" id="inputBuktiPencairan" class="form-control border-primary" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                         <div class="tab-pane" id="dokumen" aria-labelledby="tab_dokumen">
                             <h4 class="card-title mt-2"><b>DATA DOKUMEN KONSUMEN</b></h4>

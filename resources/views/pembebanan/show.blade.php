@@ -591,8 +591,8 @@
                                             @foreach ($order->pembebanan as $pembebanan)
                                                 <tr>
                                                     <td align="center">{{$pembebanan->pembayaranke}}</td>
-                                                    <td>{{$pembebanan->notransaksi}}</td>
-                                                    <td>{{date('j F Y', strtotime($pembebanan->tgl_bayar))}}</td>
+                                                    <td align="center">{{$pembebanan->notransaksi}}</td>
+                                                    <td align="center">{{date('j/m/Y', strtotime($pembebanan->tgl_bayar))}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

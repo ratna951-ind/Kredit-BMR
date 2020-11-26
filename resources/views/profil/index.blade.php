@@ -29,7 +29,7 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <th style="width: 40%">Nama</th>
+                                    <th style="width: 30%">Nama</th>
                                     <td>: {{Auth::user()->nama}}</td>
                                 </tr>
                                 <tr>

@@ -105,7 +105,7 @@ class JadwalController extends Controller
             'selfie' => $gambarselfie,
         );
 
-        if ($check['kwt_jb']) {
+        if (isset($check['kwt_jb'])) {
             $gambarkwt_jb = $check['nik']."-".$count."-KWTJB.".$check['kwt_jb']->getClientOriginalExtension();
 
             $uploadgambarkwt_jb = Storage::putFileAs('jadwal_order', $check['kwt_jb'], $gambarkwt_jb);
@@ -147,7 +147,11 @@ class JadwalController extends Controller
      */
     public function edit($id)
     {
-        $data['jadwal'] = JadwalOrder::where([
+        $kios = Auth::user()->kode_kios;
+
+        $data['jadwal'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {
+            $query->where('kode_kios','=',$kios);
+        })->where([
             ['status', 'J'],
             ['no_kontrak', null],
             ['id', $id]
@@ -163,9 +167,24 @@ class JadwalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(JadwalForm $request, $id)
     {
-        //
+        $check = $request->validated();
+
+        $angsuran = (Angsuran::find($check['pinjaman_disetujui']))->toArray();
+
+        $check['angsuran'] = $angsuran['bln_'.$check['tenor']];
+        $check['status'] = 'O';
+
+        $process = JadwalOrder::find($id)->update($check);
+
+        if ($process) {
+            Alert::success('Sukses', 'Data Jadwal Berhasil Diubah!');
+        } else {
+            Alert::error('Gagal', 'Data Jadwal Gagal Diubah!');
+        }
+
+        return redirect()->route('jadwal.index');
     }
 
     /**

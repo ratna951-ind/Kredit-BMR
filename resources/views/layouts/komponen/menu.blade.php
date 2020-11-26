@@ -90,12 +90,44 @@
             </a>
             </li>
 
-            @if (\Str::contains(Route::currentRouteName(), ['pembebanan']))
+            @if (\Str::contains(Route::currentRouteName(), ['laporan']))
                 <li class="active">
             @else
                 <li class=" nav-item">
             @endif
-                <a href="{{route('pembebanan.index')}}">
+                <a href="{{route('laporan.order')}}">
+                <i class="la la-sticky-note"></i><span class="menu-title" data-i18n="Laporan">Laporan</span>
+            </a>
+            </li>
+
+        @elseif(Auth::user()->peran_id == 4)
+
+            @if (\Str::contains(Route::currentRouteName(), ['order']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('order.index')}}">
+                <i class="la la-check-square"></i><span class="menu-title" data-i18n="Order">Order</span>
+            </a>
+            </li>
+            
+            @if (\Str::contains(Route::currentRouteName(), ['kas_bank']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('kas_bank.index')}}">
+                <i class="la la-bank"></i><span class="menu-title" data-i18n="Kas & Bank">Kas & Bank</span>
+            </a>
+            </li>
+
+            @if (\Str::contains(Route::currentRouteName(), ['laporan']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('laporan.order')}}">
                 <i class="la la-sticky-note"></i><span class="menu-title" data-i18n="Laporan">Laporan</span>
             </a>
             </li>

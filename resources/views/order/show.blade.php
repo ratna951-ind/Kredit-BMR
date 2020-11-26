@@ -573,7 +573,7 @@
                     </div>
                 </div>
                 <center>
-                    <button type="button" class="btn btn-secondary mt-3" onclick="window.location.href='{{route('order.index')}}'">Kembali</button>
+                    <button type="button" class="btn btn-secondary mt-3" onclick="window.location.href='{{Auth::user()->peran_id==3 ? route('laporan.order') : route('order.index')}}'">Kembali</button>
                 </center>
             </div>
         </div>

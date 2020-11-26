@@ -122,6 +122,82 @@
             </div>
         </div>
     </div>
+    @elseif(Auth::user()->peran_id == 3)
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-24">
+            <div class="card">
+                <div class="card-content">
+                    <div class="earning-chart position-relative">
+                        <div class="chart-title position-absolute mt-2 ml-2">
+                            <h1 class="display-4">596</h1>
+                            <span class="text-muted">Total Order</span>
+                        </div>
+                        <canvas id="earning-chart" class="height-450"></canvas>
+                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
+                            <h3><b>Order Kios {{Auth::user()->kios->nama}} Tahun 2020</b></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-24">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <canvas id="column-stacked" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-24 col-48">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <canvas id="column-chart" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @elseif(Auth::user()->peran_id == 4)
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-24">
+            <div class="card pull-up">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <h3 class="success">{{$order}}</h3>
+                                <h6>Order Hari Ini</h6>
+                            </div>
+                            <div>
+                                <i class="icon-check success font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-24">
+            <div class="card pull-up">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <h3 class="info">Rp {{number_format($sisa_saldo,0,",",".")}}</h3>
+                                <h6>Sisa Saldo</h6>
+                            </div>
+                            <div>
+                                <i class="icon-wallet info font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @endif
 @endsection
 
@@ -263,6 +339,57 @@
 
             // Create the chart
             var lineChart = new Chart(ctx, config);
+
+            var a = $("#column-stacked");
+            new Chart(a, {
+                type: "bar",
+                options: {
+                    title: {
+                        display: !1,
+                        text: "Chart.js Column Chart - Stacked"
+                    },
+                    tooltips: {
+                        mode: "label"
+                    },
+                    responsive: !0,
+                    maintainAspectRatio: !1,
+                    responsiveAnimationDuration: 500,
+                    scales: {
+                        xAxes: [{
+                            stacked: !0,
+                            display: !0,
+                            gridLines: {
+                                color: "#f3f3f3",
+                                drawTicks: !1
+                            },
+                            scaleLabel: {
+                                display: !0
+                            }
+                        }],
+                        yAxes: [{
+                            stacked: !0,
+                            display: !0,
+                            gridLines: {
+                                color: "#f3f3f3",
+                                drawTicks: !1
+                            },
+                            scaleLabel: {
+                                display: !0
+                            }
+                        }]
+                    }
+                },
+                data: {
+                    labels: ["Rara", "Ratna", "Gede Adi", "Pastiyasa", "Made Deni"],
+                    datasets: [{
+                        label: "Order MCE",
+                        data: [65, 59, 80, 81, 56],
+                        backgroundColor: "#FF4961",
+                        hoverBackgroundColor: "#FF566D",
+                        borderColor: "transparent"
+                    }]
+                }
+            })
         }));
     </script>
 @endpush

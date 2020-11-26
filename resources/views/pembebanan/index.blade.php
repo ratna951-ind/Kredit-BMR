@@ -19,8 +19,9 @@
                             <tr>
                                 <th width="1%">No</th>
                                 <th width="1%">No Kontrak</th>
+                                <th width="1%">Jatuh Tempo</th>
                                 <th>Konsumen</th>
-                                <th>Pinjaman</th>
+                                <th width="15%">Pinjaman</th>
                                 <th width="1%">Aksi</th>
                             </tr>
                         </thead>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$pembebanan->no_kontrak ? $pembebanan->no_kontrak : "-"}}</td>
+                                <td>{{(\Carbon\Carbon::createFromTimestamp(strtotime($pembebanan->tgl_order))->addMonth()->format('j/m/Y'))}}</td>
                                 <td>{{$pembebanan->konsumen->nama}}</td>
                                 <td>Rp {{number_format($pembebanan->pinjaman_awal,0,",",".")}}</td>
                                 <td>

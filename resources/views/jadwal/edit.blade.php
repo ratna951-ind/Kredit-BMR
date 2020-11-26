@@ -507,12 +507,13 @@
                         <form action="{{route('jadwal.update', $jadwal->id)}}" method="post" id="updateRecord">
                             {{csrf_field()}}
                             @method('PUT')
+                            <input type="hidden" name="edit" value="1">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputHargaBarang">Harga Barang</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputHargaBarang" class="form-control border-primary" value="Rp {{number_format($jadwal->harga_barang,0,',','.')}}" disabled>
+                                            <input type="text" id="inputHargaBarang" class="form-control border-primary" placeholder="Masukkan Harga Barang!" name="harga_barang" value="{{old('harga_barang')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -593,6 +594,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <center>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('konsumen.index')}}'">Batal</button>
+                                    <button type="button" class="modal-update btn btn-icon btn-success">Simpan</button>
+                                </div>
+                            </center>
                         </form>
                     </div>
                 </div>
@@ -602,7 +609,7 @@
 @endsection
 
 @push('js')
-    @include('komponen.modalUpdate', ['modul' => 'order konsumen'])
+    @include('komponen.modalUpdate', ['modul' => 'jadwal konsumen'])
     <script src="{{asset('app-assets/custom/konsumen.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>

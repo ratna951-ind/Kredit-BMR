@@ -13,7 +13,6 @@
         <div class="card-content collapse show">
             <div class="card-body card-dashboard">
                 <div class="table-responsive">
-                    <h3 style="padding: 15px 15px"><button type="button" class="btn btn-success btn-sm" onclick="window.location.href='{{route('jadwal.create')}}'"><i class="la la-plus"></i> Tambah</button></h3>
                     <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                             <tr>

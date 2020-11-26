@@ -31,7 +31,7 @@ class CreateJadwalOrderTable extends Migration
             $table->string('stnk',40);
             $table->string('bpkb_depan',40);
             $table->string('bpkb_belakang',40);
-            $table->string('kwt_jb',40);
+            $table->string('kwt_jb',40)->nullable();
             $table->string('mtr_dpn',40);
             $table->string('mtr_blkng',40);
             $table->string('mtr_kanan',40);
@@ -39,7 +39,7 @@ class CreateJadwalOrderTable extends Migration
             $table->string('nosin',40);
             $table->string('noka',40);
             $table->string('selfie',40);
-            $table->enum('status', ['J', 'T', 'O', 'B', 'D'])->comment('Jadwal, Tolak, Order, Batal, Diterima')->default('J');
+            $table->enum('status', ['J', 'O', 'B', 'D'])->comment('Jadwal, Order, Batal, Diterima')->default('J');
             $table->text('pembatalan')->nullable();
 
         });

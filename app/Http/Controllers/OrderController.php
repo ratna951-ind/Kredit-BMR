@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderForm;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\JadwalOrder;
 use Alert;
@@ -33,7 +34,6 @@ class OrderController extends Controller
         ];
 
         $data['statuss'] = [
-            ['id' => "T", 'nama' => 'Tolak'],
             ['id' => "O", 'nama' => 'Order'],
             ['id' => "B", 'nama' => 'Batal'],
             ['id' => "D", 'nama' => 'Diterima']
@@ -63,6 +63,7 @@ class OrderController extends Controller
         $data['orders'] = $orders->where([
             ['tgl_order', '>=', $dateFirst],
             ['tgl_order', '<=', $dateLast],
+            ['user_id', Auth::user()->id],
         ])->get();
 
         return view('order.index',$data);

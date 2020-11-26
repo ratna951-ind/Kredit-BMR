@@ -56,7 +56,22 @@ Route::group(['middleware' => ['auth','peran:3']], function(){
 Route::group(['middleware' => ['auth','peran:2,3']], function(){
     Route::get('jadwal','JadwalController@index')->name('jadwal.index');
     Route::get('jadwal/{jadwal}', 'JadwalController@show')->name('jadwal.show');
+});
 
+//Route MCE. UH & Admin
+Route::group(['middleware' => ['auth','peran:2,3,4']], function(){
     Route::get('order', 'OrderController@index')->name('order.index');
     Route::get('order/{order}', 'OrderController@show')->name('order.show');
+});
+
+// Route UH
+Route::group(['middleware' => ['auth','peran:4']], function(){
+    Route::get('kasbank', 'KasBankController@create')->name('kas_bank.index');
+    Route::post('kasbank', 'KasBankController@store')->name('kas_bank.store');
+});
+
+// Route UH & BM
+Route::group(['middleware' => ['auth','peran:3,6']], function(){
+    Route::get('laporan/order','HomeController@laporanOrder')->name('laporan.order');
+    
 });

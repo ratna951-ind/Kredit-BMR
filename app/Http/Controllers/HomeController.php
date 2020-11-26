@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\JadwalOrder;
 use App\Kios;
 use App\User;
 use App\Peran;
@@ -33,7 +35,16 @@ class HomeController extends Controller
             $data['peran'] = Peran::count();
         }
         else if($role == 4){
-            $data['peran'] = Peran::count();
+            $data['sisa_saldo'] = "10000000";
+
+            $kios = Auth::user()->kode_kios;
+            $data['order'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {
+                $query->where('kode_kios','=',$kios);
+            })->where([
+                ['status', 'D'],
+                ['tgl_order', '>=', now()->startOfMonth()],
+                ['tgl_order', '<=', now()->endOfMonth()],
+            ])->count();
         }
         else if($role == 5){
             $data['peran'] = Peran::count();
@@ -82,5 +93,60 @@ class HomeController extends Controller
         }
 
         return redirect()->route('profile.index');
+    }
+
+    public function laporanOrder(Request $request)
+    {
+        $data['months'] = [
+            ['id' => 1, 'nama' => 'Januari'],
+            ['id' => 2, 'nama' => 'Februari'],
+            ['id' => 3, 'nama' => 'Maret'],
+            ['id' => 4, 'nama' => 'April'],
+            ['id' => 5, 'nama' => 'Mei'],
+            ['id' => 6, 'nama' => 'Juni'],
+            ['id' => 7, 'nama' => 'Juli'],
+            ['id' => 8, 'nama' => 'Agustus'],
+            ['id' => 9, 'nama' => 'September'],
+            ['id' => 10, 'nama' => 'Oktober'],
+            ['id' => 11, 'nama' => 'November'],
+            ['id' => 12, 'nama' => 'Desember'],
+        ];
+
+        $data['statuss'] = [
+            ['id' => "B", 'nama' => 'Batal'],
+            ['id' => "D", 'nama' => 'Diterima']
+        ];
+
+        $orders = JadwalOrder::whereNotIn('status',['J','O']);
+
+        $data['bulan'] = now()->month;
+        $data['tahun'] = now()->year;
+        $data['stts'] = null;
+
+        $dateFirst = now()->startOfMonth();
+        $dateLast = now()->endOfMonth();
+
+        if ($request->bulan && $request->tahun) {
+            $data['bulan'] = $request->bulan;
+            $data['tahun'] = $request->tahun;
+            $dateFirst = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->startOfMonth();
+            $dateLast = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->endOfMonth();
+        }
+        
+        if ($request->status) {
+            $orders->where('status', $request->status);
+            $data['stts'] = $request->status;
+        }
+        
+        $kios = Auth::user()->kode_kios;
+
+        $data['orders'] = $orders->whereHas('user', function ($query) use ($kios) {
+            $query->where('kode_kios','=',$kios);
+        })->where([
+            ['tgl_order', '>=', $dateFirst],
+            ['tgl_order', '<=', $dateLast],
+        ])->get();
+
+        return view('laporan.index-order',$data);
     }
 }

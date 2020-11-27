@@ -29,7 +29,7 @@
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$order->konsumen->nama}}</td>
                                 <td>{{$order->user->nama}}</td>
-                                <td>Rp {{number_format($order->pinjaman_awal,0,",",".")}}</td>
+                                <td>Rp {{number_format($order->pinjaman_disetujui,0,",",".")}}</td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-icon btn-info" onclick="window.location.href='{{route('order.show',$order->id)}}'"><i class="la la-print"></i></button>

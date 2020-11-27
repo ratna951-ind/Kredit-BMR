@@ -16,6 +16,8 @@ class CreateKiosTable extends Migration
         Schema::create('kios', function (Blueprint $table) {
             $table->increments('kode');
             $table->string('nama');
+            $table->string('bank', 10);
+            $table->text('alamat');
             $table->enum('aktif',[0,1])->default(1);
         });
     }

@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth','peran:2,3,4']], function(){
 
 // Route UH
 Route::group(['middleware' => ['auth','peran:4']], function(){
-    Route::get('kasbank', 'KasBankController@create')->name('kas_bank.index');
+    Route::get('kasbank', 'KasBankController@index')->name('kas_bank.index');
     Route::post('kasbank', 'KasBankController@store')->name('kas_bank.store');
 });
 

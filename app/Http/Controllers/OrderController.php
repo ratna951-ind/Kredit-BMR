@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderForm;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\JadwalOrder;
+use App\KasBank;
 use Alert;
 
 class OrderController extends Controller
@@ -48,10 +50,11 @@ class OrderController extends Controller
             $data['statuss'] = [
                 ['id' => "O", 'nama' => 'Order'],
                 ['id' => "B", 'nama' => 'Batal'],
-                ['id' => "D", 'nama' => 'Diterima']
+                ['id' => "K", 'nama' => 'Kontrak'],
+                ['id' => "S", 'nama' => 'Selesai']
             ];
 
-            $orders = JadwalOrder::whereNotIn('status',['J']);
+            $orders = JadwalOrder::whereNotIn('status',['J','D']);
 
             $data['bulan'] = now()->month;
             $data['tahun'] = now()->year;
@@ -187,6 +190,7 @@ class OrderController extends Controller
         else{
             $data = JadwalOrder::find($id);
             $check['no_kontrak'] = $request->no_kontrak;
+            $check['status'] = "S";
             $process = $data->update($check);
 
             if ($process) {
@@ -207,6 +211,47 @@ class OrderController extends Controller
             ['id', $id],
         ])->first();
 
+        $sisa = (KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first())->sisa;
+
+        if ($sisa<$data['order']->pinjaman_disetujui) {
+            Alert::error('Gagal', 'Saldo Kios Tidak Mencukupi!');
+
+            return redirect()->route('order.index');
+        }
+
         return view('order.edit', $data);
+    }
+
+    public function acceptUpdate(OrderForm $request, $id)
+    {
+        $check = $request->validated();
+
+        $order = JadwalOrder::find($id);
+
+        $sisa = (KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first())->sisa;
+
+        $check['kode_kios'] = Auth::user()->kode_kios;
+        $check['order_id'] = $id;
+        $check['jenis'] = 'P';
+        $check['jumlah'] = $order->pinjaman_disetujui;
+        $check['sisa'] = $sisa - $check['jumlah'];
+
+        $gambarbukti = $order->nik."-".$id."-Pencairan.".$check['bukti_std']->getClientOriginalExtension();
+        $uploadgambarbukti = Storage::putFileAs('pencairan', $check['bukti_std'], $gambarbukti);
+        $check['bukti_std'] = $gambarbukti;
+
+        $checkOrder['status'] = 'K';
+
+        $processOrder = $order->update($checkOrder);
+
+        $process = KasBank::create($check);
+
+        if ($process && $processOrder) {
+            Alert::success('Sukses', 'Data Pencairan '.$order->konsumen->nama.' Berhasil Diproses!');
+        } else {
+            Alert::error('Gagal', 'Data Pencairan '.$order->konsumen->nama.' Gagal Diproses!');
+        }
+
+        return redirect()->route('order.index');
     }
 }

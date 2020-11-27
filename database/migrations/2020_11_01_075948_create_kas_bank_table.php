@@ -15,17 +15,16 @@ class CreateKasBankTable extends Migration
     {
         Schema::create('kas_bank', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('kode_kios')->nullable();
+            $table->unsignedInteger('kode_kios');
             $table->foreign('kode_kios')->references('kode')->on('kios')->onDelete('restrict');
-            $table->unsignedInteger('order_id');
+            $table->unsignedInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('jadwal_order')->onDelete('restrict');
             $table->enum('cara_bayar', ['B', 'C'])->comment('Bank, Cash');
-            $table->string('bank', 10);
             $table->enum('jenis', ['CO', 'PK', 'P'])->comment('Cash Opname, Pengisian Kas, Pencairan');
             $table->integer('jumlah');
             $table->integer('sisa');
             $table->date('tgl');
-            $table->string('bukti_std', 20);
+            $table->string('bukti_std')->nullable();
         });
     }
 

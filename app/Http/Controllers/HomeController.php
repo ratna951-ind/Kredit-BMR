@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\JadwalOrder;
+use App\KasBank;
 use App\Kios;
 use App\User;
 use App\Peran;
@@ -35,7 +36,7 @@ class HomeController extends Controller
             $data['peran'] = Peran::count();
         }
         else if($role == 4){
-            $data['sisa_saldo'] = "10000000";
+            $data['sisa_saldo'] = (KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first())->sisa;
 
             $kios = Auth::user()->kode_kios;
             $data['order'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {

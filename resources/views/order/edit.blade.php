@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('judul')
-    Batal Order
+    @if(Auth::user()->peran_id==4)
+        Pencairan Order
+    @else
+        Batal Order
+    @endif
 @endsection
 
 @push('css')
@@ -12,7 +16,11 @@
     <section id="description" class="card">
         <div class="card-content">
             <div class="card-body">
-                <form class="form form-horizontal" action="{{route('order.update', $order->id)}}" method="post" id="updateRecord">
+                @if(Auth::user()->peran_id==4)
+                    <form class="form form-horizontal" action="{{route('order.accept_update', $order->id)}}" method="post" id="updateRecord" enctype="multipart/form-data">
+                @else
+                    <form class="form form-horizontal" action="{{route('order.update', $order->id)}}" method="post" id="updateRecord">
+                @endif
                     {{csrf_field()}}
                     @method('PUT')
                     @if(count($errors) > 0)
@@ -450,9 +458,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-md-3 label-control" for="inputMetode">Metode</label>
+                                        <label class="col-md-3 label-control" for="inputMetode">Metode Pembayaran</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputMetode" class="form-control border-primary" value="">
+                                            <select class="form-control custom-select" id="inputMetode" name="cara_bayar">
+                                                <option value="">Pilih Metode Pembayaran</option>
+                                                <option value="B" @if ('B' == old('cara_bayar')) {{'selected'}}@endif>Bank</option>
+                                                <option value="C" @if ('C' == old('cara_bayar')) {{'selected'}}@endif>Cash</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -460,9 +472,14 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputTanggal">Tanggal</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="date" id="inputTanggal" class="form-control border-primary" value="{{old('tgl')}}">
+                                            <input type="date" id="inputTanggal" class="form-control border-primary" name="tgl" value="{{old('tgl')}}">
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6" align="center">
+                                    <img src="{{asset('app-assets/images/ico/document-default.png')}}" id="uploadBuktiPencairan" height="200px" alt="Preview Bukti Pencairan">
                                 </div>
                             </div>
                             <div class="row">
@@ -470,7 +487,8 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputBuktiPencairan">Bukti Pencairan</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputBuktiPencairan" class="form-control border-primary" value="">
+                                            <input type="file" class="custom-file-input" id="inputBuktiPencairan" name="bukti_std">
+                                            <label class="custom-file-label" for="inputBuktiPencairan" aria-describedby="inputBuktiPencairan">Pilih Dokumen</label>
                                         </div>
                                     </div>
                                 </div>
@@ -626,7 +644,27 @@
 @endsection
 
 @push('js')
-    @include('komponen.modalUpdate', ['modul' => 'order konsumen'])
+    @if(Auth::user()->peran_id==4)
+        @include('komponen.modalCair', ['modul' => 'pencairan'])
+    @else
+        @include('komponen.modalUpdate', ['modul' => 'order konsumen'])
+    @endif
     <script src="{{asset('app-assets/custom/konsumen.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>
+    <script>
+        function readImageBuktiPencairan(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+        
+            reader.onload = function (e) {
+                $('#uploadBuktiPencairan').attr('src', e.target.result);
+            }
+        
+            reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#inputBuktiPencairan").change(function(){
+            readImageBuktiPencairan(this);
+        });
+    </script>
 @endpush

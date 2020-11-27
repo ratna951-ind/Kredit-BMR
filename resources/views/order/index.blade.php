@@ -59,7 +59,7 @@
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$order->no_kontrak ? $order->no_kontrak : "-"}}</td>
                                 <td>{{$order->konsumen->nama}}</td>
-                                <td>Rp {{number_format($order->pinjaman_awal,0,",",".")}}</td>
+                                <td>Rp {{number_format($order->pinjaman_disetujui,0,",",".")}}</td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-icon btn-dark" onclick="window.location.href='{{route('order.show',$order->id)}}'"><i class="la la-file-text"></i></button>
@@ -70,7 +70,7 @@
                                                 @method("PUT")
                                             </form>
                                             <button type="button" class="btn btn-icon btn-warning" onclick="window.location.href='{{route('order.edit',$order->id)}}'"><i class="la la-close"></i></button>
-                                        @elseif($order->status == "D" && !isset($order->no_kontrak))
+                                        @elseif($order->status == "K" && !isset($order->no_kontrak))
                                             <button type="button" data-name="{{$order->konsumen->nama}}" data-id="{{$order->id}}" class="modal-kontrak btn btn-icon btn-success"><i class="la la-edit"></i></button>
                                             <form action="{{route('order.kontrak', $order->id)}}" method="post" id="kontrakRecord{{$order->id}}">
                                                 {{csrf_field()}}

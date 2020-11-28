@@ -78,13 +78,13 @@ Route::group(['middleware' => ['auth','peran:4']], function(){
 });
 
 // Route UH & BM
-Route::group(['middleware' => ['auth','peran:3,6']], function(){
-    Route::get('order/laporan','HomeController@laporanOrder')->name('laporan.order');
+Route::group(['middleware' => ['auth','peran:3']], function(){
+    Route::get('laporan-order','HomeController@laporanOrder')->name('laporan.order');
 });
 
 // Route Admin, BM & SPV
 Route::group(['middleware' => ['auth','peran:4,5,6']], function(){
-    Route::get('keuangan/laporan','HomeController@laporanKeuangan')->name('laporan.keuangan');
+    Route::get('laporan-keuangan','HomeController@laporanKeuangan')->name('laporan.keuangan');
 });
 
 // Route BM & SPV

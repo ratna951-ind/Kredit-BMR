@@ -181,7 +181,7 @@ class HomeController extends Controller
             ['tgl_order', '<=', $dateLast],
         ])->get();
 
-        return view('laporan.detail-order',$data);
+        return view('order.index',$data);
     }
 
     public function laporanKeuanganIndex()

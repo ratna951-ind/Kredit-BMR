@@ -42,6 +42,11 @@
   <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
   @include('sweetalert::alert')
+  
+  <?php
+      session_start();
+      unset($_SESSION['alert']);
+  ?>
 
     <!-- BEGIN: Header-->
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-shadow navbar-semi-light bg-danger">

@@ -126,6 +126,17 @@ class JadwalForm extends FormRequest
             'selfie.file' => 'Foto selfie dibutuhkan!',
             'selfie.mimes' => 'Foto selfie harus dalam format gambar!',
             'selfie.max' => 'Foto selfie maksimal 10MB!',
+
+            'pinjaman_disetujui.required' => 'Jumlah pinjaman disetujui dibutuhkan!',
+            'pinjaman_disetujui.integer' => 'Jumlah pinjaman disetujui harus angka!',
+            'pinjaman_disetujui.min' => 'Jumlah pinjaman disetujui minimal 2.000.000!',
+            'pinjaman_disetujui.max' => 'Jumlah pinjaman disetujui maksimal 16.100.000!',
+
+            'adm.required' => 'Jumlah administrasi dibutuhkan!',
+            'adm.integer' => 'Jumlah administrasi harus angka!',
+
+            'harga_barang.required' => 'Harga barang dibutuhkan!',
+            'harga_barang.integer' => 'Harga barang harus angka!',
         ];
     }
 }

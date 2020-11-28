@@ -85,9 +85,9 @@ class UserForm extends FormRequest
             'password.max' => 'Password maksimal 20 karakter!',
             'password.confirmed' => 'Konfirmasi password tidak cocok!',
 
-            'kode_kios.required' => 'Peran dibutuhkan!',
-            'kode_kios.integer' => 'Peran harus dipilih!',
-            'kode_kios.min' => 'Peran harus dipilih!',
+            'kode_kios.required' => 'Kios dibutuhkan!',
+            'kode_kios.integer' => 'Kios harus dipilih!',
+            'kode_kios.min' => 'Kios harus dipilih!',
 
             'peran_id.required' => 'Peran dibutuhkan!',
             'peran_id.integer' => 'Peran harus dipilih!',

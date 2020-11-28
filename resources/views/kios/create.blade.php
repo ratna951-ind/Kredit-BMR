@@ -23,8 +23,7 @@
 @section('isi')
     <section id="form-action-layouts">
         <div class="row match-height">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <form class="form form-horizontal" action="{{route('kios.store')}}" method="post" id="createRecord">
@@ -37,16 +36,44 @@
                                     @endforeach
                                 </div>
                             @endif
-                            <div class="form-group row">
-                                <label class="col-md-2 label-control" for="inputKode">Kode</label>
-                                <div class="col-md-10 mx-auto">
-                                    <input type="number" id="inputKode" class="form-control decimal-inputmask" placeholder="Masukan Kode!" value="{{old('kode')}}" name="kode" required autofocus>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" for="inputKode">Kode</label>
+                                        <div class="col-md-9 mx-auto">
+                                            <input type="number" id="inputKode" class="form-control decimal-inputmask" placeholder="Masukan Kode!" value="{{old('kode')}}" name="kode" required autofocus>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" for="inputNama">Nama</label>
+                                        <div class="col-md-9 mx-auto">
+                                            <input type="text" id="inputNama" class="form-control" placeholder="Masukan Nama!" value="{{old('nama')}}" name="nama" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 label-control" for="inputNama">Nama</label>
-                                <div class="col-md-10 mx-auto">
-                                    <input type="text" id="inputNama" class="form-control" placeholder="Masukan Nama!" value="{{old('nama')}}" name="nama" required>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" for="inputBank">Bank</label>
+                                        <div class="col-md-9 mx-auto">
+                                            <select class="form-control" id="inputBank" name="bank">
+                                                <option value="">Pilih Bank</option>
+                                                <option value="BNI" @if ('BNI' == old('bank')) {{'selected'}}@endif>BNI</option>
+                                                <option value="Mandiri" @if ('Mandiri' == old('bank')) {{'selected'}}@endif>Mandiri</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" for="inputAlamat">Alamat</label>
+                                        <div class="col-md-9 mx-auto">
+                                            <input type="text" id="inputAlamat" class="form-control" placeholder="Masukan Alamat!" value="{{old('alamat')}}" name="alamat" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -59,7 +86,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3"></div>
         </div>
     </section>
 @endsection

@@ -12,11 +12,16 @@ class Kios extends Model
     protected $primaryKey = 'kode';
 
     protected $fillable = [
-        'kode', 'nama', 'aktif'
+        'kode', 'nama', 'bank', 'alamat', 'aktif'
     ];
 
     public function user()
     {
         return $this->hasMany(User::class, 'kode_kios', 'kode');
+    }
+
+    public function kas_bank()
+    {
+        return $this->hasMany(KasBank::class, 'kode_kios', 'kode');
     }
 }

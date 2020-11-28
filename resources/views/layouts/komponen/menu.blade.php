@@ -127,8 +127,42 @@
             @else
                 <li class=" nav-item">
             @endif
-                <a href="{{route('laporan.order')}}">
+                <a href="{{route('laporan.keuangan')}}">
                 <i class="la la-sticky-note"></i><span class="menu-title" data-i18n="Laporan">Laporan</span>
+            </a>
+            </li>
+        
+        @elseif(Auth::user()->peran_id == 5)
+
+            @if (\Str::contains(Route::currentRouteName(), ['laporan']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('laporan.keuangan.index')}}">
+                <i class="la la-sticky-note"></i><span class="menu-title" data-i18n="Laporan">Laporan</span>
+            </a>
+            </li>
+
+        @elseif(Auth::user()->peran_id == 6)
+
+            @if (\Str::contains(Route::currentRouteName(), ['laporan.order']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('laporan.order.index')}}">
+                <i class="la la-sticky-note"></i><span class="menu-title" data-i18n="Laporan Order">Laporan Order</span>
+            </a>
+            </li>
+
+            @if (\Str::contains(Route::currentRouteName(), ['laporan.keuangan']))
+                <li class="active">
+            @else
+                <li class=" nav-item">
+            @endif
+                <a href="{{route('laporan.keuangan.index')}}">
+                <i class="la la-money"></i><span class="menu-title" data-i18n="Laporan Keuangan">Laporan Keuangan</span>
             </a>
             </li>
 

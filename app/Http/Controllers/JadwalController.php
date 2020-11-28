@@ -45,7 +45,7 @@ class JadwalController extends Controller
     public function create()
     {
         $data['konsumens'] = Konsumen::all();
-        $data['angsuran'] = Angsuran::all();
+        $data['angsurans'] = Angsuran::all();
 
         return view('jadwal.create', $data);
     }
@@ -149,6 +149,7 @@ class JadwalController extends Controller
     {
         $kios = Auth::user()->kode_kios;
 
+        $data['angsurans'] = Angsuran::all();
         $data['jadwal'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {
             $query->where('kode_kios','=',$kios);
         })->where([

@@ -211,7 +211,8 @@ class OrderController extends Controller
             ['id', $id],
         ])->first();
 
-        $sisa = (KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first())->sisa;
+        $kasbank = KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first();
+        $sisa = $kasbank ? $kasbank->sisa : 0;
 
         if ($sisa<$data['order']->pinjaman_disetujui) {
             Alert::error('Gagal', 'Saldo Kios Tidak Mencukupi!');
@@ -228,7 +229,8 @@ class OrderController extends Controller
 
         $order = JadwalOrder::find($id);
 
-        $sisa = (KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first())->sisa;
+        $kasbank = KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first();
+        $sisa = $kasbank ? $kasbank->sisa : 0;
 
         $check['kode_kios'] = Auth::user()->kode_kios;
         $check['order_id'] = $id;

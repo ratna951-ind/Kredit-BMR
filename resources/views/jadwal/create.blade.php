@@ -67,9 +67,9 @@
                                         <div class="col-md-9 mx-auto">
                                             <select class="select2 form-control" id="inputPinjaman" name="pinjaman_awal">
                                                 <option value="">Pilih Jumlah Pinjaman</option>
-                                                @for($i=20; $i<=161; $i++)
-                                                    <option value="{{$i*100000}}" @if ($i*100000 == old('pinjaman_awal')) {{'selected'}}@endif>{{$i*100000}}</option>
-                                                @endfor
+                                                @foreach($angsurans as $angsuran)
+                                                    <option value="{{$angsuran->pinjaman}}" data-bln_6="{{$angsuran->bln_6}}" data-bln_12="{{$angsuran->bln_12}}" data-bln_18="{{$angsuran->bln_18}}" data-bln_24="{{$angsuran->bln_24}}" @if ($angsuran->pinjaman == old('pinjaman_awal')) {{'selected'}}@endif>Rp {{number_format($angsuran->pinjaman,0,",",".")}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputAngsuran">Angsuran</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="number" id="inputAngsuran" class="form-control border-primary nospinner" placeholder="Angsuran" value="{{ old('angsuran') }}" name="angsuran" disabled>
+                                            <input type="text" id="inputAngsuran" class="form-control border-primary nospinner" value="Rp 0" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -291,11 +291,11 @@
 
             $('select').on('change', function() {
                 var pinjaman = $("#inputPinjaman").val();
-                var tenor = $("#inputJangkaWaktu").val();
+                var tenor = $("#inputJangkaWaktu").val() ? $("#inputJangkaWaktu").val() : 6;
 
-                var angsuran = pinjaman + tenor;
+                var angsuran = $("#inputPinjaman").children('option:selected').data('bln_'+tenor)
 
-                console.log(angsuran);
+                $('#inputAngsuran').val("Rp "+angsuran.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
             });
         
         })(jQuery, undefined);

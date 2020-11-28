@@ -513,7 +513,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputHargaBarang">Harga Barang</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputHargaBarang" class="form-control border-primary" placeholder="Masukkan Harga Barang!" name="harga_barang" value="{{old('harga_barang')}}">
+                                            <input type="number" id="inputHargaBarang" class="form-control border-primary" placeholder="Masukkan Harga Barang!" name="harga_barang" value="{{old('harga_barang')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -531,7 +531,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputAdministrasi">Administrasi</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputAdministrasi" class="form-control border-primary" placeholder="Masukkan Administrasi Yang Disetujui!" name="adm" value="{{old('adm')}}">
+                                            <input type="number" id="inputAdministrasi" class="form-control border-primary" placeholder="Masukkan Administrasi Yang Disetujui!" name="adm" value="{{old('adm')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -541,9 +541,9 @@
                                         <div class="col-md-9 mx-auto">
                                             <select class="select2 form-control" id="inputPinjamanDisetujui" name="pinjaman_disetujui">
                                                 <option value="">Pilih Jumlah Pinjaman Disetujui</option>
-                                                @for($i=20; $i<=161; $i++)
-                                                    <option value="{{$i*100000}}" @if ($i*100000 == old('pinjaman_disetujui')) {{'selected'}}@endif>{{$i*100000}}</option>
-                                                @endfor
+                                                @foreach($angsurans as $angsuran)
+                                                    <option value="{{$angsuran->pinjaman}}" data-bln_6="{{$angsuran->bln_6}}" data-bln_12="{{$angsuran->bln_12}}" data-bln_18="{{$angsuran->bln_18}}" data-bln_24="{{$angsuran->bln_24}}" @if ($angsuran->pinjaman == old('pinjaman_disetujui')) {{'selected'}}@endif>Rp {{number_format($angsuran->pinjaman,0,",",".")}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -614,4 +614,33 @@
     <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>
     <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/select/form-select2.min.js')}}"></script>
+    <script>
+        (function($) {
+            'use strict';
+
+            var admin = 0;
+            var pinjaman = 0;
+
+            $('select').on('change', function() {
+                pinjaman = parseInt($("#inputPinjamanDisetujui").val());
+                var tenor = $("#inputJangkaWaktu").val() ? $("#inputJangkaWaktu").val() : 6;
+
+                var angsuran = $("#inputPinjamanDisetujui").children('option:selected').data('bln_'+tenor)
+
+                $('#inputAngsuran').val("Rp "+angsuran.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
+
+                var result = pinjaman+admin;
+
+                $('#inputPokokHutang').val("Rp "+result.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
+            });
+
+            $("#inputAdministrasi").change(function(){
+                admin = parseInt($("#inputAdministrasi").val());
+                var result = pinjaman+admin;
+
+                $('#inputPokokHutang').val("Rp "+result.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'));
+            });
+        
+        })(jQuery, undefined);
+    </script>
 @endpush

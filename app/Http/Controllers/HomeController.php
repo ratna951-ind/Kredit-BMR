@@ -36,7 +36,8 @@ class HomeController extends Controller
             $data['peran'] = Peran::count();
         }
         else if($role == 4){
-            $data['sisa_saldo'] = (KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first())->sisa;
+            $kasbank = KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first();
+            $data['sisa_saldo'] = $kasbank ? $kasbank->sisa : 0;
 
             $kios = Auth::user()->kode_kios;
             $data['order'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {
@@ -48,7 +49,7 @@ class HomeController extends Controller
             ])->count();
         }
         else if($role == 5){
-            $data['peran'] = Peran::count();
+            $data['kioss'] = Kios::where('aktif','1')->get();
         }
         else if($role == 6){
             $data['peran'] = Peran::count();
@@ -94,6 +95,38 @@ class HomeController extends Controller
         }
 
         return redirect()->route('profile.index');
+    }
+
+    public function laporanOrderIndex()
+    {
+        $data['kioss'] = Kios::where('aktif','1')->get();
+
+        return view('laporan.index-order',$data);
+    }
+
+    public function laporanOrderDetail(Request $request, $kode)
+    {
+        $data['awal'] = date_format(now()->startOfMonth(),"Y-m-d");
+        $data['akhir'] = date_format(now()->endOfMonth(),"Y-m-d");
+        $data['kios'] = $kode;
+        
+        if ($request->awal && $request->akhir) {
+            $data['awal'] = $request->awal;
+            $data['akhir'] = $request->akhir;
+        }
+
+        $data['orders'] = JadwalOrder::whereHas('user', function ($query) use ($kode) {
+            $query->where('kode_kios','=',$kode);
+        })->where([
+            ['tgl_order', '>=', $data['awal']],
+            ['tgl_order', '<=', $data['akhir']],
+            ['status', 'S']
+        ])->orderBy('tgl_order')->get();
+
+        $data['kios'] = Kios::find($kode);
+        $data['total'] = 0;
+
+        return view('laporan.detail-order',$data);
     }
 
     public function laporanOrder(Request $request)
@@ -148,6 +181,54 @@ class HomeController extends Controller
             ['tgl_order', '<=', $dateLast],
         ])->get();
 
-        return view('laporan.index-order',$data);
+        return view('laporan.detail-order',$data);
+    }
+
+    public function laporanKeuanganIndex()
+    {
+        $data['kioss'] = Kios::where('aktif','1')->get();
+
+        return view('laporan.index-keuangan',$data);
+    }
+
+    public function laporanKeuanganDetail(Request $request, $kode)
+    {
+        $data['awal'] = date_format(now()->startOfMonth(),"Y-m-d");
+        $data['akhir'] = date_format(now()->endOfMonth(),"Y-m-d");
+        $data['kios'] = $kode;
+        
+        if ($request->awal && $request->akhir) {
+            $data['awal'] = $request->awal;
+            $data['akhir'] = $request->akhir;
+        }
+
+        $data['kas_banks'] = KasBank::where([
+            ['kode_kios','=', $data['kios']],
+            ['tgl', '>=', $data['awal']],
+            ['tgl', '<=', $data['akhir']],
+        ])->orderBy('tgl')->get();
+
+        return view('laporan.detail-keuangan',$data);
+    }
+
+    public function laporanKeuangan(Request $request)
+    {
+        $data['awal'] = date_format(now()->startOfMonth(),"Y-m-d");
+        $data['akhir'] = date_format(now()->endOfMonth(),"Y-m-d");
+        
+        if ($request->awal && $request->akhir) {
+            $data['awal'] = $request->awal;
+            $data['akhir'] = $request->akhir;
+        }
+        
+        $kios = Auth::user()->kode_kios;
+
+        $data['kas_banks'] = KasBank::where([
+            ['kode_kios','=',$kios],
+            ['tgl', '>=', $data['awal']],
+            ['tgl', '<=', $data['akhir']],
+        ])->orderBy('tgl')->get();
+
+        return view('laporan.detail-keuangan',$data);
     }
 }

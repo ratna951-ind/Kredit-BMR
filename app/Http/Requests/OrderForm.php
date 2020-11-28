@@ -27,7 +27,6 @@ class OrderForm extends FormRequest
         if (Auth::user()->peran_id==4) {
             return [
                 'cara_bayar' => 'required|string|in:B,C',
-                'tgl' => 'required|date',
                 'bukti_std' => 'required|file|mimes:png,jpeg,jpg|max:10240',
             ];
         }
@@ -51,9 +50,6 @@ class OrderForm extends FormRequest
 
             'cara_bayar.required' => 'Metode pencairan dibutuhkan!',
             'cara_bayar.in' => 'Metode pencairan dibutuhkan!',
-
-            'tgl.required' => 'Tanggal dibutuhkan!',
-            'tgl.date' => 'Tanggal dibutuhkan!',
 
             'bukti_std.required' => 'Foto bukti pencairan dibutuhkan!',
             'bukti_std.file' => 'Foto bukti pencairan dibutuhkan!',

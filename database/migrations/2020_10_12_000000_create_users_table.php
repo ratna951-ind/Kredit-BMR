@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('nama');
             $table->string('username')->unique();
             $table->string('password');
-            $table->unsignedInteger('kode_kios');
+            $table->unsignedInteger('kode_kios')->nullable();
             $table->foreign('kode_kios')->references('kode')->on('kios')->onDelete('restrict');
             $table->unsignedInteger('peran_id');
             $table->foreign('peran_id')->references('id')->on('peran')->onDelete('restrict');

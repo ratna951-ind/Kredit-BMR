@@ -198,6 +198,70 @@
             </div>
         </div>
     </div>
+    @elseif(Auth::user()->peran_id == 5)
+    <section id="description" class="card">
+        <div class="card-content collapse show">
+            <div class="card-body card-dashboard">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="1%">No</th>
+                                <th>Kios</th>
+                                <th>Admin</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kioss as $kios)
+                                <tr>
+                                    <td align="center">{{$loop->iteration}}</td>
+                                    <td>Kios {{$kios->nama}}</td>
+                                    <td>
+                                        @foreach ($kios->user as $user)
+                                            @if($user->peran_id == 4)
+                                                {{$user->nama}}
+                                                @break
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td>Rp {{count($kios->kas_bank) ? number_format($kios->kas_bank[count($kios->kas_bank)-1]->sisa,0,",",".") : 0}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    @elseif(Auth::user()->peran_id == 6)
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-24">
+            <div class="card">
+                <div class="card-content">
+                    <div class="earning-chart position-relative">
+                        <div class="chart-title position-absolute mt-2 ml-2">
+                            <h1 class="display-4">596</h1>
+                            <span class="text-muted">Total Order</span>
+                        </div>
+                        <canvas id="earning-chart" class="height-450"></canvas>
+                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
+                            <h3><b>Order Tahun 2020</b></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-24">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <canvas id="column-chart" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @endif
 @endsection
 

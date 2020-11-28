@@ -13,8 +13,10 @@ class KiosTableSeeder extends Seeder
     {
         App\Kios::insert([
             [
-                'kode' => 712002,
-                'nama' => 'Hybrid Kepaon'
+                'kode'   => 712002,
+                'nama'   => 'Hybrid Kepaon',
+                'bank'   => 'Mandiri',
+                'alamat' => 'Jalan Raya Pemogan No 264A',
             ]
         ]);
     }

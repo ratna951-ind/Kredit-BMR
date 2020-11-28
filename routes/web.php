@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth','peran:2,3,4']], function(){
     Route::get('order/{order}', 'OrderController@show')->name('order.show');
 });
 
-// Route UH
+// Route Admin
 Route::group(['middleware' => ['auth','peran:4']], function(){
     Route::get('kasbank', 'KasBankController@index')->name('kas_bank.index');
     Route::post('kasbank', 'KasBankController@store')->name('kas_bank.store');
@@ -79,6 +79,22 @@ Route::group(['middleware' => ['auth','peran:4']], function(){
 
 // Route UH & BM
 Route::group(['middleware' => ['auth','peran:3,6']], function(){
-    Route::get('laporan/order','HomeController@laporanOrder')->name('laporan.order');
-    
+    Route::get('order/laporan','HomeController@laporanOrder')->name('laporan.order');
+});
+
+// Route Admin, BM & SPV
+Route::group(['middleware' => ['auth','peran:4,5,6']], function(){
+    Route::get('keuangan/laporan','HomeController@laporanKeuangan')->name('laporan.keuangan');
+});
+
+// Route BM & SPV
+Route::group(['middleware' => ['auth','peran:5,6']], function(){
+    Route::get('laporan/keuangan','HomeController@laporanKeuanganIndex')->name('laporan.keuangan.index');
+    Route::get('laporan/keuangan/{kios}','HomeController@laporanKeuanganDetail')->name('laporan.keuangan.detail');
+});
+
+// Route BM
+Route::group(['middleware' => ['auth','peran:6']], function(){
+    Route::get('laporan/order','HomeController@laporanOrderIndex')->name('laporan.order.index');
+    Route::get('laporan/order/{kios}','HomeController@laporanOrderDetail')->name('laporan.order.detail');
 });

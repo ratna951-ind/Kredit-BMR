@@ -20,6 +20,8 @@
                                 <th width="1%">No</th>
                                 <th>Kode</th>
                                 <th>Nama</th>
+                                <th>Bank</th>
+                                <th>Alamat</th>
                                 <th width="1%">Aksi</th>
                             </tr>
                         </thead>
@@ -29,6 +31,8 @@
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$kios->kode}}
                                 <td>Kios {{$kios->nama}}</td>
+                                <td>{{$kios->bank}}</td>
+                                <td>{{$kios->alamat}}</td>
                                 <td>
                                     <button type="button" data-name="{{$kios->nama}}" data-id="{{$kios->kode}}" class="modal-delete btn btn-icon btn-danger"><i class="la la-trash"></i></button>
                                 </td>

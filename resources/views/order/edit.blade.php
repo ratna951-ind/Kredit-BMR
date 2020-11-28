@@ -455,7 +455,10 @@
                                 </div>
                             </div>
                             @if(Auth::user()->peran_id==4)
-                            <div class="row">
+                            <div class="row mb-2">
+                                <div class="col-md-6" align="center">
+                                    <img src="{{asset('app-assets/images/ico/document-default.png')}}" id="uploadBuktiPencairan" height="200px" alt="Preview Bukti Pencairan">
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="col-md-3 label-control" for="inputMetode">Metode Pembayaran</label>
@@ -467,19 +470,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-md-3 label-control" for="inputTanggal">Tanggal</label>
-                                        <div class="col-md-9 mx-auto">
-                                            <input type="date" id="inputTanggal" class="form-control border-primary" name="tgl" value="{{old('tgl')}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-md-6" align="center">
-                                    <img src="{{asset('app-assets/images/ico/document-default.png')}}" id="uploadBuktiPencairan" height="200px" alt="Preview Bukti Pencairan">
                                 </div>
                             </div>
                             <div class="row">

@@ -39,6 +39,73 @@
                         </div>
                         <div class="col-md-8"></div>
                     </div>
+                    <div class="row" style="padding: 15px 15px">
+                        @isset($col)
+                            @foreach ($mces as $mce)
+                                <div class="col-md-{{$col}}">
+                                    <table class="table table-striped table-bordered" align="center" style="max-width: 350px">
+                                        <tr class="table-success">
+                                            <td align="center"><h4><b>{{$mce->total}}</b></h4></td>
+                                        </tr>
+                                        <tr style="height: 80px">
+                                            <td style="vertical-align: middle" align="center"><b>{{$mce->nama}}</b></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="col-md-2">
+                                <table class="table table-striped table-bordered" align="center" style="max-width: 350px">
+                                    <tr class="table-success">
+                                        <td align="center">{{$mces[0]->total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{{$mces[0]->nama}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-3">
+                                <table class="table table-striped table-bordered" align="center" style="max-width: 350px">
+                                    <tr class="table-success">
+                                        <td align="center">{{$mces[1]->total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{{$mces[1]->nama}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-2">
+                                <table class="table table-striped table-bordered" align="center" style="max-width: 350px">
+                                    <tr class="table-success">
+                                        <td align="center">{{$mces[2]->total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{{$mces[2]->nama}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-3">
+                                <table class="table table-striped table-bordered" align="center" style="max-width: 350px">
+                                    <tr class="table-success">
+                                        <td align="center">{{$mces[3]->total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{{$mces[3]->nama}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-2">
+                                <table class="table table-striped table-bordered" align="center" style="max-width: 350px">
+                                    <tr class="table-success">
+                                        <td align="center">{{$mces[4]->total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">{{$mces[4]->nama}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        @endisset
+                    </div>
                     <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                             <tr>

@@ -13,11 +13,7 @@
         <div class="card-content collapse show">
             <div class="card-body card-dashboard">
                 <div class="table-responsive">
-                    @if(Auth::user()->peran_id == 4)
                     <form action="{{route('laporan.keuangan')}}" method="get">
-                    @else
-                    <form action="{{route('laporan.keuangan.detail', $kios)}}" method="get">
-                    @endif
                         <div class="row" style="padding: 15px 15px">
                             <div class="col-md-2" style="margin: auto">
                                 <input type="date" class="form-control" name="awal" id="inputAwal" value="{{$awal}}">

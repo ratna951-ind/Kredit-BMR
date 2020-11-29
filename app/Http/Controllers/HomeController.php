@@ -12,6 +12,7 @@ use App\Kios;
 use App\User;
 use App\Peran;
 use Alert;
+use DB;
 
 class HomeController extends Controller
 {
@@ -126,6 +127,53 @@ class HomeController extends Controller
         $data['kios'] = Kios::find($kode);
         $data['total'] = 0;
 
+        $data['mces'] = DB::table('users')
+            ->select('nama', DB::raw('count(case when status = "S" then 1 end) as total'))
+            ->leftJoin('jadwal_order', 'users.id', '=', 'jadwal_order.user_id')
+            ->where([
+                ['users.peran_id', 2],
+                ['users.kode_kios', $kode],
+                ['users.aktif', '1'],
+            ])
+            ->groupBy('users.id')
+            ->get();
+
+        // dd($data['mces']);
+
+        switch (count($data['mces'])) {
+            case 1:
+                $data['col'] = 12;
+                break;
+            
+            case 2:
+                $data['col'] = 6;
+                break;
+            
+            case 3:
+                $data['col'] = 4;
+                break;
+            
+            case 4:
+                $data['col'] = 3;
+                break;
+            
+            case 5:
+                $data['col-1'] = 2;
+                $data['col-2'] = 3;
+                $data['col-3'] = 2;
+                $data['col-4'] = 3;
+                $data['col-5'] = 2;
+                break;
+            
+            case 6:
+                $data['col'] = 2;
+                break;
+            
+            default:
+                
+                break;
+        }
+
         return view('laporan.detail-order',$data);
     }
 
@@ -181,7 +229,7 @@ class HomeController extends Controller
             ['tgl_order', '<=', $dateLast],
         ])->get();
 
-        return view('order.index',$data);
+        return view('laporan.laporan-order',$data);
     }
 
     public function laporanKeuanganIndex()
@@ -229,6 +277,6 @@ class HomeController extends Controller
             ['tgl', '<=', $data['akhir']],
         ])->orderBy('tgl')->get();
 
-        return view('laporan.detail-keuangan',$data);
+        return view('laporan.laporan-keuangan',$data);
     }
 }

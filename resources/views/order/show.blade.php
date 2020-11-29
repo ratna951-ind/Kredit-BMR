@@ -12,6 +12,11 @@
     <section id="description" class="card">
         <div class="card-content">
             <div class="card-body">
+                @if (Auth::user()->peran_id==3 || Auth::user()->peran_id==4 || Auth::user()->peran_id==5 || Auth::user()->peran_id==6)
+                    <div class="mb-1" style="padding: 8px 13px">
+                        <h4><b>ID MCE : {{$order->user->nama}}</b></h4>
+                    </div>
+                @endif
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link" id="tab_konsumen" data-toggle="tab" aria-controls="konsumen" href="#konsumen" aria-expanded="false"><i class="la la-user"></i> &nbspKonsumen</a>

@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth','peran:2']], function(){
 Route::group(['middleware' => ['auth','peran:3']], function(){
     Route::get('jadwal/{jadwal}/edit', 'JadwalController@edit')->name('jadwal.edit');
     Route::put('jadwal/{jadwal}', 'JadwalController@update')->name('jadwal.update');
+
+    Route::get('laporan-order','HomeController@laporanOrder')->name('laporan.order');
 });
 
 // Route Admin
@@ -57,6 +59,11 @@ Route::group(['middleware' => ['auth','peran:4']], function(){
     Route::get('order/history', 'OrderController@history')->name('order.history');
     Route::get('order/{order}/accept', 'OrderController@accept')->name('order.accept'); 
     Route::put('order/{order}/accept', 'OrderController@acceptUpdate')->name('order.accept_update');
+
+    Route::get('kasbank', 'KasBankController@index')->name('kas_bank.index');
+    Route::post('kasbank', 'KasBankController@store')->name('kas_bank.store');
+    
+    Route::get('laporan-keuangan','HomeController@laporanKeuangan')->name('laporan.keuangan');
 });
 
 // Route MCE & UH
@@ -65,22 +72,14 @@ Route::group(['middleware' => ['auth','peran:2,3']], function(){
     Route::get('jadwal/{jadwal}', 'JadwalController@show')->name('jadwal.show');
 });
 
+// Route MCE & Admin
+Route::group(['middleware' => ['auth','peran:2,4']], function(){
+    Route::get('order', 'OrderController@index')->name('order.index');
+});
+
 //Route MCE, UH & Admin
 Route::group(['middleware' => ['auth','peran:2,3,4']], function(){
-    Route::get('order', 'OrderController@index')->name('order.index');
     Route::get('order/{order}', 'OrderController@show')->name('order.show');
-});
-
-// Route Admin
-Route::group(['middleware' => ['auth','peran:4']], function(){
-    Route::get('kasbank', 'KasBankController@index')->name('kas_bank.index');
-    Route::post('kasbank', 'KasBankController@store')->name('kas_bank.store');
-    Route::get('laporan-keuangan','HomeController@laporanKeuangan')->name('laporan.keuangan');
-});
-
-// Route UH & BM
-Route::group(['middleware' => ['auth','peran:3']], function(){
-    Route::get('laporan-order','HomeController@laporanOrder')->name('laporan.order');
 });
 
 // Route BM & SPV

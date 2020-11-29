@@ -148,10 +148,10 @@ class HomeController extends Controller
 
         $data['statuss'] = [
             ['id' => "B", 'nama' => 'Batal'],
-            ['id' => "D", 'nama' => 'Diterima']
+            ['id' => "S", 'nama' => 'Selesai']
         ];
 
-        $orders = JadwalOrder::whereNotIn('status',['J','O']);
+        $orders = JadwalOrder::whereNotIn('status',['J','O','D','K']);
 
         $data['bulan'] = now()->month;
         $data['tahun'] = now()->year;

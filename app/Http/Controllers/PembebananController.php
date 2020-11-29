@@ -18,7 +18,7 @@ class PembebananController extends Controller
     public function index()
     {
         $data['pembebanans'] = JadwalOrder::where([
-            ['status', 'D'],
+            ['status', 'S'],
             ['no_kontrak', '!=', null],
         ])->has('pembebanan', '<', 3)->get();
 
@@ -68,7 +68,7 @@ class PembebananController extends Controller
     public function edit($id)
     {
         $data['order'] = JadwalOrder::where([
-            ['status', 'D'],
+            ['status', 'S'],
             ['no_kontrak', '!=', null],
             ['id', $id],
         ])->has('pembebanan', '<', 3)->first();
@@ -118,7 +118,7 @@ class PembebananController extends Controller
     public function history()
     {
         $data['pembebanans'] = JadwalOrder::where([
-            ['status', 'D'],
+            ['status', 'S'],
             ['no_kontrak', '!=', null],
         ])->has('pembebanan', '=', 3)->get();
 

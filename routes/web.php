@@ -75,16 +75,12 @@ Route::group(['middleware' => ['auth','peran:2,3,4']], function(){
 Route::group(['middleware' => ['auth','peran:4']], function(){
     Route::get('kasbank', 'KasBankController@index')->name('kas_bank.index');
     Route::post('kasbank', 'KasBankController@store')->name('kas_bank.store');
+    Route::get('laporan-keuangan','HomeController@laporanKeuangan')->name('laporan.keuangan');
 });
 
 // Route UH & BM
 Route::group(['middleware' => ['auth','peran:3']], function(){
     Route::get('laporan-order','HomeController@laporanOrder')->name('laporan.order');
-});
-
-// Route Admin, BM & SPV
-Route::group(['middleware' => ['auth','peran:4,5,6']], function(){
-    Route::get('laporan-keuangan','HomeController@laporanKeuangan')->name('laporan.keuangan');
 });
 
 // Route BM & SPV

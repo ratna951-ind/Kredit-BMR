@@ -84,6 +84,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    @if(Auth::user()->peran_id==3) <h3 align="right" style="padding: 15px 15px"><button type="button" class="btn btn-success" onclick="window.location.href='{{route('jadwal.create')}}'">Cetak</button></h3> @endif
                 </div>
             </div>
         </div>

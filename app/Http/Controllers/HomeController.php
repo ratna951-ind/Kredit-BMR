@@ -232,6 +232,14 @@ class HomeController extends Controller
         return view('laporan.laporan-order',$data);
     }
 
+    public function laporanOrderCetak($bulan=null, $tahun=null, $status=null)
+    {
+        $data['orders']= JadwalOrder::where('status', 'S')->get();
+
+        $pdf= PDF::loadview('PDF.order', $data);
+
+        return $pdf->stream();
+    }
     public function laporanKeuanganIndex()
     {
         $data['kioss'] = Kios::where('aktif','1')->get();

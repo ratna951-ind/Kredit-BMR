@@ -13,7 +13,7 @@
         <div class="card-content collapse show">
             <div class="card-body card-dashboard">
                 <div class="table-responsive">
-                    <form action="{{route('laporan.keuangan')}}" method="get">
+                    <form action="{{route('laporan.order')}}" method="get">
                         <div class="row" style="padding: 15px 15px">
                             <div class="col-md-2">
                                 <select class="form-control" id="inputBulan" name="bulan">
@@ -71,6 +71,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <h3 align="right" style="padding: 15px 15px"><a class="btn btn-success" target="_blank" href="{{route('laporan.order.cetak')}}">Cetak</a></h3>
                 </div>
             </div>
         </div>

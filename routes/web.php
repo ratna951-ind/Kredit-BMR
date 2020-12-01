@@ -93,3 +93,8 @@ Route::group(['middleware' => ['auth','peran:6']], function(){
     Route::get('laporan/order','HomeController@laporanOrderIndex')->name('laporan.order.index');
     Route::get('laporan/order/{kios}','HomeController@laporanOrderDetail')->name('laporan.order.detail');
 });
+
+// Route UH & BM
+Route::group(['middleware' => ['auth','peran:3,6']], function(){
+    Route::get('/cetak/order/{bulan?}/{tahun?}/{status?}','HomeController@laporanOrderCetak')->name('laporan.order.cetak');
+});

@@ -12,6 +12,7 @@ use App\Kios;
 use App\User;
 use App\Peran;
 use Alert;
+use PDF;
 use DB;
 
 class HomeController extends Controller
@@ -232,9 +233,31 @@ class HomeController extends Controller
         return view('laporan.laporan-order',$data);
     }
 
-    public function laporanOrderCetak($bulan=null, $tahun=null, $status=null)
+    public function laporanOrderCetak($bulan=null, $tahun=null)
     {
-        $data['orders']= JadwalOrder::where('status', 'S')->get();
+        $orders = JadwalOrder::where('status','S');
+
+        $data['bulan'] = now()->month;
+        $data['tahun'] = now()->year;
+
+        $dateFirst = now()->startOfMonth();
+        $dateLast = now()->endOfMonth();
+
+        if ($bulan && $tahun) {
+            $data['bulan'] = $bulan;
+            $data['tahun'] = $tahun;
+            $dateFirst = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->startOfMonth();
+            $dateLast = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->endOfMonth();
+        }
+        
+        $kios = Auth::user()->kode_kios;
+
+        $data['orders'] = $orders->whereHas('user', function ($query) use ($kios) {
+            $query->where('kode_kios','=',$kios);
+        })->where([
+            ['tgl_order', '>=', $dateFirst],
+            ['tgl_order', '<=', $dateLast],
+        ])->get();
 
         $pdf= PDF::loadview('PDF.order', $data);
 

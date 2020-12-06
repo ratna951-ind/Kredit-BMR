@@ -243,6 +243,8 @@ class OrderController extends Controller
         $check['bukti_std'] = $gambarbukti;
 
         $checkOrder['status'] = 'K';
+        $checkOrder['tgl_order'] = now();
+        $checkOrder['tgl_selesai'] = now()->addMonth($order->tenor);
 
         $processOrder = $order->update($checkOrder);
 

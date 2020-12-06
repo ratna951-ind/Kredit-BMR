@@ -70,13 +70,11 @@
                 <div class="card-content">
                     <div class="earning-chart position-relative">
                         <div class="chart-title position-absolute mt-2 ml-2">
-                            <h1 class="display-4">596</h1>
-                            <span class="text-muted">Total Order</span>
+                            <h1 class="display-4">{{$total}}</h1>
+                            <span class="text-muted">Total Order Tahun {{now()->year}}</span>
                         </div>
                         <canvas id="earning-chart" class="height-450"></canvas>
-                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
-                            <h3><b>Order Tahun 2020</b></h3>
-                        </div>
+                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3"></div>
                     </div>
                 </div>
             </div>
@@ -109,12 +107,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
+                                @foreach ($konsumen as $data)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$data->nama}}</td>
+                                        <td>{{$data->telp}}</td>
+                                        <td>{{$data->alamatktp}}</td>
+                                    </tr>
+                                @endforeach
+                                @if(count($konsumen)==0)
+                                    <tr>
+                                        <td colspan="4" align="center">Belum ada!</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -129,13 +134,11 @@
                 <div class="card-content">
                     <div class="earning-chart position-relative">
                         <div class="chart-title position-absolute mt-2 ml-2">
-                            <h1 class="display-4">596</h1>
-                            <span class="text-muted">Total Order</span>
+                            <h1 class="display-4">{{$total}}</h1>
+                            <span class="text-muted">Total Order Kios {{Auth::user()->kios->nama}} Tahun {{now()->year}}</span>
                         </div>
                         <canvas id="earning-chart" class="height-450"></canvas>
-                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
-                            <h3><b>Order Kios {{Auth::user()->kios->nama}} Tahun 2020</b></h3>
-                        </div>
+                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3"></div>
                     </div>
                 </div>
             </div>
@@ -241,13 +244,11 @@
                 <div class="card-content">
                     <div class="earning-chart position-relative">
                         <div class="chart-title position-absolute mt-2 ml-2">
-                            <h1 class="display-4">596</h1>
-                            <span class="text-muted">Total Order</span>
+                            <h1 class="display-4">{{$total}}</h1>
+                            <span class="text-muted">Total Order Tahun {{now()->year}}</span>
                         </div>
                         <canvas id="earning-chart" class="height-450"></canvas>
-                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3">
-                            <h3><b>Order Tahun 2020</b></h3>
-                        </div>
+                        <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3"></div>
                     </div>
                 </div>
             </div>
@@ -269,6 +270,7 @@
     <script src="{{asset('app-assets/vendors/js/charts/chart.min.js')}}"></script>
     <script>
         $(window).on("load", (function() {
+            @if(Auth::user()->peran_id == 2 || Auth::user()->peran_id == 3 || Auth::user()->peran_id == 6)
             var l = document.getElementById("earning-chart").getContext("2d");
             new Chart(l, {
                 type: "line",
@@ -326,6 +328,8 @@
                     }]
                 }
             });
+            @endif
+            @if(Auth::user()->peran_id == 2 || Auth::user()->peran_id == 3 || Auth::user()->peran_id == 6)
              //Get the context of the Chart canvas element we want to select
             var ctx = $("#column-chart");
 
@@ -365,6 +369,10 @@
                         },
                         scaleLabel: {
                             display: true,
+                        },
+                        ticks: {
+                            min: 0,
+                            stepSize: 1
                         }
                     }]
                 },
@@ -376,16 +384,16 @@
 
             // Chart Data
             var chartData = {
-                labels: ["Jan-Feb", "Feb-Mar", "Mar-Apr", "Apr-Mei", "Mei-Jun"],
+                labels: ["Order"],
                 datasets: [{
                     label: "Bulan Sebelumnya",
-                    data: [65, 59, 80, 81, 56],
+                    data: [{{$order[(now()->month)-2]}}],
                     backgroundColor: "#28D094",
                     hoverBackgroundColor: "rgba(22,211,154,.9)",
                     borderColor: "transparent"
                 }, {
                     label: "Bulan Sekarang",
-                    data: [28, 48, 40, 19, 86],
+                    data: [{{$order[(now()->month)-1]}}],
                     backgroundColor: "#F98E76",
                     hoverBackgroundColor: "rgba(249,142,118,.9)",
                     borderColor: "transparent"
@@ -401,9 +409,12 @@
                 data : chartData
             };
 
-            // Create the chart
             var lineChart = new Chart(ctx, config);
-
+            @endif
+            
+            @if(Auth::user()->peran_id == 3)
+            // Create the chart
+            
             var a = $("#column-stacked");
             new Chart(a, {
                 type: "bar",
@@ -439,21 +450,26 @@
                             },
                             scaleLabel: {
                                 display: !0
+                            },
+                            ticks: {
+                                min: 0,
+                                stepSize: 1
                             }
                         }]
                     }
                 },
                 data: {
-                    labels: ["Rara", "Ratna", "Gede Adi", "Pastiyasa", "Made Deni"],
+                    labels: @json($group),
                     datasets: [{
                         label: "Order MCE",
-                        data: [65, 59, 80, 81, 56],
+                        data: @json($order_group),
                         backgroundColor: "#FF4961",
                         hoverBackgroundColor: "#FF566D",
                         borderColor: "transparent"
                     }]
                 }
             })
+            @endif
         }));
     </script>
 @endpush

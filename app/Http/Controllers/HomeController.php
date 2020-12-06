@@ -33,25 +33,70 @@ class HomeController extends Controller
         }
         else if($role == 2){
             $data['order'] = array();
+            $data['total'] = 0;
             for ($i=1; $i < 13; $i++) {
-                $awal = 
-                $akhir = 
+                $awal = Carbon::createFromDate(now()->year, $i, 1)->startOfMonth();
+                $akhir = Carbon::createFromDate(now()->year, $i, 1)->endOfMonth();
+
+                $temp = JadwalOrder::where([
+                    ['user_id', Auth::user()->id],
+                    ['status', 'S'],
+                    ['tgl_order', '>=', $awal],
+                    ['tgl_order', '<=', $akhir],
+                ])->count();
+                
+                $data['total'] += $temp;
+
+                array_push($data['order'], $temp);
+            }
+            $data['konsumen'] = DB::table('jadwal_order')
+            ->select('nama', 'telp', 'alamatktp')
+            ->join('konsumen', 'konsumen.nik', '=', 'jadwal_order.nik')
+            ->where([
+                ['user_id', Auth::user()->id],
+                ['tgl_selesai', '<=', now()],
+                ['jadwal_order.status', 'S']
+            ])->groupBy('konsumen.nik')->get();
+        }
+        else if($role == 3){
+            $data['order'] = array();
+            $data['total'] = 0;
+            for ($i=1; $i < 13; $i++) {
+                $awal = Carbon::createFromDate(now()->year, $i, 1)->startOfMonth();
+                $akhir = Carbon::createFromDate(now()->year, $i, 1)->endOfMonth();
 
                 $kios = Auth::user()->kode_kios;
+
                 $temp = JadwalOrder::whereHas('user', function ($query) use ($kios) {
                     $query->where('kode_kios','=',$kios);
                 })->where([
-                    ['status', 'D'],
-                    ['tgl_order', '>=', now()->startOfMonth()],
-                    ['tgl_order', '<=', now()->endOfMonth()],
+                    ['status', 'S'],
+                    ['tgl_order', '>=', $awal],
+                    ['tgl_order', '<=', $akhir],
                 ])->count();
+                
+                $data['total'] += $temp;
 
-                // dd($temp);
-                array_push($data['order'], );
+                array_push($data['order'], $temp);
             }
-        }
-        else if($role == 3){
-            $data['peran'] = Peran::count();
+            
+            $mces = DB::table('users')
+                ->select('username as nama', DB::raw('count(case when status = "S" then 1 end) as total'))
+                ->leftJoin('jadwal_order', 'users.id', '=', 'jadwal_order.user_id')
+                ->where([
+                    ['users.peran_id', 2],
+                    ['users.kode_kios', $kios],
+                    ['users.aktif', '1'],
+                ])
+                ->groupBy('users.id')
+                ->get();
+            
+            $data['group'] = array();
+            $data['order_group'] = array();
+            foreach ($mces as $mce) {
+                array_push($data['group'], $mce->nama);
+                array_push($data['order_group'], $mce->total);
+            }
         }
         else if($role == 4){
             $kasbank = KasBank::where('kode_kios', Auth::user()->kode_kios)->orderBy('id', 'desc')->first();
@@ -70,7 +115,42 @@ class HomeController extends Controller
             $data['kioss'] = Kios::where('aktif','1')->get();
         }
         else if($role == 6){
-            $data['peran'] = Peran::count();
+            $data['order'] = array();
+            $data['total'] = 0;
+            for ($i=1; $i < 13; $i++) {
+                $awal = Carbon::createFromDate(now()->year, $i, 1)->startOfMonth();
+                $akhir = Carbon::createFromDate(now()->year, $i, 1)->endOfMonth();
+
+                $kios = Auth::user()->kode_kios;
+
+                $temp = JadwalOrder::where([
+                    ['status', 'S'],
+                    ['tgl_order', '>=', $awal],
+                    ['tgl_order', '<=', $akhir],
+                ])->count();
+                
+                $data['total'] += $temp;
+
+                array_push($data['order'], $temp);
+            }
+
+            $kioss = DB::table('users')
+                ->select('username as nama', DB::raw('count(case when status = "S" then 1 end) as total'))
+                ->leftJoin('jadwal_order', 'users.id', '=', 'jadwal_order.user_id')
+                ->where([
+                    ['users.peran_id', 2],
+                    ['users.kode_kios', $kios],
+                    ['users.aktif', '1'],
+                ])
+                ->groupBy('users.id')
+                ->get();
+            
+            $data['group'] = array();
+            $data['order_group'] = array();
+            foreach ($kioss as $kios) {
+                array_push($data['group'], $kios->nama);
+                array_push($data['order_group'], $kios->total);
+            }
         }
 
         return view('home', $data);

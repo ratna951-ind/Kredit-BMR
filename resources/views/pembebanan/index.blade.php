@@ -30,7 +30,7 @@
                             <tr>
                                 <td align="center">{{$loop->iteration}}</td>
                                 <td>{{$pembebanan->no_kontrak ? $pembebanan->no_kontrak : "-"}}</td>
-                                <td>{{(\Carbon\Carbon::createFromTimestamp(strtotime($pembebanan->tgl_order))->addMonth()->format('j/m/Y'))}}</td>
+                                <td>{{(\Carbon\Carbon::createFromTimestamp(strtotime($pembebanan->tgl_order))->addMonth(count($pembebanan->pembebanan)+1)->format('j/m/Y'))}}</td>
                                 <td>{{$pembebanan->konsumen->nama}}</td>
                                 <td>Rp {{number_format($pembebanan->pinjaman_awal,0,",",".")}}</td>
                                 <td>

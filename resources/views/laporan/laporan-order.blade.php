@@ -71,7 +71,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <h3 align="right" style="padding: 15px 15px"><a class="btn btn-success" target="_blank" href="{{route('laporan.order.cetak')}}">Cetak</a></h3>
+                    <h3 align="right" style="padding: 15px 15px"><a class="btn btn-success" target="_blank" href="{{route('laporan.order.cetakUH', ['bulan'=>$bulan, 'tahun'=>$tahun])}}">Cetak</a></h3>
                 </div>
             </div>
         </div>
@@ -79,37 +79,6 @@
 @endsection
 
 @push('js')
-    <div class="modal fade" id="kontrakModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-col-danger">
-                <div class="modal-header bg-danger white">
-                    <h4 class="modal-title white">Konfirmasi</h4>
-                </div>
-                <div class="modal-body">
-                    <p align="center">Input No Kontrak</p>
-                    <input type="hidden" id="id_kontrak" disabled>
-                    <input type="text" class="form-control" id="no_kontrak" placeholder="Masukkan No Kontrak">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger kontrak">Ya</button>
-                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Tidak</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).on("click", ".modal-kontrak", function () {
-            $('#id_kontrak').val($(this).data('id'));
-            $('#kontrakModal').modal('show');
-        });
-        $('.modal-footer').on('click', '.kontrak', function() {
-            id = $('#id_kontrak').val();
-            $('#inputNoKontrak'+id).val($('#no_kontrak').val()); 
-            event.preventDefault();
-            document.getElementById('kontrakRecord'+id).submit();
-        });
-    </script>
-    @include('komponen.modalApprove', ['modul' => 'order konsumen'])
     <script src="{{asset('app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <script>
         $(document).ready(function() {

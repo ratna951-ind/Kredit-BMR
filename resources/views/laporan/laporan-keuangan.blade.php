@@ -94,7 +94,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <h3 align="right" style="padding: 15px 15px"><button type="button" class="btn btn-success" onclick="window.location.href='{{route('jadwal.create')}}'">Cetak</button></h3>
+                    <h3 align="right" style="padding: 15px 15px"><a class="btn btn-success" target="_blank" href="{{route('laporan.keuangan.cetakAdmin', ['awal'=>$awal, 'akhir'=>$akhir])}}">Cetak</a></h3>
                 </div>
             </div>
         </div>

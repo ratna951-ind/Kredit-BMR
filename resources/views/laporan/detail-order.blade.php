@@ -15,14 +15,11 @@
                 <div class="table-responsive">
                     <form action="{{route('laporan.order.detail', $kios)}}" method="get">
                         <div class="row" style="padding: 0px 15px">
-                            <div class="col-md-2" style="margin: auto">
+                            <div class="col-md-3" style="margin: auto">
                                 <input type="date" class="form-control" name="awal" id="inputAwal" value="{{$awal}}">
                             </div>
-                            <div class="col-md-2" style="margin: auto">
+                            <div class="col-md-3" style="margin: auto">
                                 <input type="date" class="form-control" name="akhir" id="inputAkhir" value="{{$akhir}}">
-                            </div>
-                            <div class="col-md-2" style="margin: auto">
-                                Bank : {{Auth::user()->kios->bank}}
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-2" style="text-align:right">
@@ -31,13 +28,13 @@
                         </div>
                     </form>
                     <div class="row" style="padding: 15px 15px">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <b>Kios : {{$kios->nama}}</b>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <b>Total Order : {{count($orders)}}</b>
                         </div>
-                        <div class="col-md-8"></div>
+                        <div class="col-md-6"></div>
                     </div>
                     <div class="row" style="padding: 15px 15px">
                         @isset($col)
@@ -143,7 +140,7 @@
                         @endif
                         </tbody>
                     </table>
-                    <h3 align="right" style="padding: 15px 15px"><button type="button" class="btn btn-success" onclick="window.location.href='{{route('jadwal.create')}}'">Cetak</button></h3>
+                    <h3 align="right" style="padding: 15px 15px"><a class="btn btn-success" target="_blank" href="{{route('laporan.order.cetakBM', ['bulan'=>$awal, 'tahun'=>$akhir, 'kios'=>$kios])}}">Cetak</a></h3>
                 </div>
             </div>
         </div>

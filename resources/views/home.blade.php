@@ -306,10 +306,10 @@
                     }
                 },
                 data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember"],
                     datasets: [{
                         label: "Order",
-                        data: [28, 35, 36, 48, 46, 42, 60],
+                        data: @json($order),
                         backgroundColor: "rgba(255,117,136,0.12)",
                         borderColor: "#FF4961",
                         borderWidth: 3,

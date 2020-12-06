@@ -32,7 +32,7 @@
                                 <td>Rp {{number_format($order->pinjaman_disetujui,0,",",".")}}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-icon btn-info" onclick="window.location.href='{{route('order.show',$order->id)}}'"><i class="la la-print"></i></button>
+                                        <a class="btn btn-icon btn-info" target="_blank" href="{{route('pencairan.cetak',$order->id)}}"><i class="la la-print"></i></a>
                                         <button type="button" class="btn btn-icon btn-success" onclick="window.location.href='{{route('order.accept',$order->id)}}'"><i class="la la-money"></i></button>
                                     </div>
                                 </td>

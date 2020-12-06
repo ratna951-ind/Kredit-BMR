@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Order {{$bulan," ", $tahun}}</title>
+    <title>Laporan Order {{$title}} - Kios {{$kios}}</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -21,11 +21,11 @@
             font-family: arial, sans-serif;
             text-align: center;
         }
-</style>
+    </style>
 </head>
 <body>
-    <h2>Laporan Order {{$bulan," ", $tahun}}</h2>
-    <table class="table table-striped table-bordered" style="width:100%">
+    <h2>Laporan Order {{$title}}<br>Kios {{$kios}}</h2>
+    <table>
     <thead>
         <tr>
             <th width="1%">No</th>
@@ -45,6 +45,11 @@
             <td>{{$order->konsumen->telp}}</td>
         </tr>
     @endforeach
+    @if(count($orders)==0)
+        <tr>
+            <td colspan="5" class="center">Tidak ada data!</td>
+        </tr>
+    @endif
     </tbody>
 </table>
 </body>

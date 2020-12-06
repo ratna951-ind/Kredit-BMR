@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth','peran:3']], function(){
     Route::put('jadwal/{jadwal}', 'JadwalController@update')->name('jadwal.update');
 
     Route::get('laporan-order','HomeController@laporanOrder')->name('laporan.order');
+    Route::get('/cetak/order/UH/{bulan?}/{tahun?}','HomeController@laporanOrderCetak')->name('laporan.order.cetakUH');
 });
 
 // Route Admin
@@ -64,6 +65,8 @@ Route::group(['middleware' => ['auth','peran:4']], function(){
     Route::post('kasbank', 'KasBankController@store')->name('kas_bank.store');
     
     Route::get('laporan-keuangan','HomeController@laporanKeuangan')->name('laporan.keuangan');
+    Route::get('/cetak/keuangan/Admin/{awal?}/{akhir?}','HomeController@laporanKeuanganCetak')->name('laporan.keuangan.cetakAdmin');
+    Route::get('/cetak/pencairan/{order}','HomeController@pencairanCetak')->name('pencairan.cetak');
 });
 
 // Route MCE & UH
@@ -86,15 +89,13 @@ Route::group(['middleware' => ['auth','peran:2,3,4']], function(){
 Route::group(['middleware' => ['auth','peran:5,6']], function(){
     Route::get('laporan/keuangan','HomeController@laporanKeuanganIndex')->name('laporan.keuangan.index');
     Route::get('laporan/keuangan/{kios}','HomeController@laporanKeuanganDetail')->name('laporan.keuangan.detail');
+    Route::get('/cetak/keuangan/BM-SPV/{awal?}/{akhir?}/{kios?}','HomeController@laporanKeuanganCetak')->name('laporan.keuangan.cetakBM-SPV');
 });
 
 // Route BM
 Route::group(['middleware' => ['auth','peran:6']], function(){
     Route::get('laporan/order','HomeController@laporanOrderIndex')->name('laporan.order.index');
     Route::get('laporan/order/{kios}','HomeController@laporanOrderDetail')->name('laporan.order.detail');
-});
-
-// Route UH & BM
-Route::group(['middleware' => ['auth','peran:3,6']], function(){
-    Route::get('/cetak/order/{bulan?}/{tahun?}/{status?}','HomeController@laporanOrderCetak')->name('laporan.order.cetak');
+    Route::get('/cetak/order/BM/{bulan?}/{tahun?}/{kios?}','HomeController@laporanOrderCetak')->name('laporan.order.cetakBM');
+   
 });

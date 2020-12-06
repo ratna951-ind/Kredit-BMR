@@ -16,7 +16,7 @@
                     @if(Auth::user()->peran_id == 4)
                     <form action="{{route('laporan.keuangan')}}" method="get">
                     @else
-                    <form action="{{route('laporan.keuangan.detail', $kios)}}" method="get">
+                    <form action="{{route('laporan.keuangan.detail', $kios->kode)}}" method="get">
                     @endif
                         <div class="row" style="padding: 15px 15px">
                             <div class="col-md-2" style="margin: auto">
@@ -26,7 +26,7 @@
                                 <input type="date" class="form-control" name="akhir" id="inputAkhir" value="{{$akhir}}">
                             </div>
                             <div class="col-md-2" style="margin: auto">
-                                Bank : {{Auth::user()->kios->bank}}
+                                Bank : {{$kios->bank}}
                             </div>
                             <div class="col-md-4"></div>
                             <div class="col-md-2" style="text-align:right">
@@ -98,7 +98,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <h3 align="right" style="padding: 15px 15px"><button type="button" class="btn btn-success" onclick="window.location.href='{{route('jadwal.create')}}'">Cetak</button></h3>
+                    <h3 align="right" style="padding: 15px 15px"><a class="btn btn-success" target="_blank" href="{{route('laporan.keuangan.cetakBM-SPV', ['awal'=>$awal, 'akhir'=>$akhir, 'kios'=>$kios->kode])}}">Cetak</a></h3>
                 </div>
             </div>
         </div>

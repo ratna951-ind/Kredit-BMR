@@ -20,6 +20,22 @@ class UsersTableSeeder extends Seeder
                 'peran_id' => 1
             ],
             
+            [
+                'nama' => 'Novi Fitrianingrum',
+                'username' => 'novi',
+                'password' => Hash::make('novi12345'),
+                'kode_kios' => null,
+                'peran_id' => 6
+            ],
+            
+            [
+                'nama' => 'Made Kariada',
+                'username' => 'made',
+                'password' => Hash::make('made12345'),
+                'kode_kios' => null,
+                'peran_id' => 5
+            ],
+            
             // User UH
             [
                 'nama' => 'Ida Bagus Anom Satwika S.S',
@@ -201,6 +217,92 @@ class UsersTableSeeder extends Seeder
                 'username' => 'dharma',
                 'password' => Hash::make('dharma12345'),
                 'kode_kios' => 701025,
+                'peran_id' => 2
+            ],
+
+            [
+                'nama' => 'Ida Ayu Putu Mita Sasmita',
+                'username' => 'mita',
+                'password' => Hash::make('mita12345'),
+                'kode_kios' => 706805,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Ni Putu Arlina Dewi',
+                'username' => 'arlina',
+                'password' => Hash::make('arlina12345'),
+                'kode_kios' => 706805,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Komang Subroto Adijaya',
+                'username' => 'subroto',
+                'password' => Hash::make('subroto12345'),
+                'kode_kios' => 706805,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Hari Sulistyo',
+                'username' => 'hari',
+                'password' => Hash::make('hari12345'),
+                'kode_kios' => 706805,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'I Komang Agus Indra Jaya',
+                'username' => 'indra',
+                'password' => Hash::make('indra12345'),
+                'kode_kios' => 706805,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Ni Kadek Aprilia Vitaloka',
+                'username' => 'vita',
+                'password' => Hash::make('vita12345'),
+                'kode_kios' => 706805,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Komang Lisa Andriyani',
+                'username' => 'lisa',
+                'password' => Hash::make('lisa12345'),
+                'kode_kios' => 706805,
+                'peran_id' => 2
+            ],
+
+            [
+                'nama' => 'Gede Arya Sentana',
+                'username' => 'arya',
+                'password' => Hash::make('arya12345'),
+                'kode_kios' => 706925,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Nyoman Duta Suwarlana',
+                'username' => 'duta',
+                'password' => Hash::make('duta12345'),
+                'kode_kios' => 706925,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Putu Pindya Jayanti',
+                'username' => 'pindya',
+                'password' => Hash::make('pindya12345'),
+                'kode_kios' => 706925,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Luh Sri Utami',
+                'username' => 'sri',
+                'password' => Hash::make('sri12345'),
+                'kode_kios' => 706925,
+                'peran_id' => 2
+            ],
+            [
+                'nama' => 'Putu Indra Yudana',
+                'username' => 'yuda',
+                'password' => Hash::make('yuda12345'),
+                'kode_kios' => 706925,
                 'peran_id' => 2
             ],
         ]);

@@ -87,7 +87,7 @@ class KonsumenForm extends FormRequest
                 'perusahaan' => 'required|string|min:2|max:30',
                 'masakerja' => 'required|integer',
                 'alamat_pekerjaan' => 'required|string',
-                'telp_pekerjaan' => 'required|numeric|digits_between:5,14',
+                'telp_pekerjaan' => 'nullable|numeric|digits_between:5,14',
                 'jabatan' => 'required|string|min:2|max:20',
                 'penghasilan' => 'required|integer',
                 'perusahaan_2' => 'required_if:status,K|string|min:2|max:30',

@@ -149,6 +149,7 @@ class OrderController extends Controller
 
         $data = JadwalOrder::find($id);
         $check['status'] = 'B';
+        $check['tgl_order'] = now();
         $process = $data->update($check);
         
         if ($process) {
@@ -175,6 +176,7 @@ class OrderController extends Controller
     {
         $data = JadwalOrder::find($id);
         $check['status'] = 'D';
+        $check['tgl_order'] = now();
         $process = $data->update($check);
 
         if ($process) {

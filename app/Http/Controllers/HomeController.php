@@ -67,7 +67,7 @@ class HomeController extends Controller
 
                 $kios = Auth::user()->kode_kios;
 
-                $temp = JadwalOrder::whereHas('user', function ($query) use ($kios) {
+                $temp = JadwalOrder::whereNotIn('status',['J','O','B','D'])->whereHas('user', function ($query) use ($kios) {
                     $query->where('kode_kios','=',$kios);
                 })->where([
                     ['status', 'S'],
@@ -106,7 +106,7 @@ class HomeController extends Controller
             $data['order'] = JadwalOrder::whereHas('user', function ($query) use ($kios) {
                 $query->where('kode_kios','=',$kios);
             })->where([
-                ['status', 'D'],
+                ['status', 'S'],
                 ['tgl_order', '>=', now()->startOfMonth()],
                 ['tgl_order', '<=', now()->endOfMonth()],
             ])->count();
@@ -340,31 +340,36 @@ class HomeController extends Controller
     {
         $orders = JadwalOrder::where('status','S');
 
-        $data['bulan'] = now()->month;
-        $data['tahun'] = now()->year;
+        if(isset($kios)) {
+            $data['bulan'] = now()->month;
+            $data['tahun'] = now();
 
-        $dateFirst = now()->startOfMonth();
-        $dateLast = now()->endOfMonth();
+            $dateFirst = now()->startOfMonth();
+            $dateLast = now()->endOfMonth();
 
-        if ($bulan && $tahun) {
-            if (is_integer($bulan) && is_integer($tahun)) {
+            if ($bulan && $tahun) {
+                $data['awal'] = $dateFirst = $bulan;
+                $data['akhir'] = $dateLast = $tahun;
+                $data['title'] = date("d-m-Y", strtotime($dateFirst))." sampai ".date("d-m-Y", strtotime($dateLast));
+            }
+
+            $data['kios'] = (Kios::find($kios))->nama;
+        }
+        else {
+            $data['bulan'] = now()->month;
+            $data['tahun'] = now()->year;
+
+            $dateFirst = now()->startOfMonth();
+            $dateLast = now()->endOfMonth();
+
+            if ($bulan && $tahun) {
                 $data['bulan'] = $bulan;
                 $data['tahun'] = $tahun;
                 $dateFirst = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->startOfMonth();
                 $dateLast = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->endOfMonth();
                 $data['title'] = $this->namaBulan($bulan)." ".$tahun;
             }
-            else {
-                $data['awal'] = $dateFirst = $bulan;
-                $data['akhir'] = $dateLast = $tahun;
-                $data['title'] = date("d-m-Y", strtotime($dateFirst))." sampai ".date("d-m-Y", strtotime($dateLast));
-            }
-        }
-        
-        if ($kios) {
-            $data['kios'] = (Kios::find($kios))->nama;
-        }
-        else {
+            
             $data['kios'] = Auth::user()->kios->nama;
             $kios = Auth::user()->kode_kios;
         }

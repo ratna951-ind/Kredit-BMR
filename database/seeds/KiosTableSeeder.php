@@ -46,7 +46,7 @@ class KiosTableSeeder extends Seeder
                 'kode'   => 706925,
                 'nama'   => 'Hybrid Kalibukbuk',
                 'bank'   => 'Mandiri',
-                'alamat' => 'Jl. ',
+                'alamat' => 'Jl. A Yani No 99',
             ],
         ]);
     }

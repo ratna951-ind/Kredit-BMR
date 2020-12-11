@@ -182,6 +182,7 @@ class JadwalController extends Controller
 
         $check['angsuran'] = $angsuran['bln_'.$check['tenor']];
         $check['status'] = 'O';
+        $check['tgl_order'] = now();
 
         $process = JadwalOrder::find($id)->update($check);
 

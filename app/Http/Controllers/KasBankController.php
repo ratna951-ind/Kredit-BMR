@@ -13,7 +13,7 @@ class KasBankController extends Controller
     public function index()
     {
         $data['notif'] = $this->notif(Auth::user()->peran_id);
-        return view('kasbank.index');
+        return view('kasbank.index', $data);
     }
 
     public function store(KasBankForm $request)

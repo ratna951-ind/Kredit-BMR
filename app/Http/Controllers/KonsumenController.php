@@ -34,7 +34,7 @@ class KonsumenController extends Controller
     public function create()
     {
         $data['notif'] = $this->notif(Auth::user()->peran_id);
-        return view('konsumen.create');
+        return view('konsumen.create', $data);
     }
 
     /**

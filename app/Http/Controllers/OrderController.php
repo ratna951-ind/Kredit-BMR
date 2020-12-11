@@ -29,6 +29,7 @@ class OrderController extends Controller
                 ['no_kontrak', null]
             ])->get();
 
+            $data['notif'] = $this->notif(Auth::user()->peran_id);
             return view('order.index-admin',$data);
         }
         else{
@@ -81,6 +82,7 @@ class OrderController extends Controller
                 ['user_id', Auth::user()->id],
             ])->get();
 
+            $data['notif'] = $this->notif(Auth::user()->peran_id);
             return view('order.index',$data);
         }
     }
@@ -116,6 +118,7 @@ class OrderController extends Controller
     {
         $data['order'] = JadwalOrder::find($id);
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('order.show', $data);
     }
 
@@ -129,6 +132,7 @@ class OrderController extends Controller
     {
         $data['order'] = JadwalOrder::where('status', 'O')->where('id', $id)->first();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('order.edit', $data);
     }
 
@@ -220,6 +224,7 @@ class OrderController extends Controller
             return redirect()->route('order.index');
         }
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('order.edit', $data);
     }
 

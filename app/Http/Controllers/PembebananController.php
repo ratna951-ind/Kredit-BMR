@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\PembebananForm;
 use App\JadwalOrder;
@@ -22,6 +23,7 @@ class PembebananController extends Controller
             ['no_kontrak', '!=', null],
         ])->has('pembebanan', '<', 3)->get();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('pembebanan.index',$data);
     }
 
@@ -56,6 +58,7 @@ class PembebananController extends Controller
     {
         $data['order'] = JadwalOrder::find($id);
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('pembebanan.show', $data);
     }
 
@@ -77,6 +80,7 @@ class PembebananController extends Controller
             return redirect()->route('pembebanan.index');
         }
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('pembebanan.edit', $data);
     }
 
@@ -122,6 +126,7 @@ class PembebananController extends Controller
             ['no_kontrak', '!=', null],
         ])->has('pembebanan', '=', 3)->get();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('pembebanan.history',$data);
     }
 }

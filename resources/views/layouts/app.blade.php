@@ -68,22 +68,40 @@
             <ul class="nav navbar-nav mr-auto float-left">
             </ul>
             <ul class="nav navbar-nav float-right">
-              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span class="badge badge-pill badge-danger badge-up badge-glow">5</span></a>
+              @if(Auth::user()->peran_id!=1)
+              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span class="badge badge-pill badge-danger badge-up badge-glow">{{$notif['count']}}</span></a>
                 <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                   <li class="dropdown-menu-header">
-                    <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6><span class="notification-tag badge badge-danger float-right m-0">5 New</span>
+                    <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6><span class="notification-tag badge badge-warning float-right m-0">{{$notif['count']}}</span>
                   </li>
-                  <li class="scrollable-container media-list w-100"><a href="javascript:void(0)">
+                  @foreach($notif['content'] as $item)
+                  <li class="scrollable-container media-list w-100">
+                    <a href="@if (url()->current() == route($item['href'])) javascript:void(0); @else {{route($item['href'])}} @endif">
                       <div class="media">
-                        <div class="media-left align-self-center"><i class="ft-file icon-bg-circle bg-teal mr-0"></i></div>
+                        <div class="media-left align-self-center"><i class="{{$item['icon']}} icon-bg-circle bg-teal mr-0"></i></div>
                         <div class="media-body">
-                          <h6 class="media-heading">Generate monthly report</h6><small>
-                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month</time></small>
+                          <h6 class="media-heading">{{$item['title']}}</h6>
+                          <small>{{$item['desc']}}</small>
                         </div>
-                      </div></a></li>
-                  <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
+                      </div>
+                    </a>
+                  </li>
+                  @endforeach
+                  @if($notif['count'] == 0)
+                  <li class="scrollable-container media-list w-100">
+                    <a href="javascript:void(0);">
+                      <div class="media">
+                        <div class="media-body">
+                          <h6 class="media-heading">Notifikasi Belum Ada!</h6>
+                          <small>Belum ada notifikasi saat ini!</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  @endif
                 </ul>
               </li>
+              @endif
               <li class="dropdown dropdown-user nav-item">
                 <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                     <span style="margin-top: 5px" class="user-name text-bold-700">{{Auth::user()->nama}}</span>

@@ -153,6 +153,8 @@ class HomeController extends Controller
             }
         }
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
+        
         return view('home', $data);
     }
 
@@ -167,12 +169,14 @@ class HomeController extends Controller
     }
 
     public function profile()
-    {
+    {   
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('profil.index');
     }
 
     public function editProfile()
-    {
+    {   
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('profil.edit');
     }
 
@@ -199,6 +203,7 @@ class HomeController extends Controller
     {
         $data['kioss'] = Kios::where('aktif','1')->get();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('laporan.index-order',$data);
     }
 
@@ -271,6 +276,7 @@ class HomeController extends Controller
                 break;
         }
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('laporan.detail-order',$data);
     }
 
@@ -326,6 +332,7 @@ class HomeController extends Controller
             ['tgl_order', '<=', $dateLast],
         ])->get();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('laporan.laporan-order',$data);
     }
 
@@ -378,6 +385,7 @@ class HomeController extends Controller
     {
         $data['kioss'] = Kios::where('aktif','1')->get();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('laporan.index-keuangan',$data);
     }
 
@@ -398,6 +406,7 @@ class HomeController extends Controller
             ['tgl', '<=', $data['akhir']],
         ])->orderBy('tgl')->get();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('laporan.detail-keuangan',$data);
     }
 
@@ -419,6 +428,7 @@ class HomeController extends Controller
             ['tgl', '<=', $data['akhir']],
         ])->orderBy('tgl')->get();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('laporan.laporan-keuangan',$data);
     }
 

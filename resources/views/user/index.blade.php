@@ -29,7 +29,7 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td align="center">{{$loop->iteration}}</td>
-                                <td>{{$user->kios->nama}}
+                                <td>{{$user->kios? $user->kios->nama : "-"}}</td>
                                 <td>{{$user->nama}}</td>
                                 <td>{{$user->username}}</td>
                                 <td>{{$user->peran->nama}}</td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\KonsumenForm;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,7 @@ class KonsumenController extends Controller
     {
         $data['konsumens'] = Konsumen::all();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('konsumen.index', $data);
     }
 
@@ -31,6 +33,7 @@ class KonsumenController extends Controller
      */
     public function create()
     {
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('konsumen.create');
     }
 
@@ -130,6 +133,7 @@ class KonsumenController extends Controller
     {
         $data['konsumen'] = Konsumen::find($nik);
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('konsumen.show', $data);
     }
 
@@ -143,6 +147,7 @@ class KonsumenController extends Controller
     {
         $data['konsumenlama'] = Konsumen::find($nik);
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('konsumen.edit', $data);
     }
 

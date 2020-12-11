@@ -24,6 +24,8 @@ class JadwalController extends Controller
                 ['status', 'J'],
                 ['user_id', Auth::user()->id],
             ])->get();
+            
+            $data['notif'] = $this->notif(Auth::user()->peran_id);
             return view('jadwal.index-mce', $data);
         }
         else if(Auth::user()->peran_id == 3){
@@ -33,6 +35,7 @@ class JadwalController extends Controller
                 $query->where('kode_kios','=',$kios);
             })->where('status', 'J')->get();
             
+            $data['notif'] = $this->notif(Auth::user()->peran_id);
             return view('jadwal.index-uh', $data);
         }
     }
@@ -47,6 +50,7 @@ class JadwalController extends Controller
         $data['konsumens'] = Konsumen::all();
         $data['angsurans'] = Angsuran::all();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('jadwal.create', $data);
     }
 
@@ -136,6 +140,7 @@ class JadwalController extends Controller
     {
         $data['jadwal'] = JadwalOrder::find($id);
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('jadwal.show', $data);
     }
 
@@ -158,6 +163,7 @@ class JadwalController extends Controller
             ['id', $id]
         ])->first();
 
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('jadwal.edit', $data);
     }
 

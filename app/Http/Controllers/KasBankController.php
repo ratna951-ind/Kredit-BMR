@@ -12,6 +12,7 @@ class KasBankController extends Controller
 {
     public function index()
     {
+        $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('kasbank.index');
     }
 

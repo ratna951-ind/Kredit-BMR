@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-    <h3>Kwitansi Penagihan</h3>
+    <h3 align="center">Kwitansi Penagihan</h3>
     <table>
         <tr>
             <td width="23%">No</td>

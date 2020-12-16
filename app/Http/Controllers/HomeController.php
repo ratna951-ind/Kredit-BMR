@@ -258,19 +258,11 @@ class HomeController extends Controller
             case 4:
                 $data['col'] = 3;
                 break;
-            
-            case 5:
-                $data['col-1'] = 2;
-                $data['col-2'] = 3;
-                $data['col-3'] = 2;
-                $data['col-4'] = 3;
-                $data['col-5'] = 2;
-                break;
-            
+                
             case 6:
                 $data['col'] = 2;
                 break;
-            
+
             default:
                 
                 break;
@@ -341,17 +333,17 @@ class HomeController extends Controller
         $orders = JadwalOrder::where('status','S');
 
         if(isset($kios)) {
-            $data['bulan'] = now()->month;
-            $data['tahun'] = now();
+            $data['awal'] = now()->startOfMonth();
+            $data['akhir'] = now();
 
             $dateFirst = now()->startOfMonth();
-            $dateLast = now()->endOfMonth();
+            $dateLast = now();
 
             if ($bulan && $tahun) {
                 $data['awal'] = $dateFirst = $bulan;
                 $data['akhir'] = $dateLast = $tahun;
-                $data['title'] = date("d-m-Y", strtotime($dateFirst))." sampai ".date("d-m-Y", strtotime($dateLast));
             }
+            $data['title'] = date("d-m-Y", strtotime($data['awal']))." sampai ".date("d-m-Y", strtotime($data['akhir']));
 
             $data['kios'] = (Kios::find($kios))->nama;
         }
@@ -367,8 +359,8 @@ class HomeController extends Controller
                 $data['tahun'] = $tahun;
                 $dateFirst = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->startOfMonth();
                 $dateLast = Carbon::createFromDate($data['tahun'], $data['bulan'], 1)->endOfMonth();
-                $data['title'] = $this->namaBulan($bulan)." ".$tahun;
             }
+            $data['title'] = $this->namaBulan($data['bulan'])." ".$data['tahun'];
             
             $data['kios'] = Auth::user()->kios->nama;
             $kios = Auth::user()->kode_kios;

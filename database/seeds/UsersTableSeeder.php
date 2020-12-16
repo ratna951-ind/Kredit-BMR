@@ -110,16 +110,16 @@ class UsersTableSeeder extends Seeder
                 'peran_id' => 4
             ],
             [
-                'nama' => 'Belum Tau',
-                'username' => 'belum',
-                'password' => Hash::make('belum'),
+                'nama' => 'Ni Made Candra Dewi',
+                'username' => 'candra',
+                'password' => Hash::make('candra12345'),
                 'kode_kios' => 706805,
                 'peran_id' => 4
             ],
             [
-                'nama' => 'Belum Tau',
-                'username' => 'tau',
-                'password' => Hash::make('tau'),
+                'nama' => 'Ni Putu Mei Agustini',
+                'username' => 'mei',
+                'password' => Hash::make('mei12345'),
                 'kode_kios' => 706925,
                 'peran_id' => 4
             ],

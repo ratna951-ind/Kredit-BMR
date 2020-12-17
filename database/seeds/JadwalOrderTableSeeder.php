@@ -79,7 +79,7 @@ class JadwalOrderTableSeeder extends Seeder
                 'jumlah' => 9700000,
                 'sisa' => 20300000,
                 'tgl' => '2020-12-14',
-                'bukti_std' => '5171014411790006-1-Pencairan.jpg'
+                'bukti_std' => '5171014411790006-2-Pencairan.jpg'
             ],
             [
                 'id' => 2,

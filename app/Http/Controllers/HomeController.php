@@ -230,7 +230,7 @@ class HomeController extends Controller
         $data['total'] = 0;
 
         $data['mces'] = DB::table('users')
-            ->select('nama', DB::raw('count(case when status = "S" then 1 end) as total'))
+            ->select('nama', DB::raw('count(case when status = "S" and tgl_order >= "'.$data['awal'].'" and tgl_order <= "'.$data['akhir'].'" then 1 end) as total'))
             ->leftJoin('jadwal_order', 'users.id', '=', 'jadwal_order.user_id')
             ->where([
                 ['users.peran_id', 2],
@@ -239,8 +239,6 @@ class HomeController extends Controller
             ])
             ->groupBy('users.id')
             ->get();
-
-        // dd($data['mces']);
 
         switch (count($data['mces'])) {
             case 1:

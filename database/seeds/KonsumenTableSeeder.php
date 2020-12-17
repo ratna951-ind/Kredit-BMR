@@ -29,6 +29,27 @@ class KonsumenTableSeeder extends Seeder
                 'gambarktp' => '5171034406720022-KTP.jpg',
                 'gambarkk' => '5171034406720022-KK.jpg',
             ],
+            [
+                'nik' => '5171014411790006',
+                'nama' => 'Gst Ayu Martha Winingsih',
+                'tmptlahir' => 'Kalbar',
+                'tgllahir' => '1979-11-04',
+                'alamatktp' => 'Jl. Gn Krakatau I/Tamansari 4',
+                'alamatskrng' => 'Jl. Pulau Bungin No. 35',
+                'telp' => '08123636122',
+                'jk' => 'P',
+                'ibukandung' => 'Marcelina Holiday',
+                'status' => 'K',
+                'statusrumah' => 'K',
+                'lamamenetapbulan' => 60,
+                'pendidikanterakhir' => 'Universitas',
+                'nama_2' => 'A.A.Ngurah Roy Kesuma',
+                'tmptlahir_2' => 'Majene',
+                'tgllahir_2' => '1979-04-25',
+                'gambarktp' => '5171014411790006-KTP.jpg',
+                'gambarkk' => '5171014411790006-KK.jpg',
+                'gambarktp_2' => '5171014411790006-KTP_2.jpg'
+            ],
         ]);
         App\KonsumenPekerjaan::insert([
             [
@@ -41,6 +62,21 @@ class KonsumenTableSeeder extends Seeder
                 'jabatan' => 'Marketing',
                 'penghasilan' => 5000000
             ],
+            [
+                'nik' => '5171014411790006',
+                'tipe' => 'Non Karyawan',
+                'perusahaan' => 'Lava Cake',
+                'masakerja' => 12,
+                'alamat_pekerjaan' => 'Jl. Pulau Kawe No. 46',
+                'telp_pekerjaan' => '08123636122',
+                'jabatan' => 'Pemilik',
+                'penghasilan' => 3000000,
+                'perusahaan_2' => '',
+                'alamat_pekerjaan_2' => '',
+                'telp_pekerjaan_2' => '',
+                'jabatan_2' => 'Perawat',
+                'penghasilan_2' => 5000000
+            ],
         ]);
         App\KonsumenDarurat::insert([
             [
@@ -49,6 +85,13 @@ class KonsumenTableSeeder extends Seeder
                 'hubungan' => 'Anak',
                 'alamat_darurat' => 'Jl. Pulau Moyo Gg. II No. 9',
                 'telp_darurat' => '087445058971'
+            ],
+            [
+                'nik' => '5171014411790006',
+                'nama_darurat' => '',
+                'hubungan' => 'Ipar',
+                'alamat_darurat' => '',
+                'telp_darurat' => ''
             ],
         ]);
     }

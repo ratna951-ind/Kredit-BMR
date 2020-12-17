@@ -17,7 +17,7 @@ class KonsumenTableSeeder extends Seeder
                 'nama' => 'Sumiyati',
                 'tmptlahir' => 'Pasuruan',
                 'tgllahir' => '1972-06-04',
-                'alamatktp' => 'Jl. Pendidikan Gg. Baja 10A, Graha Kerti',
+                'alamatktp' => 'Jl. Pendidikan Gg. Baja 10A Graha Kerti',
                 'alamatskrng' => 'Jl. Pulau Moyo Gg. II No. 9',
                 'telp' => '081337654222',
                 'jk' => 'P',
@@ -26,8 +26,12 @@ class KonsumenTableSeeder extends Seeder
                 'statusrumah' => 'Sew',
                 'lamamenetapbulan' => 24,
                 'pendidikanterakhir' => 'SLTP',
+                'nama_2' => null,
+                'tmptlahir_2' => null,
+                'tgllahir_2' => null,
                 'gambarktp' => '5171034406720022-KTP.jpg',
                 'gambarkk' => '5171034406720022-KK.jpg',
+                'gambarktp_2' => null
             ],
             [
                 'nik' => '5171014411790006',
@@ -60,7 +64,12 @@ class KonsumenTableSeeder extends Seeder
                 'alamat_pekerjaan' => 'Jl. Maluku No. 1A',
                 'telp_pekerjaan' => '082147460506',
                 'jabatan' => 'Marketing',
-                'penghasilan' => 5000000
+                'penghasilan' => 5000000,
+                'perusahaan_2' => null,
+                'alamat_pekerjaan_2' => null,
+                'telp_pekerjaan_2' => null,
+                'jabatan_2' => null,
+                'penghasilan_2' => null
             ],
             [
                 'nik' => '5171014411790006',
@@ -71,8 +80,8 @@ class KonsumenTableSeeder extends Seeder
                 'telp_pekerjaan' => '08123636122',
                 'jabatan' => 'Pemilik',
                 'penghasilan' => 3000000,
-                'perusahaan_2' => '',
-                'alamat_pekerjaan_2' => '',
+                'perusahaan_2' => 'Rumah Sakit Surya Medika',
+                'alamat_pekerjaan_2' => 'Jl Teuku Umar',
                 'telp_pekerjaan_2' => '',
                 'jabatan_2' => 'Perawat',
                 'penghasilan_2' => 5000000
@@ -88,10 +97,10 @@ class KonsumenTableSeeder extends Seeder
             ],
             [
                 'nik' => '5171014411790006',
-                'nama_darurat' => '',
+                'nama_darurat' => 'Gst Ngr Martin Widianta',
                 'hubungan' => 'Ipar',
-                'alamat_darurat' => '',
-                'telp_darurat' => ''
+                'alamat_darurat' => 'Jln. Gn. Bromo III No. 11',
+                'telp_darurat' => '08123603688'
             ],
         ]);
     }

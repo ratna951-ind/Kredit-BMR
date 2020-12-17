@@ -485,12 +485,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                @if(isset($order->kwt_jb))
                                 <div class="form-group row">
                                     <label class="col-md-3 label-control">Kwitansi Jual Beli</label>
                                     <div class="col-md-9 mx-auto">
                                         <img src="{{route('image', ['jadwal_order', $order->kwt_jb])}}" alt="Gambar Kwitansi Jual Beli" width="300px">
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <div class="row">

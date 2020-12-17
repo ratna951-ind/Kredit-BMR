@@ -36,10 +36,12 @@
                                     <th>Username</th>
                                     <td>: {{Auth::user()->username}}</td>
                                 </tr>
+                                @if(isset(Auth::user()->kios->nama))
                                 <tr>
                                     <th>Kios</th>
                                     <td>: {{Auth::user()->kios->nama}}</td>
                                 </tr>
+                                @endif
                                 <tr>
                                     <th>Peran</th>
                                     <td>: {{Auth::user()->peran->nama}}</td>

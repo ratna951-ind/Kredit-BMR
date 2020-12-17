@@ -16,7 +16,7 @@ class JadwalOrderTableSeeder extends Seeder
                 'id' => 1,
                 'user_id' => 17,
                 'nik' => '5171034406720022',
-                'no_kontrak' => '',
+                'no_kontrak' => '712002549120',
                 'tgl_jadwal' => '2020-12-15',
                 'tgl_order' => '2020-12-15',
                 'tgl_selesai' => '2021-12-15',
@@ -44,7 +44,7 @@ class JadwalOrderTableSeeder extends Seeder
                 'id' => 2,
                 'user_id' => 17,
                 'nik' => '5171014411790006',
-                'no_kontrak' => '',
+                'no_kontrak' => '712002545120',
                 'tgl_jadwal' => '2020-12-14',
                 'tgl_order' => '2020-12-14',
                 'tgl_selesai' => '2022-06-14',
@@ -67,6 +67,30 @@ class JadwalOrderTableSeeder extends Seeder
                 'selfie' => '5171014411790006-1-Selfie.jpg',
                 'status' => 'S',
                 'pembatalan' => null
+            ],
+        ]);
+        App\KasBank::insert([
+            [
+                'id' => 1,
+                'kode_kios' => 712002,
+                'order_id' => 2,
+                'cara_bayar' => 'C',
+                'jenis' => 'P',
+                'jumlah' => 9700000,
+                'sisa' => 20300000,
+                'tgl' => '2020-12-14',
+                'bukti_std' => '5171014411790006-1-Pencairan.jpg'
+            ],
+            [
+                'id' => 2,
+                'kode_kios' => 712002,
+                'order_id' => 1,
+                'cara_bayar' => 'B',
+                'jenis' => 'P',
+                'jumlah' => 16100000,
+                'sisa' => 4200000,
+                'tgl' => '2020-12-15',
+                'bukti_std' => '5171034406720022-1-Pencairan.jpg'
             ],
         ]);
     }

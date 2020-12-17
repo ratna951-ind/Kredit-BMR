@@ -171,13 +171,13 @@ class HomeController extends Controller
     public function profile()
     {   
         $data['notif'] = $this->notif(Auth::user()->peran_id);
-        return view('profil.index');
+        return view('profil.index',$data);
     }
 
     public function editProfile()
     {   
         $data['notif'] = $this->notif(Auth::user()->peran_id);
-        return view('profil.edit');
+        return view('profil.edit',$data);
     }
 
     public function updateProfile(UserForm $request, $id)

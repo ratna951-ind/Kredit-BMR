@@ -10,7 +10,7 @@ class KasBank extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'kode_kios', 'order_id', 'cara_bayar', 'bank', 'jenis', 'jumlah', 'sisa', 'tgl', 'bukti_std'
+        'kode_kios', 'order_id', 'cara_bayar', 'jenis', 'jumlah', 'sisa', 'tgl', 'bukti_std'
     ];
 
     public function kios()

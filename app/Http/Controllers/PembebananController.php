@@ -21,6 +21,7 @@ class PembebananController extends Controller
         $data['pembebanans'] = JadwalOrder::where([
             ['status', 'S'],
             ['no_kontrak', '!=', null],
+            ['user_id', Auth::user()->id],
         ])->has('pembebanan', '<', 3)->get();
 
         $data['notif'] = $this->notif(Auth::user()->peran_id);
@@ -74,6 +75,7 @@ class PembebananController extends Controller
             ['status', 'S'],
             ['no_kontrak', '!=', null],
             ['id', $id],
+            ['user_id', Auth::user()->id],
         ])->has('pembebanan', '<', 3)->first();
 
         if (!($data['order'])) {
@@ -124,6 +126,7 @@ class PembebananController extends Controller
         $data['pembebanans'] = JadwalOrder::where([
             ['status', 'S'],
             ['no_kontrak', '!=', null],
+            ['user_id', Auth::user()->id],
         ])->has('pembebanan', '=', 3)->get();
 
         $data['notif'] = $this->notif(Auth::user()->peran_id);

@@ -26,6 +26,11 @@ class KasBankController extends Controller
             $check['sisa'] = $sisa + $check['jumlah'];
         }
         elseif($check['jenis'] == "CO"){
+            if ($check['jumlah']>$sisa) {
+                Alert::error('Gagal Cash Opname', 'Jumlah Melebihi Sisa Uang!');
+                
+                return redirect()->route('kas_bank.index');
+            }
             $check['sisa'] = $sisa - $check['jumlah'];
         }
 

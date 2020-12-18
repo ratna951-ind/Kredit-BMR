@@ -34,6 +34,7 @@ class Controller extends BaseController
             $pembebanan = JadwalOrder::where([
                 ['status', 'S'],
                 ['no_kontrak', '!=', null],
+                ['user_id', Auth::user()->id],
             ])->has('pembebanan', '<', 3)->count();
             if ($pembebanan) {
                 array_push($temp['content'], array('title' => 'Pembebanan', 'desc' => 'Terdapat '.$pembebanan.' pembebanan belum selesai!', 'href' => 'pembebanan.index', 'icon' => 'ft-file'));

@@ -23,7 +23,7 @@ class CreateKasBankTable extends Migration
             $table->enum('jenis', ['CO', 'PK', 'P'])->comment('Cash Opname, Pengisian Kas, Pencairan');
             $table->integer('jumlah');
             $table->integer('sisa');
-            $table->date('tgl')->default(now());
+            $table->date('tgl');
             $table->string('bukti_std')->nullable();
         });
     }

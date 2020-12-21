@@ -46,7 +46,7 @@ class Controller extends BaseController
                 $query->where('kode_kios','=',$kios);
             })->where('status', 'J')->count();
             if($jadwal){
-                array_push($temp['content'], array('title' => 'Order', 'desc' => 'Terdapat '.$jadwal.' jadwal belum diproses!', 'href' => 'order.index', 'icon' => 'ft-file'));
+                array_push($temp['content'], array('title' => 'Jadwal', 'desc' => 'Terdapat '.$jadwal.' jadwal belum diproses!', 'href' => 'jadwal.index', 'icon' => 'ft-file'));
                 $temp['count'] += 1;
             }
         } elseif ($peran == 4) {

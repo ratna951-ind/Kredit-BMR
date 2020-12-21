@@ -33,7 +33,8 @@ class KasBankController extends Controller
             }
             $check['sisa'] = $sisa - $check['jumlah'];
         }
-
+        
+        $check['tgl'] = now();
         $check['kode_kios'] = Auth::user()->kode_kios;
 
         $process = KasBank::create($check);

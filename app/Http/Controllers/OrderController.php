@@ -242,6 +242,7 @@ class OrderController extends Controller
         $check['kode_kios'] = Auth::user()->kode_kios;
         $check['order_id'] = $id;
         $check['jenis'] = 'P';
+        $check['tgl'] = now();
         $check['jumlah'] = $order->pinjaman_disetujui;
         $check['sisa'] = $sisa - $check['jumlah'];
 

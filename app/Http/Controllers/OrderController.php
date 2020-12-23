@@ -252,6 +252,7 @@ class OrderController extends Controller
 
         $checkOrder['status'] = 'K';
         $checkOrder['tgl_order'] = now();
+        $checkOrder['tgl_tempo'] = now()->addMonth(1);
         $checkOrder['tgl_selesai'] = now()->addMonth($order->tenor);
 
         $processOrder = $order->update($checkOrder);

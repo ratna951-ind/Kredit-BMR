@@ -16,13 +16,23 @@ class PembebananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data['awal'] = date_format(now()->startOfMonth(),"Y-m-d");
+        $data['akhir'] = date_format(now()->endOfMonth(),"Y-m-d");
+
+        if ($request->awal && $request->akhir) {
+            $data['awal'] = $request->awal;
+            $data['akhir'] = $request->akhir;
+        }
+
         $data['pembebanans'] = JadwalOrder::where([
             ['status', 'S'],
             ['no_kontrak', '!=', null],
             ['user_id', Auth::user()->id],
-        ])->has('pembebanan', '<', 3)->get();
+            ['tgl_tempo', '>=', $data['awal']],
+            ['tgl_tempo', '<=', $data['akhir']],
+        ])->get();
 
         $data['notif'] = $this->notif(Auth::user()->peran_id);
         return view('pembebanan.index',$data);

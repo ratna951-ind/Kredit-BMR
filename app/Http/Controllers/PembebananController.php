@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PembebananForm;
 use App\JadwalOrder;
 use App\DetailPembebanan;
+use Carbon\Carbon;
 use Alert;
 
 class PembebananController extends Controller
@@ -107,8 +108,14 @@ class PembebananController extends Controller
     {
         $check = $request->validated();
 
+        $order = JadwalOrder::find($id);
+
         $check['order_id'] = $id;
 
+        $checkOrder['tgl_tempo'] = Carbon::createFromFormat('Y-m-d', $order->tgl_tempo)->addMonth(1);
+
+        $processOrder = $order->update($checkOrder);
+        
         $process = DetailPembebanan::create($check);
 
         if ($process) {

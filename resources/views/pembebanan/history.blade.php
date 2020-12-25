@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('judul')
-    Data Pembebanan
+    Histori Data Pembebanan
 @endsection
 
 @push('css')

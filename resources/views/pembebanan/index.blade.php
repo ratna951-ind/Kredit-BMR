@@ -13,7 +13,27 @@
         <div class="card-content collapse show">
             <div class="card-body card-dashboard">
                 <div class="table-responsive">
-                    <h3 style="padding: 15px 15px"><button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('pembebanan.history')}}'"><i class="la la-clock-o"></i> Histori</button></h3>
+                    <h3 style="padding: 15px 15px 0px 15px"><button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('pembebanan.history')}}'"><i class="la la-clock-o"></i> Histori</button></h3>
+                    <form action="{{route('pembebanan.index')}}" method="get">
+                        <div class="row" style="padding: 15px 15px 15px 15px">
+                            <div class="col-md-1" style="text-align: center; vertical-align: middle">
+                                Dari
+                            </div>
+                            <div class="col-md-3" style="margin: auto">
+                                <input type="date" class="form-control" name="awal" id="inputAwal" value="{{$awal}}">
+                            </div>
+                            <div class="col-md-1" style="text-align: center; vertical-align: middle">
+                                Sampai
+                            </div>
+                            <div class="col-md-3" style="margin: auto">
+                                <input type="date" class="form-control" name="akhir" id="inputAkhir" value="{{$akhir}}">
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2" style="text-align:right">
+                                <h3><button type="submit" class="btn btn-info">Cari</button></h3>
+                            </div>
+                        </div>
+                    </form>
                     <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                             <tr>

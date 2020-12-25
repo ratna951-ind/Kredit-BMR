@@ -25,7 +25,7 @@ class JadwalForm extends FormRequest
     {
         if (isset($this->edit)) {
             return [
-                'harga_barang' => 'required|integer',
+                'harga_barang' => 'required|integer|min:'.$this->pinjaman_disetujui,
                 'adm' => 'required|integer',
                 'pinjaman_disetujui' => 'required|integer|min:2000000|max:16100000',
                 'tenor' => 'required|in:6,12,18,24',
@@ -137,6 +137,7 @@ class JadwalForm extends FormRequest
 
             'harga_barang.required' => 'Harga barang dibutuhkan!',
             'harga_barang.integer' => 'Harga barang harus angka!',
+            'harga_barang.min' => 'Harga barang harus lebih besar dari pinjaman!',
         ];
     }
 }

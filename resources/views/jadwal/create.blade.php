@@ -46,7 +46,7 @@
                                         <select class="select2 form-control" id="inputKonsumen" name="nik">
                                             <option value="">Pilih Konsumen!</option>
                                             @foreach($konsumens as $konsumen)
-                                                <option value="{{$konsumen->nik}}" @if ($konsumen->nik == old('nik')) {{'selected'}}@endif>{{$konsumen->nik}} - {{$konsumen->nama}}</option>
+                                                <option value="{{$konsumen->nik}}" @if ($konsumen->nik == old('nik')) {{'selected'}}@endif {{$konsumen->blacklist == 'Y' ? 'disabled' : ''}}>{{$konsumen->nik}} - {{$konsumen->nama}} {{$konsumen->blacklist == 'Y' ? '(Blacklist)' : ''}}</option>
                                             @endforeach
                                             </optgroup>
                                         </select>

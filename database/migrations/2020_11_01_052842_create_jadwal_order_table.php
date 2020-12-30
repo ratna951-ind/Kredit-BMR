@@ -40,7 +40,7 @@ class CreateJadwalOrderTable extends Migration
             $table->string('nosin',40);
             $table->string('noka',40);
             $table->string('selfie',40);
-            $table->enum('status', ['J', 'O', 'B', 'D', 'K', 'S'])->comment('Jadwal, Order, Batal, Diterima, Kontrak, Selesai')->default('J');
+            $table->enum('status', ['J', 'O', 'B', 'T', 'D', 'K', 'S'])->comment('Jadwal, Order, Batal, Tolak, Diterima, Kontrak, Selesai')->default('J');
             $table->text('pembatalan')->nullable();
 
         });

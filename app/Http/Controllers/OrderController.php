@@ -51,6 +51,7 @@ class OrderController extends Controller
             $data['statuss'] = [
                 ['id' => "O", 'nama' => 'Order'],
                 ['id' => "B", 'nama' => 'Batal'],
+                ['id' => "T", 'nama' => 'Tolak'],
                 ['id' => "K", 'nama' => 'Kontrak'],
                 ['id' => "S", 'nama' => 'Selesai']
             ];

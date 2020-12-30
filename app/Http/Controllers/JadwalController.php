@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Requests\JadwalForm;
 use App\JadwalOrder;
 use App\Angsuran;
@@ -64,6 +65,16 @@ class JadwalController extends Controller
     {
         $check = $request->validated();
 
+        $konsumen = Konsumen::find($check['nik'])->first();
+
+        $nama = $konsumen->nama;
+
+        if($konsumen->blacklist == "Y") {
+            Alert::error('Gagal', 'Data Jadwal '.$nama.' Blacklist!');
+
+            return redirect()->route('jadwal.index');
+        }
+
         $count = (JadwalOrder::where('nik', $check['nik'])->count())+1;
 
         $angsuran = (Angsuran::find($check['pinjaman_awal']))->toArray();
@@ -118,8 +129,6 @@ class JadwalController extends Controller
         }
 
         $process = JadwalOrder::create($jadwal);
-
-        $nama = (Konsumen::find($check['nik']))->nama;
 
         if ($process) {
             Alert::success('Sukses', 'Data Jadwal '.$nama.' Berhasil Ditambah!');
@@ -187,6 +196,36 @@ class JadwalController extends Controller
         $process = JadwalOrder::find($id)->update($check);
 
         if ($process) {
+            Alert::success('Sukses', 'Data Jadwal Berhasil Diubah!');
+        } else {
+            Alert::error('Gagal', 'Data Jadwal Gagal Diubah!');
+        }
+
+        return redirect()->route('jadwal.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function tolak(Request $request, $id)
+    {
+        $jadwal = JadwalOrder::find($id);
+
+        $check['pembatalan'] = $request->reason;
+        $check['status'] = 'T';
+        $check['tgl_order'] = now();
+
+        $checkKonsumen['blacklist'] = 'Y';
+
+        $processKonsumen = Konsumen::find($jadwal->nik)->update($checkKonsumen);
+
+        $process = $jadwal->update($check);
+
+        if ($process && $processKonsumen) {
             Alert::success('Sukses', 'Data Jadwal Berhasil Diubah!');
         } else {
             Alert::error('Gagal', 'Data Jadwal Gagal Diubah!');

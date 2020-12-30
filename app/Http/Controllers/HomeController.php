@@ -289,6 +289,7 @@ class HomeController extends Controller
 
         $data['statuss'] = [
             ['id' => "B", 'nama' => 'Batal'],
+            ['id' => "T", 'nama' => 'Tolak'],
             ['id' => "S", 'nama' => 'Selesai']
         ];
 

@@ -33,6 +33,7 @@ class CreateKonsumenTable extends Migration
             $table->string('gambarktp');
             $table->string('gambarkk');
             $table->string('gambarktp_2')->nullable();
+            $table->enum('blacklist', ['Y', 'T'])->comment('Ya, Tidak')->default('T');
         });
     }
 

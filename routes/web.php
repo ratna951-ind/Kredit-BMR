@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth','peran:2']], function(){
 Route::group(['middleware' => ['auth','peran:3']], function(){
     Route::get('jadwal/{jadwal}/edit', 'JadwalController@edit')->name('jadwal.edit');
     Route::put('jadwal/{jadwal}', 'JadwalController@update')->name('jadwal.update');
+    Route::put('jadwal/{jadwal}/tolak', 'JadwalController@tolak')->name('jadwal.tolak');
 
     Route::get('laporan-order','HomeController@laporanOrder')->name('laporan.order');
     Route::get('/cetak/order/UH/{bulan?}/{tahun?}','HomeController@laporanOrderCetak')->name('laporan.order.cetakUH');

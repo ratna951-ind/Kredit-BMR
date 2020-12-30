@@ -38,6 +38,7 @@
                         <thead>
                             <tr>
                                 <th width="1%">No</th>
+                                <th>Tanggal</th>
                                 <th width>Transaksi</th>
                                 <th width="15%">Debit</th>
                                 <th width="15%">Kredit</th>
@@ -46,6 +47,7 @@
                         <tbody>
                         <tr>
                             <td align="center">1</td>
+                            <td>{{(\Carbon\Carbon::createFromTimestamp(strtotime($awal))->format('j/m/Y'))}}</td>
                             <td>Saldo Awal</td>
                             <td>
                                 @if (count($kas_banks)>0)
@@ -63,6 +65,7 @@
                         @foreach ($kas_banks as $kas_bank)
                             <tr>
                                 <td align="center">{{$loop->iteration+1}}</td>
+                                <td>{{(\Carbon\Carbon::createFromTimestamp(strtotime($kas_bank->tgl))->format('j/m/Y'))}}</td>
                                 @switch($kas_bank->jenis)
                                     @case("CO")
                                         <td>Cash Opname</td>
@@ -83,6 +86,7 @@
                             </tr>
                         @endforeach
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td><b>Saldo Akhir</b></td>

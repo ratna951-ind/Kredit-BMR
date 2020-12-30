@@ -598,6 +598,7 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('konsumen.index')}}'">Batal</button>
                                     <button type="button" class="modal-update btn btn-icon btn-success">Simpan</button>
+                                    <button type="button" class="modal-reject btn btn-icon btn-danger">Tolak</button>       
                                 </div>
                             </center>
                         </form>
@@ -609,6 +610,38 @@
 @endsection
 
 @push('js')
+    <form action="{{route('jadwal.tolak', $jadwal->id)}}" method="post" id="rejectRecord">
+        {{csrf_field()}}
+        @method("PUT")
+        <input type="hidden" name="reason" id="input_reason">
+    </form>
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-col-danger">
+                <div class="modal-header bg-danger white">
+                    <h4 class="modal-title white">Konfirmasi</h4>
+                </div>
+                <div class="modal-body">
+                    <p align="center">Input Alasan Tolak</p>
+                    <input type="text" class="form-control" id="reason" placeholder="Masukkan Alasan Tolak">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger reject">Ya</button>
+                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Tidak</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).on("click", ".modal-reject", function () {
+            $('#rejectModal').modal('show');
+        });
+        $('.modal-footer').on('click', '.reject', function() {
+            $('#input_reason').val($('#reason').val());
+            event.preventDefault();
+            document.getElementById('rejectRecord').submit();
+        });
+    </script>
     @include('komponen.modalUpdate', ['modul' => 'jadwal konsumen'])
     <script src="{{asset('app-assets/custom/konsumen.js')}}"></script>
     <script src="{{asset('app-assets/js/scripts/forms/custom-file-input.min.js')}}"></script>

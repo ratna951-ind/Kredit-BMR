@@ -421,12 +421,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            @if(isset($order->pembatalan) && $order->status=="B")
+                            @if(isset($order->pembatalan) && ($order->status=="B" || $order->status=="T"))
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="col-md-3 label-control" for="inputAlasanBatal">Alasan Batal</label>
+                                        <label class="col-md-3 label-control" for="inputAlasan">Alasan</label>
                                         <div class="col-md-9 mx-auto">
-                                            <input type="text" id="inputAlasanBatal" class="form-control border-primary" value="{{ $order->pembatalan }}" disabled>
+                                            <input type="text" id="inputAlasan" class="form-control border-primary" value="{{ $order->pembatalan }}" disabled>
                                         </div>
                                     </div>
                                 </div>
